@@ -1,6 +1,16 @@
 import { STAT_META_BY_KEY, UNIVERSITY_TYPES } from '../game';
 import type { CharacterConfig, Effects, Ending, StatKey, Stats } from '../game';
 
+/** The non-zero per-stat change between two stat snapshots (post-clamp accurate). */
+export function statDelta(prev: Stats, next: Stats): Effects {
+  const d: Effects = {};
+  for (const k of Object.keys(next) as StatKey[]) {
+    const diff = next[k] - prev[k];
+    if (diff !== 0) d[k] = diff;
+  }
+  return d;
+}
+
 // Per-stat data colors (data encoding only; page chrome stays amber).
 export const STAT_COLORS: Record<StatKey, string> = {
   money: '#f4b04a',

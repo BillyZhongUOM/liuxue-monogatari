@@ -1,0 +1,185 @@
+import type { GameEvent } from '../game/types';
+
+// Story beats: a light arc across the one-year master's, plus two recurring
+// character threads (flatmate Amara via the `flat_close` flag, tutor Dr Whitfield
+// via the `tutor_ref` flag). All are once-per-game, sit in the general weekly
+// pool, and are gated by minWeek/minTerm so they unfold roughly in order. High
+// weight so a beat tends to land soon after it becomes eligible. The engine reads
+// these like any event; nothing here touches src/game. No em or en dashes.
+//
+// totalWeeks runs 0..35 across 3 terms of 12 weeks. minWeek gates on totalWeeks.
+export const STORY_EVENTS: GameEvent[] = [
+  {
+    id: 'beat_freshers',
+    title: 'Freshers 周',
+    description: '迎新周像一场不会停的派对。免费的披萨、塞满传单的帆布袋、一晚上认识二十个名字第二天全忘光。你站在喧闹中间，有点兴奋，又有点想家。',
+    category: 'social',
+    weight: 40,
+    pool: '',
+    oncePerGame: true,
+    cond: { minWeek: 1, maxYear: 1 },
+    choices: [
+      { text: '一头扎进去，社团全报一遍', resultText: '你像海绵一样吸收一切，加了七个群，钱包瘪了，但归属感也悄悄长出来了。', effects: { social: 8, adaptation: 4, money: -25, energy: -8 }, routeWeights: { social: 2 } },
+      { text: '挑一两个真感兴趣的', resultText: '你没贪多，选了中国学联和一个徒步社。不累，刚刚好。', effects: { social: 4, adaptation: 3, stress: -2 }, routeWeights: { social: 1, chill: 1 } },
+      { text: '回宿舍，给家里打个电话', resultText: '热闹是他们的。你和爸妈视频到很晚，心里踏实了些，只是第二天发现错过了不少。', effects: { homesick: -6, social: -3, stress: -3 } },
+    ],
+  },
+  {
+    id: 'ev_flat_dinner',
+    title: '合租厨房的香味',
+    description: '隔壁房间的 Amara 是个尼日利亚姑娘，正在厨房炖一锅咖喱，香味飘满走廊。她探出头：要不要一起吃，顺便教教你？',
+    category: 'social',
+    weight: 34,
+    pool: '',
+    oncePerGame: true,
+    cond: { minWeek: 3, maxYear: 1 },
+    choices: [
+      { text: '当然，我带瓶可乐下去', resultText: '一锅咖喱配你带的泡面当主食，两个异乡人聊到深夜。从这天起，厨房成了你们的据点。', effects: { social: 7, homesick: -5, energy: -3 }, setFlags: { flat_close: true }, routeWeights: { social: 1 } },
+      { text: '今天作业赶不完，改天', resultText: '你回了句改天，关上门继续敲键盘。香味还在，只是没你的份。', effects: { gpa: 3, social: -2, homesick: 2 } },
+    ],
+  },
+  {
+    id: 'beat_first_essay',
+    title: '第一篇 essay',
+    description: '两千字的 essay，referencing 格式比内容还难。距离 deadline 还有四十八小时，你的 Word 文档停在标题。',
+    category: 'study',
+    weight: 38,
+    pool: '',
+    oncePerGame: true,
+    cond: { minWeek: 5, maxYear: 1 },
+    choices: [
+      { text: '泡在图书馆，一句一句啃', resultText: '你熬了两个通宵，交上去那一刻手在抖。分数中规中矩，但你摸到了门道。', effects: { gpa: 8, energy: -12, stress: 8, english: 3 }, routeWeights: { scholar: 2 } },
+      { text: '约同学组队互相改', resultText: '几个人凑在一起，你帮她理逻辑，她帮你抓语法。交上去的版本干净了不少。', effects: { gpa: 5, social: 4, energy: -6 }, routeWeights: { scholar: 1, social: 1 } },
+      { text: '能过就行，凌晨硬凑', resultText: '你压着 deadline 提交，系统转圈那两秒像一年。过了，刚刚好过。', effects: { gpa: 1, stress: 5, energy: -8 } },
+    ],
+  },
+  {
+    id: 'ev_tutor_office_hour',
+    title: '导师的 office hour',
+    description: 'Dr Whitfield 在邮件里写：有空来我办公室坐坐。你不确定是例行公事，还是真的有话说。',
+    category: 'career',
+    weight: 32,
+    pool: '',
+    oncePerGame: true,
+    cond: { minWeek: 7, maxYear: 1 },
+    choices: [
+      { text: '认真准备问题，去聊', resultText: '你列了一页问题去，聊了四十分钟。他记住了你的名字，临走说了句 keep it up。这句话你存了很久。', effects: { career: 7, gpa: 3, reputation: 4, energy: -4 }, setFlags: { tutor_ref: true }, routeWeights: { phd: 2, career: 1 } },
+      { text: '露个脸就走，别尴尬', resultText: '你寒暄两句就撤了。礼貌，但他大概记不住你。', effects: { reputation: 1, stress: -1 } },
+    ],
+  },
+  {
+    id: 'beat_reading_week',
+    title: 'Reading week',
+    description: '期中的 reading week，没有课。同学有的飞去欧洲，有的窝着补作业，有的睡到中午。这一周你想怎么过？',
+    category: 'life',
+    weight: 36,
+    pool: '',
+    oncePerGame: true,
+    cond: { minWeek: 9, maxYear: 1 },
+    choices: [
+      { text: '订张廉价机票，出去走走', resultText: '你拖着登机箱挤上凌晨的航班。钱花了不少，但站在异国的广场上，你第一次觉得留学这件事真值。', effects: { homesick: -8, adaptation: 6, money: -180, stress: -6, energy: -4 }, routeWeights: { chill: 2 } },
+      { text: '把落下的全补上', resultText: '别人在玩，你在啃文献。一周下来进度赶了一大截，朋友圈空空，心里踏实。', effects: { gpa: 7, career: 2, energy: -6, social: -3 }, routeWeights: { scholar: 1 } },
+      { text: '什么都不干，好好睡', resultText: '你睡到自然醒，追了一整季剧。身体回了血，罪恶感也有一点点。', effects: { energy: 16, stress: -10, health: 4, gpa: -2 } },
+    ],
+  },
+  {
+    id: 'beat_homesick_low',
+    title: '深夜的低谷',
+    description: '又是一个下雨的深夜，外卖凉了，论文卡着，家那边都睡了。你突然很想念那口热饭，和不用翻译就能说的话。',
+    category: 'emotion',
+    weight: 42,
+    pool: '',
+    oncePerGame: true,
+    cond: { minWeek: 13, maxYear: 1, flagsSet: ['flat_close'] },
+    choices: [
+      { text: '敲 Amara 的门', resultText: 'Amara 睡眼惺忪地开了门，二话不说煮了两碗面。你们没聊什么大道理，但天亮时你好多了。异乡也能长出家的形状。', effects: { homesick: -12, social: 5, stress: -8, energy: -2 }, routeWeights: { social: 1 } },
+      { text: '自己扛过去', resultText: '你把脸埋进被子，硬撑到天亮。第二天照常上课，只是眼睛有点肿。', effects: { homesick: -3, stress: 4, health: -3 } },
+    ],
+  },
+  {
+    id: 'beat_exam_good',
+    title: '成绩单：还不错',
+    description: '期末成绩出来了。你深吸一口气点开邮件，数字比想象中好。那些熬过的夜，原来真的算数。',
+    category: 'study',
+    weight: 45,
+    pool: '',
+    oncePerGame: true,
+    cond: { minTerm: 2, maxYear: 1, statGte: { gpa: 62 }, flagsNotSet: ['exam_seen'] },
+    choices: [
+      { text: '截图发家庭群', resultText: '爸妈在群里发了一串鼓掌。你嘴上说运气好，截图却存进了收藏夹。', effects: { reputation: 4, homesick: -4, stress: -6 }, setFlags: { exam_seen: true }, routeWeights: { scholar: 1 } },
+      { text: '低调，继续往前', resultText: '你只跟自己说了句不错，然后翻开下学期的 reading list。路还长。', effects: { gpa: 2, stress: -3 }, setFlags: { exam_seen: true }, routeWeights: { scholar: 1, phd: 1 } },
+    ],
+  },
+  {
+    id: 'beat_exam_rough',
+    title: '成绩单：有点难看',
+    description: '期末成绩出来了。有一门擦着及格线，有一门没擦过去。你盯着屏幕，心里那根弦松了一下，又紧了起来。',
+    category: 'study',
+    weight: 45,
+    pool: '',
+    oncePerGame: true,
+    cond: { minTerm: 2, maxYear: 1, statLte: { gpa: 61 }, flagsNotSet: ['exam_seen'] },
+    choices: [
+      { text: '约导师问补救方案', resultText: '你硬着头皮去问，他没批评你，给了张很具体的清单。原来求助不丢人，及时才重要。', effects: { gpa: 5, career: 2, stress: -2, energy: -4 }, setFlags: { exam_seen: true }, routeWeights: { survivor: 1 } },
+      { text: '关掉邮件，假装没看见', resultText: '你刷了两小时手机，焦虑没少，问题也没解决。', effects: { stress: 8, gpa: -1, homesick: 3 }, setFlags: { exam_seen: true } },
+    ],
+  },
+  {
+    id: 'beat_turning_point',
+    title: '半年了',
+    description: '不知不觉，留学过去了一半。你翻着相册：刚落地时的狼狈，第一次自己做饭，雨里赶 due 的夜晚。你好像不太一样了。后半年，你想成为谁？',
+    category: 'emotion',
+    weight: 40,
+    pool: '',
+    oncePerGame: true,
+    cond: { minWeek: 18, maxYear: 1 },
+    choices: [
+      { text: '把学业彻底拉满', resultText: '你给自己定了个狠目标，把娱乐砍到最低。方向清楚了，人也沉下来了。', effects: { gpa: 4, stress: 3, energy: -3 }, routeWeights: { scholar: 3, phd: 1 } },
+      { text: '认真攒履历，铺好出路', resultText: '你重写了 CV，开始海投实习。每天多了一件正事，也多了一份盼头。', effects: { career: 6, social: 2, energy: -3 }, routeWeights: { career: 3, homebound: 1 } },
+      { text: '别太拼，把日子过好', resultText: '你决定善待自己：好好吃饭，好好睡觉，周末去 city walk。焦虑少了，留学也终于有了生活的样子。', effects: { stress: -8, health: 5, homesick: -4 }, routeWeights: { chill: 3 } },
+    ],
+  },
+  {
+    id: 'beat_dissertation',
+    title: '毕业论文开题',
+    description: '最后一学期，dissertation 是绕不过的大山。选题、找方法、约 supervisor，一摊子事压过来。',
+    category: 'study',
+    weight: 42,
+    pool: '',
+    oncePerGame: true,
+    cond: { minWeek: 26, maxYear: 1 },
+    choices: [
+      { text: '找 Dr Whitfield 把关', resultText: '有过一面之缘的导师爽快答应带你。他三言两语帮你把题目收窄，你少走了好多弯路。', effects: { gpa: 8, career: 4, reputation: 3, energy: -6 }, requires: { flagsSet: ['tutor_ref'] }, routeWeights: { phd: 2, scholar: 1 } },
+      { text: '硬着头皮自己摸索', resultText: '没人领路，你在文献里泡了一周才理出头绪。慢，但每一步都是自己踩出来的。', effects: { gpa: 4, stress: 8, energy: -10, english: 3 }, routeWeights: { scholar: 1, survivor: 1 } },
+      { text: '先求稳，选个保险题目', resultText: '你挑了个不出彩但好做的方向。不惊艳，但能按时交，能毕业。', effects: { gpa: 3, stress: -3 }, routeWeights: { survivor: 2 } },
+    ],
+  },
+  {
+    id: 'ev_amara_goodbye',
+    title: 'Amara 要走了',
+    description: 'Amara 提前答辩完，订了回拉各斯的机票。最后一晚，你们又在那个厨房，炖了第一次见面时的那锅咖喱。',
+    category: 'emotion',
+    weight: 44,
+    pool: '',
+    oncePerGame: true,
+    cond: { minWeek: 31, maxYear: 1, flagsSet: ['flat_close'] },
+    choices: [
+      { text: '约好以后一定要再见', resultText: '你们交换了家乡的地址，说好哪天去对方的城市。机场拥抱时你没哭，回到空了一半的合租屋才红了眼。有些人走进过你的异乡，就再也不是陌生人。', effects: { social: 6, homesick: 4, stress: -4, reputation: 2 } },
+      { text: '帮她把行李一件件搬下楼', resultText: '你默默帮她拖箱子、贴标签、叫车。话不多，但她临走塞给你一包她妈寄的香料。厨房的香味，你替她留着。', effects: { social: 4, homesick: 2, energy: -3, health: -1 } },
+    ],
+  },
+  {
+    id: 'beat_finale_eve',
+    title: '最后一周',
+    description: '论文交了，行李箱半空着。这座下了一年雨的城市，明天就要变成回忆里的背景。你坐在窗边，回看这一整年。',
+    category: 'emotion',
+    weight: 46,
+    pool: '',
+    oncePerGame: true,
+    cond: { minWeek: 33, maxYear: 1 },
+    choices: [
+      { text: '把这一年认真写进日记', resultText: '你写了很长很长，从落地写到此刻。写完合上本子，心里那些没说出口的，都安放好了。', effects: { stress: -8, homesick: -4, reputation: 1 } },
+      { text: '约上所有还在的朋友', resultText: '你拉了个局，能来的都来了。大家在熟悉的酒吧聊到打烊，谁都没提再见。', effects: { social: 7, stress: -5, money: -30, energy: -4 } },
+    ],
+  },
+];

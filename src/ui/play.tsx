@@ -7,12 +7,14 @@ import {
   currentLeadingRoute,
   evaluateCondition,
 } from '../game';
-import type { GameState } from '../game';
+import type { Effects, GameState } from '../game';
 import { useGame } from '../store';
 import { useAudio } from '../audio/audioStore';
 import { MapScene } from '../map/MapScene';
-import { SceneStrip, StatHud } from './bits';
-import { eventSkin } from './theme';
+import { ChapterBanner } from './ChapterBanner';
+import { EventBurst } from './EventBurst';
+import { FxChips, SceneStrip, StatHud } from './bits';
+import { eventSkin, statDelta } from './theme';
 
 // pick a scene id + caption from the current calendar position
 function sceneFor(state: GameState): { artId: string; caption: string } {
@@ -111,14 +113,25 @@ function LogFeed({ state }: { state: GameState }) {
   );
 }
 
+// Two-step so a choice has a visible consequence: pick -> see the outcome (result
+// text + what changed) -> 继续 commits. The engine only changes on resolve(); the
+// reveal reads the chosen choice's data (event effects are not trait-scaled, so
+// chosen.effects is exactly what will apply).
 function EventModal({ state }: { state: GameState }) {
   const resolve = useGame((s) => s.resolve);
+  const [picked, setPicked] = useState<number | null>(null);
+  useEffect(() => {
+    setPicked(null);
+  }, [state.pendingEventId]);
+
   const ev = state.pendingEventId ? EVENT_BY_ID[state.pendingEventId] : undefined;
   if (!ev) return null;
   const skin = eventSkin(ev.category);
   const choices = ev.choices
     .map((c, idx) => ({ c, idx }))
     .filter(({ c }) => evaluateCondition(c.requires, state));
+  const chosen = picked !== null ? ev.choices[picked] : null;
+
   return (
     <div className="modal-backdrop" role="dialog" aria-modal="true">
       <div className="modal modal--call" style={{ ['--skin' as string]: skin.color }}>
@@ -132,30 +145,61 @@ function EventModal({ state }: { state: GameState }) {
             <h2 className="modal__title">{ev.title}</h2>
           </div>
         </div>
-        <p className="modal__desc">{ev.description}</p>
-        <div className="choice-list">
-          {choices.map(({ c, idx }) => (
-            <button key={idx} className="pixel-btn choice" onClick={() => resolve(idx)}>
-              <span>{c.text}</span>
+        {chosen ? (
+          <div className="reveal">
+            <p className="reveal__text">{chosen.resultText}</p>
+            <div className="reveal__fx">
+              <FxChips fx={chosen.effects} />
+            </div>
+            <button className="pixel-btn pixel-btn--primary reveal__go" onClick={() => resolve(picked!)}>
+              继续 →
             </button>
-          ))}
-        </div>
+          </div>
+        ) : (
+          <>
+            <p className="modal__desc">{ev.description}</p>
+            <div className="choice-list">
+              {choices.map(({ c, idx }) => (
+                <button key={idx} className="pixel-btn choice" onClick={() => setPicked(idx)}>
+                  <span>{c.text}</span>
+                </button>
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
 }
 
-function WeeklySummary({ state }: { state: GameState }) {
+// Floats the stat changes from the action you just took, so every tap visibly
+// does something.
+function DeltaToast({ fx }: { fx: Effects }) {
+  return (
+    <div className="delta-toast">
+      <FxChips fx={fx} />
+    </div>
+  );
+}
+
+function WeeklySummary({ state, delta }: { state: GameState; delta: Effects }) {
   const cont = useGame((s) => s.continueWeekly);
   const line = [...state.history].reverse().find((e) => e.kind === 'weekly')?.text ?? '新的一周开始了。';
   const milestone = [...state.history].reverse().find((e) => e.kind === 'milestone');
   const showMilestone = milestone && state.week === 1;
+  const hasDelta = Object.keys(delta).length > 0;
   return (
     <div className="modal-backdrop" role="dialog" aria-modal="true">
       <div className="modal">
         <div className="modal__kicker">周末结算</div>
         <h2 className="modal__title">第 {state.year} 年 · 第 {state.term} 学期</h2>
         <p className="modal__desc">{line}</p>
+        {hasDelta ? (
+          <div className="weekly__delta">
+            <span className="weekly__delta-label">本周自然变化</span>
+            <FxChips fx={delta} />
+          </div>
+        ) : null}
         {showMilestone ? <p className="weekly__line">{milestone!.text}</p> : null}
         <button className="pixel-btn pixel-btn--primary" onClick={cont} style={{ width: '100%' }}>
           继续
@@ -174,6 +218,44 @@ export function PlayScreen({ state }: { state: GameState }) {
   const out = state.actionPoints <= 0;
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  // Consequence feedback: diff the previous state to surface what an action did
+  // (delta toast), what the week did (weekly chips), and to fire the event burst.
+  // UI-only; the engine never learns about any of this.
+  const prev = useRef<GameState | null>(null);
+  const counter = useRef(0);
+  const [actionToast, setActionToast] = useState<{ key: number; fx: Effects } | null>(null);
+  const [weeklyDelta, setWeeklyDelta] = useState<Effects>({});
+  const [burst, setBurst] = useState<{ key: number; category: string } | null>(null);
+
+  useEffect(() => {
+    const p = prev.current;
+    if (p) {
+      const sameWeek = p.totalWeeks === state.totalWeeks;
+      if (p.phase === 'playing' && state.phase === 'playing' && sameWeek) {
+        const d = statDelta(p.stats, state.stats);
+        if (Object.keys(d).length) {
+          counter.current += 1;
+          setActionToast({ key: counter.current, fx: d });
+        }
+      }
+      if (state.phase === 'weekly' && p.phase !== 'weekly') {
+        setWeeklyDelta(statDelta(p.stats, state.stats));
+      }
+      if (state.phase === 'event' && p.phase !== 'event') {
+        const ev = state.pendingEventId ? EVENT_BY_ID[state.pendingEventId] : undefined;
+        counter.current += 1;
+        setBurst({ key: counter.current, category: ev?.category ?? '' });
+      }
+    }
+    prev.current = state;
+  }, [state]);
+
+  useEffect(() => {
+    if (!actionToast) return;
+    const t = window.setTimeout(() => setActionToast(null), 1600);
+    return () => window.clearTimeout(t);
+  }, [actionToast]);
+
   // keep the action area in view when a new week starts
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: 0 });
@@ -182,6 +264,7 @@ export function PlayScreen({ state }: { state: GameState }) {
   return (
     <>
       <TopBar state={state} view={view} onToggleView={() => setView((v) => (v === 'map' ? 'list' : 'map'))} />
+      <ChapterBanner state={state} />
       {view === 'map' ? (
         <div className="map-wrap">
           <MapScene state={state} />
@@ -205,8 +288,12 @@ export function PlayScreen({ state }: { state: GameState }) {
         </button>
       </div>
 
+      {actionToast ? <DeltaToast key={actionToast.key} fx={actionToast.fx} /> : null}
       {state.phase === 'event' ? <EventModal state={state} /> : null}
-      {state.phase === 'weekly' ? <WeeklySummary state={state} /> : null}
+      {burst && state.phase === 'event' ? (
+        <EventBurst key={burst.key} category={burst.category} onDone={() => setBurst(null)} />
+      ) : null}
+      {state.phase === 'weekly' ? <WeeklySummary state={state} delta={weeklyDelta} /> : null}
     </>
   );
 }
