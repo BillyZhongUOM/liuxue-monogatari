@@ -13,6 +13,9 @@ export function nextGoal(state: GameState): string {
     if (e.crisis) continue; // crisis endings are failures to avoid, not goals
     const sg = e.cond?.statGte;
     if (!sg) continue;
+    // a few endings also gate on money; if that gate is unmet, do not nudge toward
+    // them on a 0-100 stat alone (it would read "almost there" while money blocks it)
+    if (sg.money !== undefined && state.stats.money < sg.money) continue;
     const routeMiss = !!e.cond?.leadingRouteIn && (!route || !e.cond.leadingRouteIn.includes(route));
     const penalty = routeMiss ? 12 : 0;
     for (const [k, target] of Object.entries(sg)) {

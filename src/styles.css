@@ -681,7 +681,8 @@ button { font-family: inherit; }
 
 /* ----------------------------------------------------------------- action delta toast */
 .delta-toast {
-  position: fixed; left: 50%; bottom: 84px; transform: translateX(-50%);
+  position: fixed; left: 50%; top: 40%; bottom: auto; transform: translateX(-50%);
+  max-width: calc(100vw - 24px);
   z-index: 18; pointer-events: none; display: flex; justify-content: center;
   animation: deltaFloat 1.6s ease forwards;
 }
