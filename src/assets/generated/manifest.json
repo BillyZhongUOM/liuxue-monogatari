@@ -1,0 +1,6 @@
+{
+  "generatedAt": null,
+  "model": null,
+  "note": "Populated by scripts/generate-assets.mjs. Empty assets => the game uses emoji/CSS placeholders. The game is fully playable with this file empty.",
+  "assets": []
+}

@@ -1,0 +1,11 @@
+node_modules
+dist
+dist-ssr
+.env
+.env.local
+*.log
+.DS_Store
+.vite
+coverage
+# Local-only working notes (internal design churn, not for the public repo)
+notes/scratch/
