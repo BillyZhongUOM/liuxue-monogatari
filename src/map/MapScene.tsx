@@ -1,7 +1,8 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { availableActions } from '../game';
 import type { GameState } from '../game';
 import { useGame } from '../store';
+import { isUnlocked, setRain } from '../audio/sound';
 import { assetUrl } from '../ui/theme';
 import { InteriorScene } from './InteriorScene';
 import {
@@ -105,6 +106,11 @@ export function MapScene({ state }: { state: GameState }) {
 
   const availSet = useMemo(() => new Set(availableActions(state).map((a) => a.id)), [state]);
   const outOfAp = state.actionPoints <= 0;
+
+  // dusk rain bed plays on campus only; the town zone stays dry (visual + audio)
+  useEffect(() => {
+    if (isUnlocked()) setRain(zone === 'campus');
+  }, [zone]);
 
   function statusOf(locId: string): NodeStatus {
     const here = actionsAtLocation(locId);

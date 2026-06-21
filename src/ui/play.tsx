@@ -9,6 +9,7 @@ import {
 } from '../game';
 import type { GameState } from '../game';
 import { useGame } from '../store';
+import { useAudio } from '../audio/audioStore';
 import { MapScene } from '../map/MapScene';
 import { SceneStrip, StatHud } from './bits';
 import { eventSkin } from './theme';
@@ -34,6 +35,8 @@ function TopBar({
   onToggleView: () => void;
 }) {
   const toMenu = useGame((s) => s.toMenu);
+  const muted = useAudio((s) => s.muted);
+  const toggleMuted = useAudio((s) => s.toggleMuted);
   const dots = [];
   for (let i = 0; i < state.maxActionPoints; i++) {
     dots.push(<span key={i} className={`ap-dot${i < state.actionPoints ? ' ap-dot--full' : ''}`} />);
@@ -50,6 +53,14 @@ function TopBar({
         aria-label="切换视图"
       >
         {view === 'map' ? '📋' : '🗺️'}
+      </button>
+      <button
+        className="pixel-btn pixel-btn--ghost"
+        style={{ padding: '6px 9px' }}
+        onClick={toggleMuted}
+        aria-label={muted ? '开启声音' : '静音'}
+      >
+        {muted ? '🔇' : '🔊'}
       </button>
       <div className="topbar__time">
         第 <b>{state.year}</b> 年 · T<b>{state.term}</b> · <b>{state.week}</b>/{WEEKS_PER_TERM} 周
