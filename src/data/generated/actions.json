@@ -1,0 +1,1288 @@
+[
+  {
+    "id": "buy_luxury",
+    "name": "剁手买大牌",
+    "desc": "排两小时队刷一只包犒劳自己，九宫格已就位。",
+    "emoji": "👜",
+    "apCost": 1,
+    "effects": {
+      "money": -260,
+      "stress": -16,
+      "social": 4,
+      "reputation": 6,
+      "homesick": 5
+    },
+    "tags": [
+      "spend",
+      "life"
+    ],
+    "location": "mall",
+    "routeWeights": {
+      "chill": 2,
+      "social": 1
+    },
+    "risk": {
+      "chance": 0.3,
+      "eventPool": "spending_incidents"
+    },
+    "repeatPenalty": {
+      "money": -60,
+      "stress": 8
+    }
+  },
+  {
+    "id": "online_shopping",
+    "name": "半夜网购",
+    "desc": "凌晨睡不着，购物车一键清空，收件地址填了三遍。",
+    "emoji": "📦",
+    "apCost": 1,
+    "effects": {
+      "money": -45,
+      "stress": -8,
+      "homesick": -5,
+      "health": -3,
+      "energy": -3
+    },
+    "tags": [
+      "spend",
+      "life"
+    ],
+    "location": "dorm",
+    "routeWeights": {
+      "chill": 1
+    },
+    "risk": {
+      "chance": 0.2,
+      "eventPool": "spending_incidents"
+    },
+    "repeatPenalty": {
+      "money": -30,
+      "health": -3
+    }
+  },
+  {
+    "id": "new_clothes",
+    "name": "逛街添新衣",
+    "desc": "试衣间进去十件出来两件，镜子里那个挺好。",
+    "emoji": "🛍️",
+    "apCost": 1,
+    "effects": {
+      "money": -80,
+      "reputation": 5,
+      "social": 3,
+      "stress": -7,
+      "energy": -5
+    },
+    "tags": [
+      "spend",
+      "life"
+    ],
+    "location": "mall",
+    "routeWeights": {
+      "social": 1,
+      "chill": 1
+    },
+    "repeatPenalty": {
+      "money": -30
+    }
+  },
+  {
+    "id": "date_out",
+    "name": "约会",
+    "desc": "和暧昧对象去吃饭看电影，紧张到菜都点错。",
+    "emoji": "💕",
+    "apCost": 1,
+    "effects": {
+      "money": -40,
+      "social": 7,
+      "stress": -12,
+      "homesick": -7,
+      "english": 2,
+      "energy": -6
+    },
+    "tags": [
+      "romance",
+      "social"
+    ],
+    "location": "town",
+    "routeWeights": {
+      "social": 2,
+      "chill": 1
+    },
+    "unlock": {
+      "minWeek": 3
+    },
+    "risk": {
+      "chance": 0.25,
+      "eventPool": "romance_incidents"
+    }
+  },
+  {
+    "id": "blind_date",
+    "name": "被安排相亲",
+    "desc": "热心阿姨牌室友安排见一面，尬聊到想钻桌底。",
+    "emoji": "☕",
+    "apCost": 1,
+    "effects": {
+      "money": -18,
+      "social": 4,
+      "english": 1,
+      "stress": 4,
+      "energy": -5
+    },
+    "tags": [
+      "romance",
+      "social"
+    ],
+    "location": "town",
+    "routeWeights": {
+      "social": 1
+    },
+    "unlock": {
+      "minWeek": 5
+    },
+    "risk": {
+      "chance": 0.35,
+      "eventPool": "romance_incidents"
+    }
+  },
+  {
+    "id": "anniversary_surprise",
+    "name": "准备纪念日惊喜",
+    "desc": "攒钱憋个惊喜，气球和蛋糕一个不能少。",
+    "emoji": "🎁",
+    "apCost": 1,
+    "effects": {
+      "money": -55,
+      "social": 9,
+      "stress": -10,
+      "homesick": -8,
+      "gpa": -2,
+      "energy": -6
+    },
+    "tags": [
+      "romance",
+      "social"
+    ],
+    "location": "town",
+    "routeWeights": {
+      "social": 2
+    },
+    "unlock": {
+      "minWeek": 8
+    }
+  },
+  {
+    "id": "weekend_trip",
+    "name": "周末短途旅行",
+    "desc": "背个包跳上大巴去邻城，古堡海边羊比人多。",
+    "emoji": "🚌",
+    "apCost": 1,
+    "effects": {
+      "money": -120,
+      "adaptation": 12,
+      "stress": -18,
+      "homesick": -6,
+      "social": 4,
+      "english": 2,
+      "energy": -12,
+      "gpa": -3
+    },
+    "tags": [
+      "travel",
+      "explore"
+    ],
+    "location": "station",
+    "routeWeights": {
+      "chill": 3
+    },
+    "unlock": {
+      "minWeek": 4
+    },
+    "risk": {
+      "chance": 0.3,
+      "eventPool": "travel_incidents"
+    },
+    "repeatPenalty": {
+      "money": -40,
+      "energy": -6
+    }
+  },
+  {
+    "id": "trip_home",
+    "name": "买机票回国",
+    "desc": "想家想到不行，咬牙刷张机票，行李箱塞满空奶粉罐。",
+    "emoji": "✈️",
+    "apCost": 1,
+    "effects": {
+      "money": -300,
+      "homesick": -22,
+      "stress": -14,
+      "adaptation": -4,
+      "gpa": -4,
+      "energy": -8
+    },
+    "tags": [
+      "travel",
+      "rest"
+    ],
+    "location": "station",
+    "routeWeights": {
+      "homebound": 3
+    },
+    "unlock": {
+      "minWeek": 10
+    },
+    "repeatPenalty": {
+      "money": -100,
+      "adaptation": -4
+    }
+  },
+  {
+    "id": "daigou_orders",
+    "name": "接代购单",
+    "desc": "帮老乡背奶粉保健品赚跑腿费，箱子塞到关不上。",
+    "emoji": "💰",
+    "apCost": 1,
+    "effects": {
+      "money": 95,
+      "social": 4,
+      "energy": -10,
+      "stress": 6,
+      "reputation": -2
+    },
+    "tags": [
+      "work",
+      "spend"
+    ],
+    "location": "market",
+    "routeWeights": {
+      "grind": 2,
+      "survivor": 1
+    },
+    "unlock": {
+      "minWeek": 3
+    },
+    "risk": {
+      "chance": 0.25,
+      "eventPool": "part_time_incidents"
+    },
+    "repeatPenalty": {
+      "stress": 5,
+      "energy": -6
+    }
+  },
+  {
+    "id": "sell_secondhand",
+    "name": "二手平台转卖",
+    "desc": "清空房间桌子台灯统统挂网上，约见买家社死现场。",
+    "emoji": "🏷️",
+    "apCost": 1,
+    "effects": {
+      "money": 60,
+      "adaptation": 4,
+      "stress": -3,
+      "energy": -6,
+      "social": -2
+    },
+    "tags": [
+      "work",
+      "spend"
+    ],
+    "location": "dorm",
+    "routeWeights": {
+      "survivor": 2,
+      "grind": 1
+    },
+    "repeatPenalty": {
+      "money": -25
+    }
+  },
+  {
+    "id": "student_discount",
+    "name": "薅羊毛",
+    "desc": "集齐各种 student discount，免费披萨和试用装一个不放过。",
+    "emoji": "🎟️",
+    "apCost": 1,
+    "effects": {
+      "money": 35,
+      "adaptation": 5,
+      "energy": -4,
+      "reputation": -2
+    },
+    "tags": [
+      "life",
+      "admin"
+    ],
+    "location": "town",
+    "routeWeights": {
+      "survivor": 2
+    },
+    "repeatPenalty": {
+      "money": -15,
+      "reputation": -2
+    }
+  },
+  {
+    "id": "yellow_sticker",
+    "name": "超市黄标抢购",
+    "desc": "卡着晚上打折时段冲进超市，半价三明治装满篮。",
+    "emoji": "🥪",
+    "apCost": 1,
+    "effects": {
+      "money": 18,
+      "health": 4,
+      "homesick": -2,
+      "energy": -4,
+      "stress": -2
+    },
+    "tags": [
+      "life",
+      "cook"
+    ],
+    "location": "market",
+    "routeWeights": {
+      "survivor": 2,
+      "grind": 1
+    },
+    "repeatPenalty": {
+      "health": -3
+    }
+  },
+  {
+    "id": "weekend_stall",
+    "name": "集市练摊",
+    "desc": "支个小桌卖手作或家乡小吃，吆喝半天嗓子哑。",
+    "emoji": "🧺",
+    "apCost": 1,
+    "effects": {
+      "money": 70,
+      "social": 5,
+      "english": 3,
+      "energy": -14,
+      "stress": 7
+    },
+    "tags": [
+      "work",
+      "social"
+    ],
+    "location": "market",
+    "routeWeights": {
+      "grind": 2,
+      "social": 1
+    },
+    "unlock": {
+      "minWeek": 4
+    },
+    "risk": {
+      "chance": 0.2,
+      "eventPool": "part_time_incidents"
+    },
+    "repeatPenalty": {
+      "energy": -8,
+      "stress": 4
+    }
+  },
+  {
+    "id": "clubbing",
+    "name": "蹦迪",
+    "desc": "跟着 bass 蹦到凌晨，第二天太阳晒屁股才醒。",
+    "emoji": "🪩",
+    "apCost": 1,
+    "effects": {
+      "money": -50,
+      "social": 11,
+      "stress": -15,
+      "energy": -16,
+      "health": -6,
+      "gpa": -3
+    },
+    "tags": [
+      "social",
+      "spend"
+    ],
+    "location": "nightlife",
+    "routeWeights": {
+      "social": 3,
+      "chill": 1
+    },
+    "unlock": {
+      "minWeek": 3
+    },
+    "risk": {
+      "chance": 0.4,
+      "eventPool": "social_incidents"
+    },
+    "repeatPenalty": {
+      "health": -6,
+      "energy": -8
+    }
+  },
+  {
+    "id": "pub_pint",
+    "name": "Pub 小酌",
+    "desc": "和同学窝在角落喝一杯，聊各自的 deadline。",
+    "emoji": "🍺",
+    "apCost": 1,
+    "effects": {
+      "money": -22,
+      "social": 6,
+      "stress": -9,
+      "english": 3,
+      "energy": -5
+    },
+    "tags": [
+      "social"
+    ],
+    "location": "nightlife",
+    "routeWeights": {
+      "social": 2
+    },
+    "risk": {
+      "chance": 0.2,
+      "eventPool": "social_incidents"
+    },
+    "repeatPenalty": {
+      "money": -12,
+      "health": -3
+    }
+  },
+  {
+    "id": "live_gig",
+    "name": "看演出 livehouse",
+    "desc": "抢到票去看一场，散场满身汗但心满意足。",
+    "emoji": "🎸",
+    "apCost": 1,
+    "effects": {
+      "money": -45,
+      "stress": -14,
+      "social": 5,
+      "adaptation": 5,
+      "energy": -8
+    },
+    "tags": [
+      "social",
+      "explore"
+    ],
+    "location": "nightlife",
+    "routeWeights": {
+      "chill": 2,
+      "social": 1
+    },
+    "unlock": {
+      "minWeek": 4
+    },
+    "repeatPenalty": {
+      "money": -20
+    }
+  },
+  {
+    "id": "karaoke",
+    "name": "KTV 唱到沙哑",
+    "desc": "包间一开嗓，把思乡都吼进麦克风里。",
+    "emoji": "🎤",
+    "apCost": 1,
+    "effects": {
+      "money": -30,
+      "stress": -13,
+      "homesick": -9,
+      "social": 7,
+      "energy": -7
+    },
+    "tags": [
+      "social"
+    ],
+    "location": "nightlife",
+    "routeWeights": {
+      "social": 2,
+      "homebound": 1
+    },
+    "repeatPenalty": {
+      "money": -15,
+      "energy": -4
+    }
+  },
+  {
+    "id": "football_match",
+    "name": "进球场看球",
+    "desc": "现场感受主队气氛，围巾一围跟着全场吼。",
+    "emoji": "⚽",
+    "apCost": 1,
+    "effects": {
+      "money": -55,
+      "social": 6,
+      "adaptation": 7,
+      "stress": -10,
+      "english": 2,
+      "energy": -7
+    },
+    "tags": [
+      "social",
+      "explore"
+    ],
+    "location": "town",
+    "routeWeights": {
+      "social": 2,
+      "chill": 1
+    },
+    "unlock": {
+      "minWeek": 5
+    },
+    "repeatPenalty": {
+      "money": -25
+    }
+  },
+  {
+    "id": "gym_membership",
+    "name": "办健身卡立flag",
+    "desc": "办了卡发了誓，这次一定练出马甲线对抗炸鱼薯条。",
+    "emoji": "💪",
+    "apCost": 1,
+    "effects": {
+      "money": -60,
+      "health": 14,
+      "stress": -9,
+      "reputation": 4,
+      "energy": -10
+    },
+    "tags": [
+      "health",
+      "life"
+    ],
+    "location": "gym",
+    "routeWeights": {
+      "chill": 1,
+      "grind": 1
+    },
+    "repeatPenalty": {
+      "money": -20,
+      "energy": -5
+    }
+  },
+  {
+    "id": "morning_run",
+    "name": "河边晨跑",
+    "desc": "天没亮沿河跑两圈，呼吸里全是凉空气。",
+    "emoji": "🏃",
+    "apCost": 1,
+    "effects": {
+      "health": 9,
+      "stress": -8,
+      "energy": -5,
+      "adaptation": 3
+    },
+    "tags": [
+      "health",
+      "rest"
+    ],
+    "location": "park",
+    "routeWeights": {
+      "chill": 2
+    },
+    "repeatPenalty": {
+      "energy": -4
+    }
+  },
+  {
+    "id": "park_picnic",
+    "name": "公园野餐发呆",
+    "desc": "草坪一躺三明治一摊，松鼠都来蹭饭。",
+    "emoji": "🧺",
+    "apCost": 1,
+    "effects": {
+      "money": -15,
+      "stress": -12,
+      "homesick": -5,
+      "health": 3,
+      "social": 3,
+      "energy": -3
+    },
+    "tags": [
+      "rest",
+      "explore"
+    ],
+    "location": "park",
+    "routeWeights": {
+      "chill": 2,
+      "social": 1
+    },
+    "repeatPenalty": {
+      "stress": 4
+    }
+  },
+  {
+    "id": "new_haircut",
+    "name": "换个新造型",
+    "desc": "鼓起勇气跟 Tony 比划半天，剪完和想象差亿点点。",
+    "emoji": "💇",
+    "apCost": 1,
+    "effects": {
+      "money": -35,
+      "reputation": 5,
+      "social": 3,
+      "stress": -4,
+      "energy": -4
+    },
+    "tags": [
+      "spend",
+      "life"
+    ],
+    "location": "town",
+    "routeWeights": {
+      "social": 1
+    },
+    "risk": {
+      "chance": 0.3,
+      "eventPool": "social_incidents"
+    },
+    "repeatPenalty": {
+      "money": -15
+    }
+  },
+  {
+    "id": "see_gp",
+    "name": "去看 GP",
+    "desc": "拖到扛不住才去看病，排队加等药一整天没了。",
+    "emoji": "🩺",
+    "apCost": 1,
+    "effects": {
+      "health": 12,
+      "adaptation": 5,
+      "stress": -4,
+      "energy": -8
+    },
+    "tags": [
+      "life",
+      "admin"
+    ],
+    "location": "clinic",
+    "routeWeights": {
+      "survivor": 1
+    },
+    "repeatPenalty": {
+      "energy": -4
+    }
+  },
+  {
+    "id": "vaccine_checkup",
+    "name": "打疫苗体检",
+    "desc": "按学校要求去打个针，胳膊酸两天。",
+    "emoji": "💉",
+    "apCost": 1,
+    "effects": {
+      "health": 7,
+      "visa": 4,
+      "adaptation": 3,
+      "energy": -5,
+      "stress": 2
+    },
+    "tags": [
+      "admin",
+      "life"
+    ],
+    "location": "clinic",
+    "routeWeights": {
+      "survivor": 1
+    },
+    "repeatPenalty": {
+      "energy": -3
+    }
+  },
+  {
+    "id": "wellbeing_counsel",
+    "name": "预约心理咨询",
+    "desc": "撑不住时约一次咨询，把憋着的话倒出来。",
+    "emoji": "🫂",
+    "apCost": 1,
+    "effects": {
+      "stress": -18,
+      "health": 6,
+      "homesick": -8,
+      "adaptation": 4,
+      "energy": -4
+    },
+    "tags": [
+      "rest",
+      "life"
+    ],
+    "location": "clinic",
+    "routeWeights": {
+      "chill": 1,
+      "homebound": 1
+    },
+    "repeatPenalty": {
+      "stress": 5
+    }
+  },
+  {
+    "id": "post_xiaohongshu",
+    "name": "拍照发小红书",
+    "desc": "为一张出片的下午茶摆拍二十分钟，文案改了八版。",
+    "emoji": "📸",
+    "apCost": 1,
+    "effects": {
+      "money": -25,
+      "reputation": 7,
+      "social": 4,
+      "stress": -5,
+      "energy": -5
+    },
+    "tags": [
+      "life",
+      "social"
+    ],
+    "location": "town",
+    "routeWeights": {
+      "social": 2
+    },
+    "risk": {
+      "chance": 0.3,
+      "eventPool": "social_incidents"
+    },
+    "repeatPenalty": {
+      "reputation": -3,
+      "money": -12
+    }
+  },
+  {
+    "id": "make_vlog",
+    "name": "更新留学 Vlog",
+    "desc": "架起手机拍日常，剪到半夜，期待一波涨粉。",
+    "emoji": "🎬",
+    "apCost": 1,
+    "effects": {
+      "reputation": 6,
+      "career": 4,
+      "english": 2,
+      "energy": -9,
+      "gpa": -2,
+      "stress": 3
+    },
+    "tags": [
+      "career",
+      "life"
+    ],
+    "location": "dorm",
+    "routeWeights": {
+      "career": 2,
+      "social": 1
+    },
+    "unlock": {
+      "minWeek": 3
+    },
+    "repeatPenalty": {
+      "energy": -6,
+      "reputation": -3
+    }
+  },
+  {
+    "id": "freelance_gig",
+    "name": "接私活 freelance",
+    "desc": "用专业技能接个小单，设计翻译家教，熬夜也值。",
+    "emoji": "🧑‍💻",
+    "apCost": 1,
+    "effects": {
+      "money": 110,
+      "career": 7,
+      "english": 1,
+      "energy": -15,
+      "gpa": -3,
+      "stress": 6
+    },
+    "tags": [
+      "work",
+      "career"
+    ],
+    "location": "work",
+    "routeWeights": {
+      "career": 2,
+      "grind": 2
+    },
+    "unlock": {
+      "minWeek": 6
+    },
+    "risk": {
+      "chance": 0.25,
+      "eventPool": "jobhunt_incidents"
+    },
+    "repeatPenalty": {
+      "energy": -8,
+      "stress": 4
+    }
+  },
+  {
+    "id": "driving_lessons",
+    "name": "考驾照",
+    "desc": "背 theory test 背到做梦都在让行，路考紧张到熄火。",
+    "emoji": "🚗",
+    "apCost": 1,
+    "effects": {
+      "money": -90,
+      "adaptation": 11,
+      "reputation": 4,
+      "career": 2,
+      "stress": 8,
+      "energy": -10
+    },
+    "tags": [
+      "admin",
+      "life"
+    ],
+    "location": "town",
+    "routeWeights": {
+      "survivor": 1
+    },
+    "unlock": {
+      "minWeek": 8
+    },
+    "risk": {
+      "chance": 0.3,
+      "eventPool": "admin_incidents"
+    },
+    "repeatPenalty": {
+      "money": -40,
+      "stress": 5
+    }
+  },
+  {
+    "id": "open_bank_account",
+    "name": "办银行卡",
+    "desc": "预约排队填表，逐项打钩才算在这扎了根。",
+    "emoji": "🏦",
+    "apCost": 1,
+    "effects": {
+      "money": -5,
+      "adaptation": 7,
+      "visa": 5,
+      "stress": 4,
+      "energy": -6
+    },
+    "tags": [
+      "admin"
+    ],
+    "location": "bank",
+    "routeWeights": {
+      "survivor": 2
+    },
+    "risk": {
+      "chance": 0.2,
+      "eventPool": "admin_incidents"
+    },
+    "repeatPenalty": {
+      "stress": 4
+    }
+  },
+  {
+    "id": "tax_refund",
+    "name": "申请退税",
+    "desc": "研究半天表格，发现还能退一笔，惊喜。",
+    "emoji": "🧮",
+    "apCost": 1,
+    "effects": {
+      "money": 85,
+      "adaptation": 5,
+      "stress": 3,
+      "energy": -7
+    },
+    "tags": [
+      "admin"
+    ],
+    "location": "bank",
+    "routeWeights": {
+      "survivor": 1
+    },
+    "unlock": {
+      "minWeek": 6
+    },
+    "repeatPenalty": {
+      "money": -40,
+      "stress": 4
+    }
+  },
+  {
+    "id": "volunteer_charity",
+    "name": "去做志愿者",
+    "desc": "周末去食物银行帮忙或社区义工，累但心里暖。",
+    "emoji": "🤲",
+    "apCost": 1,
+    "effects": {
+      "reputation": 7,
+      "social": 5,
+      "career": 3,
+      "english": 2,
+      "stress": -6,
+      "energy": -9
+    },
+    "tags": [
+      "career",
+      "social"
+    ],
+    "location": "society",
+    "routeWeights": {
+      "career": 1,
+      "social": 2
+    },
+    "unlock": {
+      "minWeek": 4
+    },
+    "repeatPenalty": {
+      "energy": -6
+    }
+  },
+  {
+    "id": "culture_museum",
+    "name": "逛博物馆",
+    "desc": "钻进免费博物馆，沉浸式当一天文化人。",
+    "emoji": "🏛️",
+    "apCost": 1,
+    "effects": {
+      "money": -12,
+      "adaptation": 9,
+      "english": 3,
+      "stress": -8,
+      "reputation": 2,
+      "energy": -6
+    },
+    "tags": [
+      "explore",
+      "life"
+    ],
+    "location": "town",
+    "routeWeights": {
+      "chill": 2,
+      "scholar": 1
+    },
+    "repeatPenalty": {
+      "adaptation": -3
+    }
+  },
+  {
+    "id": "festival_dumplings",
+    "name": "过节包饺子",
+    "desc": "和老乡包一锅饺子守岁，热气糊了整面窗。",
+    "emoji": "🥟",
+    "apCost": 1,
+    "effects": {
+      "money": -25,
+      "homesick": -16,
+      "social": 7,
+      "adaptation": 4,
+      "health": 3,
+      "energy": -6
+    },
+    "tags": [
+      "life",
+      "cook",
+      "social"
+    ],
+    "location": "dorm",
+    "routeWeights": {
+      "homebound": 2,
+      "social": 1
+    },
+    "unlock": {
+      "minWeek": 6
+    },
+    "repeatPenalty": {
+      "homesick": 4
+    }
+  },
+  {
+    "id": "study_group_cafe",
+    "name": "咖啡店自习",
+    "desc": "品牌咖啡店占个位，一杯拿铁换一下午专注。",
+    "emoji": "☕",
+    "apCost": 1,
+    "effects": {
+      "money": -15,
+      "gpa": 5,
+      "english": 1,
+      "stress": -3,
+      "energy": -8
+    },
+    "tags": [
+      "study",
+      "life"
+    ],
+    "location": "library",
+    "routeWeights": {
+      "scholar": 1,
+      "chill": 1
+    },
+    "repeatPenalty": {
+      "money": -8,
+      "stress": 4
+    }
+  },
+  {
+    "id": "career_centre_advice",
+    "name": "职业中心咨询",
+    "desc": "预约顾问诊一诊 CV，被圈出一堆语法错误。",
+    "emoji": "🧭",
+    "apCost": 1,
+    "effects": {
+      "career": 6,
+      "english": 2,
+      "reputation": 2,
+      "stress": -2,
+      "energy": -6
+    },
+    "tags": [
+      "career",
+      "admin"
+    ],
+    "location": "career",
+    "routeWeights": {
+      "career": 3
+    },
+    "unlock": {
+      "minWeek": 5
+    },
+    "repeatPenalty": {
+      "career": -2
+    }
+  },
+  {
+    "id": "mock_interview",
+    "name": "模拟面试",
+    "desc": "职业中心练一场 mock，被问到冰山面试题脸都红了。",
+    "emoji": "🎤",
+    "apCost": 1,
+    "effects": {
+      "career": 8,
+      "english": 3,
+      "stress": 6,
+      "reputation": 2,
+      "energy": -8
+    },
+    "tags": [
+      "career"
+    ],
+    "location": "career",
+    "routeWeights": {
+      "career": 3
+    },
+    "unlock": {
+      "minWeek": 7
+    },
+    "risk": {
+      "chance": 0.25,
+      "eventPool": "jobhunt_incidents"
+    },
+    "repeatPenalty": {
+      "stress": 5
+    }
+  },
+  {
+    "id": "society_committee",
+    "name": "竞选社团干部",
+    "desc": "报名进社团委员会，接下一堆活动要操心。",
+    "emoji": "📣",
+    "apCost": 1,
+    "effects": {
+      "social": 8,
+      "reputation": 6,
+      "career": 3,
+      "english": 2,
+      "stress": 6,
+      "energy": -9
+    },
+    "tags": [
+      "social",
+      "career"
+    ],
+    "location": "society",
+    "routeWeights": {
+      "social": 3,
+      "career": 1
+    },
+    "unlock": {
+      "minWeek": 6
+    },
+    "risk": {
+      "chance": 0.2,
+      "eventPool": "social_incidents"
+    },
+    "repeatPenalty": {
+      "stress": 5,
+      "energy": -5
+    }
+  },
+  {
+    "id": "board_game_night",
+    "name": "桌游之夜",
+    "desc": "华人圈约一局，推理半天发现自己是内鬼。",
+    "emoji": "🎲",
+    "apCost": 1,
+    "effects": {
+      "money": -12,
+      "social": 6,
+      "english": 2,
+      "stress": -8,
+      "homesick": -4,
+      "energy": -5
+    },
+    "tags": [
+      "social",
+      "rest"
+    ],
+    "location": "society",
+    "routeWeights": {
+      "social": 2,
+      "chill": 1
+    },
+    "repeatPenalty": {
+      "stress": 3
+    }
+  },
+  {
+    "id": "spa_self_care",
+    "name": "商场做个 SPA",
+    "desc": "给自己订个护理，疼归疼，镜子里的自己值了。",
+    "emoji": "💅",
+    "apCost": 1,
+    "effects": {
+      "money": -70,
+      "stress": -14,
+      "health": 4,
+      "reputation": 4,
+      "energy": -3
+    },
+    "tags": [
+      "spend",
+      "rest"
+    ],
+    "location": "mall",
+    "routeWeights": {
+      "chill": 2
+    },
+    "unlock": {
+      "minWeek": 4
+    },
+    "repeatPenalty": {
+      "money": -30,
+      "stress": 5
+    }
+  },
+  {
+    "id": "adopt_pet",
+    "name": "偷偷养只猫",
+    "desc": "合租屋藏只猫，铲屏一时爽，房东查房心跳加速。",
+    "emoji": "🐱",
+    "apCost": 1,
+    "effects": {
+      "money": -55,
+      "homesick": -14,
+      "stress": -10,
+      "health": 3,
+      "energy": -6,
+      "reputation": -3
+    },
+    "tags": [
+      "life",
+      "spend"
+    ],
+    "location": "dorm",
+    "routeWeights": {
+      "homebound": 2,
+      "chill": 1
+    },
+    "unlock": {
+      "minWeek": 8
+    },
+    "risk": {
+      "chance": 0.25,
+      "eventPool": "life_incidents"
+    },
+    "repeatPenalty": {
+      "money": -25,
+      "energy": -4
+    }
+  },
+  {
+    "id": "esports_night",
+    "name": "网吧开黑",
+    "desc": "和队友连麦上分，赢了击掌输了甘锅，时间嘾一下没了。",
+    "emoji": "🎮",
+    "apCost": 1,
+    "effects": {
+      "money": -15,
+      "stress": -9,
+      "social": 4,
+      "energy": -8,
+      "health": -4,
+      "gpa": -2
+    },
+    "tags": [
+      "social",
+      "rest"
+    ],
+    "location": "town",
+    "routeWeights": {
+      "chill": 2,
+      "social": 1
+    },
+    "repeatPenalty": {
+      "health": -4,
+      "gpa": -2
+    }
+  },
+  {
+    "id": "house_party",
+    "name": "去朋友 house party",
+    "desc": "被拉去合租屋开趋，带瓶酒就能进门。",
+    "emoji": "🎉",
+    "apCost": 1,
+    "effects": {
+      "money": -10,
+      "social": 10,
+      "homesick": -6,
+      "stress": -8,
+      "health": -4,
+      "energy": -8
+    },
+    "tags": [
+      "social"
+    ],
+    "location": "nightlife",
+    "routeWeights": {
+      "social": 3
+    },
+    "unlock": {
+      "minWeek": 3
+    },
+    "risk": {
+      "chance": 0.3,
+      "eventPool": "social_incidents"
+    },
+    "repeatPenalty": {
+      "health": -4,
+      "energy": -5
+    }
+  },
+  {
+    "id": "wellbeing_meditation",
+    "name": "公园冥想",
+    "desc": "不论信不信，安静坐一会，给漂泊的心找个锚点。",
+    "emoji": "🧘",
+    "apCost": 1,
+    "effects": {
+      "stress": -13,
+      "homesick": -5,
+      "adaptation": 3,
+      "health": 2,
+      "energy": 2
+    },
+    "tags": [
+      "rest"
+    ],
+    "location": "park",
+    "routeWeights": {
+      "chill": 2,
+      "homebound": 1
+    },
+    "repeatPenalty": {
+      "stress": 4
+    }
+  }
+]

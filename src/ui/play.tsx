@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   EVENT_BY_ID,
   ROUTE_BY_ID,
@@ -9,6 +9,7 @@ import {
 } from '../game';
 import type { GameState } from '../game';
 import { useGame } from '../store';
+import { MapScene } from '../map/MapScene';
 import { SceneStrip, StatHud } from './bits';
 
 // pick a scene id + caption from the current calendar position
@@ -22,7 +23,15 @@ function sceneFor(state: GameState): { artId: string; caption: string } {
   return { artId: 'scene-career-fair', caption: '求职季' };
 }
 
-function TopBar({ state }: { state: GameState }) {
+function TopBar({
+  state,
+  view,
+  onToggleView,
+}: {
+  state: GameState;
+  view: 'map' | 'list';
+  onToggleView: () => void;
+}) {
   const toMenu = useGame((s) => s.toMenu);
   const dots = [];
   for (let i = 0; i < state.maxActionPoints; i++) {
@@ -33,11 +42,18 @@ function TopBar({ state }: { state: GameState }) {
       <button className="pixel-btn pixel-btn--ghost" style={{ padding: '6px 9px' }} onClick={toMenu} aria-label="菜单">
         ≡
       </button>
+      <button
+        className="pixel-btn pixel-btn--ghost"
+        style={{ padding: '6px 9px' }}
+        onClick={onToggleView}
+        aria-label="切换视图"
+      >
+        {view === 'map' ? '📋' : '🗺️'}
+      </button>
       <div className="topbar__time">
-        第 <b>{state.year}</b> 年 · 第 <b>{state.term}</b> 学期 · 第 <b>{state.week}</b>/{WEEKS_PER_TERM} 周
+        第 <b>{state.year}</b> 年 · T<b>{state.term}</b> · <b>{state.week}</b>/{WEEKS_PER_TERM} 周
       </div>
       <div className="ap">
-        <span className="ap__label">行动</span>
         {dots}
       </div>
     </div>
@@ -132,6 +148,7 @@ function WeeklySummary({ state }: { state: GameState }) {
 
 export function PlayScreen({ state }: { state: GameState }) {
   const advance = useGame((s) => s.advance);
+  const [view, setView] = useState<'map' | 'list'>('map');
   const scene = sceneFor(state);
   const route = currentLeadingRoute(state);
   const routeName = route ? ROUTE_BY_ID[route]?.name : undefined;
@@ -145,14 +162,21 @@ export function PlayScreen({ state }: { state: GameState }) {
 
   return (
     <>
-      <TopBar state={state} />
-      <div className="scroll" ref={scrollRef}>
-        <SceneStrip artId={scene.artId} caption={scene.caption} route={routeName} />
-        <StatHud stats={state.stats} />
-        <div className="section-label">这周做点什么（每件事消耗 1 点行动）</div>
-        <ActionGrid state={state} />
-        <LogFeed state={state} />
-      </div>
+      <TopBar state={state} view={view} onToggleView={() => setView((v) => (v === 'map' ? 'list' : 'map'))} />
+      {view === 'map' ? (
+        <div className="map-wrap">
+          <MapScene state={state} />
+          <StatHud stats={state.stats} />
+        </div>
+      ) : (
+        <div className="scroll" ref={scrollRef}>
+          <SceneStrip artId={scene.artId} caption={scene.caption} route={routeName} />
+          <StatHud stats={state.stats} />
+          <div className="section-label">这周做点什么（每件事消耗 1 点行动）</div>
+          <ActionGrid state={state} />
+          <LogFeed state={state} />
+        </div>
+      )}
       <div className="bottom-bar">
         <button
           className={`pixel-btn ${out ? 'pixel-btn--primary' : 'pixel-btn--ghost'}`}

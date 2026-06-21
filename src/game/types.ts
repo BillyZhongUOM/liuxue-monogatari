@@ -117,6 +117,8 @@ export interface GameAction {
   effects: Effects;
   /** thematic tags, used by traits and routes: study/work/social/rest/career/life/cook/admin/explore */
   tags: string[];
+  /** map node this action is performed at (presentation/grouping only; the engine ignores it) */
+  location?: string;
   /** which growth routes this action feeds, with weight */
   routeWeights?: Record<string, number>;
   /** availability gate */
