@@ -192,9 +192,17 @@ button { font-family: inherit; }
 @keyframes rain { to { transform: translateY(9px); } }
 
 /* ----------------------------------------------------------------- HUD */
-.hud { padding: 10px 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 7px 12px; }
-.stat { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 6px; }
-.stat__ico { font-size: 13px; width: 16px; text-align: center; }
+.hud-wrap { padding: 10px 12px 6px; }
+.hud { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 14px; }
+.stat { display: grid; grid-template-columns: 2.6em 1fr auto; align-items: center; gap: 7px; }
+.stat__label { font-size: 12.5px; color: var(--tx-dim); white-space: nowrap; letter-spacing: 0.5px; }
+.stat--danger .stat__label { color: var(--bad); font-weight: 700; }
+.hud-toggle {
+  display: block; margin: 9px auto 0; padding: 4px 14px;
+  font-size: 12px; color: var(--tx-dim);
+  background: transparent; border: 1px solid var(--line-soft); cursor: pointer; border-radius: var(--r);
+}
+.hud-toggle:active { color: var(--amber); border-color: var(--amber-deep); }
 .stat__bar {
   position: relative;
   height: 10px;

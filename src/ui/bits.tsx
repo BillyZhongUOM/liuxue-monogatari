@@ -1,6 +1,12 @@
-import { STAT_METAS, STAT_META_BY_KEY } from '../game';
+import { useState } from 'react';
+import { STAT_META_BY_KEY } from '../game';
 import type { Effects, StatKey, Stats } from '../game';
 import { STAT_COLORS, assetUrl, effectChips, isDanger, statFraction } from './theme';
+
+// Vital signs the player must watch (all have a danger threshold) vs. the
+// growth stats that build quietly toward endings (shown on demand).
+const PRIMARY_STATS: StatKey[] = ['money', 'energy', 'stress', 'health', 'gpa', 'homesick'];
+const SECONDARY_STATS: StatKey[] = ['english', 'social', 'career', 'adaptation', 'visa', 'reputation'];
 
 export function StatBar({ statKey, value }: { statKey: StatKey; value: number }) {
   const meta = STAT_META_BY_KEY[statKey];
@@ -8,9 +14,7 @@ export function StatBar({ statKey, value }: { statKey: StatKey; value: number })
   const shown = statKey === 'money' ? `£${value}` : `${value}`;
   return (
     <div className={`stat${danger ? ' stat--danger' : ''}`} title={meta.desc}>
-      <span className="stat__ico" aria-hidden>
-        {meta.emoji}
-      </span>
+      <span className="stat__label">{meta.label}</span>
       <span className="stat__bar">
         <span
           className="stat__fill"
@@ -23,11 +27,18 @@ export function StatBar({ statKey, value }: { statKey: StatKey; value: number })
 }
 
 export function StatHud({ stats }: { stats: Stats }) {
+  const [open, setOpen] = useState(false);
+  const keys = open ? [...PRIMARY_STATS, ...SECONDARY_STATS] : PRIMARY_STATS;
   return (
-    <div className="hud">
-      {STAT_METAS.map((m) => (
-        <StatBar key={m.key} statKey={m.key} value={stats[m.key]} />
-      ))}
+    <div className="hud-wrap">
+      <div className="hud">
+        {keys.map((k) => (
+          <StatBar key={k} statKey={k} value={stats[k]} />
+        ))}
+      </div>
+      <button className="hud-toggle" onClick={() => setOpen((o) => !o)}>
+        {open ? '收起其余状态 ▴' : '更多状态 ▾'}
+      </button>
     </div>
   );
 }
