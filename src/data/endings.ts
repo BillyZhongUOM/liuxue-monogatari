@@ -45,6 +45,26 @@ export const ENDINGS: Ending[] = [
     crisis: true,
     cond: { statGte: { homesick: 100 }, statLte: { adaptation: 35 } },
   },
+  {
+    id: 'ending_resit_exam',
+    title: '挂科，等补考',
+    desc: '成绩单上飘出一个红色的 Fail，那门课没过。你忙着打工和喘气，作业一拖再拖，到底还是欠下了。系里给了你一次暑假补考的机会，毕业的脚步先停一停。',
+    quip: '补考不丢人，丢人的是连补考的机会都不要。这次，你想要。',
+    tone: 'mixed',
+    priority: 175,
+    crisis: true,
+    cond: { statLte: { gpa: 32, energy: 45 }, statGte: { stress: 58 }, minWeek: 14 },
+  },
+  {
+    id: 'ending_midnight_lonely',
+    title: '深夜，一个人撑不住了',
+    desc: '这座城你已经认得每一条街，可宿舍门一关，安静得能听见自己的心跳。朋友圈热闹是别人的，深夜的泡面是自己的。想家像潮水，一波接一波，你终于在某个凌晨给爸妈打了那通哭出声的电话。',
+    quip: '不是你不够坚强，是有些夜晚，本来就需要一个人一起熬。',
+    tone: 'mixed',
+    priority: 165,
+    crisis: true,
+    cond: { statGte: { homesick: 85, stress: 55 }, statLte: { social: 18 }, minWeek: 12 },
+  },
 
   // ----------------------------------------------------------------- finale (good)
   {
@@ -75,6 +95,18 @@ export const ENDINGS: Ending[] = [
     cond: { statGte: { gpa: 75, reputation: 60 } },
   },
   {
+    id: 'ending_intern_to_fulltime',
+    title: '实习转正',
+    desc: '那份咬牙撑下来的实习，最后一天经理把你叫进办公室，递来的不是辞别，是一份正式合同。你在团队里留下的好口碑，比任何一版 CV 都管用。Graduate Route 还没用上，工签就已经有了着落。',
+    quip: '别人投了一百份简历，你把一份实习，做成了一份工作。',
+    tone: 'good',
+    priority: 85,
+    cond: {
+      statGte: { career: 62, reputation: 58, money: 1000 },
+      leadingRouteIn: ['career', 'grind', 'survivor'],
+    },
+  },
+  {
     id: 'ending_social_star',
     title: '社团达人',
     desc: '你可能不是绩点最高的，但你是认识人最多的。毕业典礼上，半个会场都在和你打招呼。',
@@ -91,6 +123,31 @@ export const ENDINGS: Ending[] = [
     tone: 'good',
     priority: 66,
     cond: { statGte: { career: 48, money: 1200 }, leadingRouteIn: ['homebound', 'career', 'survivor'] },
+  },
+  {
+    id: 'ending_rain_philosopher',
+    title: '雨中哲学家',
+    desc: '你没把这一年过成一场冲刺。下雨就撑伞慢慢走，周末就坐火车去看海，把每一条街、每一间小馆子都认成了老朋友。绩点不算亮眼，可你比谁都更懂怎么在这座阴雨的城里，把日子过得舒展。',
+    quip: '别人在卷绩点，你卷的是怎么把留学，活成自己的样子。',
+    tone: 'good',
+    priority: 64,
+    cond: {
+      statGte: { adaptation: 70, english: 55, gpa: 48 },
+      statLte: { stress: 45 },
+      leadingRouteIn: ['chill'],
+    },
+  },
+  {
+    id: 'ending_grew_but_unsure',
+    title: '毕业了，路还在脚下',
+    desc: '典礼那天，你穿着租来的学位袍，照片笑得很真。只是 offer 还没着落，回不回国也没想清楚。但摸摸口袋里那本越用越顺的英语，想想一年前连点餐都紧张的自己，你知道，有些成长是成绩单上看不见的。',
+    quip: '没拿到标准答案，但你早就不是出发时的那个人了。',
+    tone: 'mixed',
+    priority: 52,
+    cond: {
+      statGte: { adaptation: 58, english: 52, social: 45 },
+      statLte: { career: 50 },
+    },
   },
   {
     id: 'ending_survivor',
