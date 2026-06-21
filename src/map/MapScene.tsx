@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { availableActions } from '../game';
 import type { GameState } from '../game';
 import { useGame } from '../store';
@@ -103,6 +103,10 @@ export function MapScene({ state }: { state: GameState }) {
   const [playerNode, setPlayerNode] = useState<string>('dorm');
   const [openLoc, setOpenLoc] = useState<string | null>(null);
   const [toast, setToast] = useState<string>('');
+  const [walking, setWalking] = useState(false);
+  const walkTimer = useRef<number | null>(null);
+
+  useEffect(() => () => { if (walkTimer.current) window.clearTimeout(walkTimer.current); }, []);
 
   const availSet = useMemo(() => new Set(availableActions(state).map((a) => a.id)), [state]);
   const outOfAp = state.actionPoints <= 0;
@@ -123,6 +127,8 @@ export function MapScene({ state }: { state: GameState }) {
 
   function switchZone(z: Zone) {
     if (z === zone) return;
+    if (walkTimer.current) window.clearTimeout(walkTimer.current);
+    setWalking(false);
     setZone(z);
     setPlayerNode(ZONE_HOME[z]);
     setOpenLoc(null);
@@ -134,8 +140,18 @@ export function MapScene({ state }: { state: GameState }) {
       window.setTimeout(() => setToast(''), 2200);
       return;
     }
-    setPlayerNode(locId); // the sprite walks over (cosmetic, CSS transition)
-    setOpenLoc(locId); // open the location menu right away
+    if (walkTimer.current) window.clearTimeout(walkTimer.current);
+    if (locId === playerNode) {
+      setOpenLoc(locId); // already there: enter at once
+      return;
+    }
+    setPlayerNode(locId); // the sprite walks over (CSS transition)
+    setWalking(true);
+    walkTimer.current = window.setTimeout(() => {
+      setOpenLoc(locId); // arrive at the door, then enter
+      setWalking(false);
+      walkTimer.current = null;
+    }, 400);
   }
 
   const nodes = LOCATIONS.filter((l) => l.zone === zone);
@@ -211,7 +227,7 @@ export function MapScene({ state }: { state: GameState }) {
 
         {playerInZone ? (
           <div
-            className="map-player"
+            className={`map-player${walking ? ' map-player--walking' : ''}`}
             style={{ left: `${player.x}%`, top: `${player.y}%`, zIndex: Math.round(player.y * 10) + 5 }}
             aria-hidden
           >

@@ -530,6 +530,11 @@ button { font-family: inherit; }
 }
 .map__stage--campus { background-color: #232a47; }
 .map__stage--town { background-color: #1b2138; }
+/* dusk vignette: darken the edges so the diorama reads as a lit little world */
+.map__stage::after {
+  content: ""; position: absolute; inset: 0; z-index: 900; pointer-events: none;
+  background: radial-gradient(125% 92% at 50% 40%, transparent 56%, rgba(10,12,22,0.4) 100%);
+}
 
 .map-skyline {
   position: absolute; top: 0; left: 0; width: 100%; height: auto;
@@ -595,6 +600,9 @@ button { font-family: inherit; }
   animation: bob 1.6s ease-in-out infinite;
 }
 @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+/* quicker stepped bob while walking to a building */
+.map-player--walking .map-player__img { animation: walkbob 0.36s steps(2, end) infinite; }
+@keyframes walkbob { 0% { transform: translateY(0); } 50% { transform: translateY(-4px); } 100% { transform: translateY(0); } }
 
 /* liveliness: available buildings breathe (glow lives on the ground pad, see .map-node--open ::before) */
 @keyframes glowpulse { 0%, 100% { opacity: 0.45; } 50% { opacity: 1; } }
