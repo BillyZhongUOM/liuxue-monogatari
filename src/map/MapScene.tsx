@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { availableActions } from '../game';
 import type { GameState } from '../game';
 import { useGame } from '../store';
+import { assetUrl } from '../ui/theme';
 import {
   LOCATIONS,
   LOCATION_BY_ID,
@@ -12,6 +13,23 @@ import {
 import type { Zone } from './locations';
 
 type NodeStatus = 'open' | 'locked' | 'dim';
+
+// Decoration layer: trees / lampposts / benches tucked into the gaps between
+// buildings for depth. Purely cosmetic, sits behind the building layer.
+const DECO_SPOTS: Record<Zone, { x: number; y: number; a: string; s: number }[]> = {
+  campus: [
+    { x: 35, y: 47, a: 'deco-tree-autumn', s: 52 },
+    { x: 66, y: 51, a: 'deco-tree-autumn', s: 46 },
+    { x: 50, y: 60, a: 'deco-lamppost', s: 30 },
+    { x: 11, y: 56, a: 'deco-tree-green', s: 44 },
+  ],
+  town: [
+    { x: 35, y: 38, a: 'deco-lamppost', s: 30 },
+    { x: 66, y: 65, a: 'deco-bench', s: 40 },
+    { x: 34, y: 67, a: 'deco-tree-green', s: 46 },
+    { x: 67, y: 38, a: 'deco-tree-green', s: 42 },
+  ],
+};
 
 // Bottom sheet listing the actions you can do at the location you walked to.
 function LocationSheet({
@@ -114,6 +132,9 @@ export function MapScene({ state }: { state: GameState }) {
   const nodes = LOCATIONS.filter((l) => l.zone === zone);
   const player = LOCATION_BY_ID[playerNode];
   const playerInZone = player?.zone === zone;
+  const ground = assetUrl(`ground-${zone}`);
+  const skyline = assetUrl(`skyline-${state.config.city}`);
+  const charImg = assetUrl('char-student');
 
   return (
     <div className="map">
@@ -130,9 +151,29 @@ export function MapScene({ state }: { state: GameState }) {
         <span className="map__hint">{outOfAp ? '行动点用完了' : '点地点，走过去做事'}</span>
       </div>
 
-      <div className={`map__stage map__stage--${zone}`}>
+      <div
+        className={`map__stage map__stage--${zone}`}
+        style={ground ? { backgroundImage: `url(${ground})` } : undefined}
+      >
+        {skyline ? <img className="map-skyline" src={skyline} alt="" aria-hidden /> : null}
+
+        {DECO_SPOTS[zone].map((d, i) => {
+          const img = assetUrl(d.a);
+          return img ? (
+            <img
+              key={i}
+              className="map-deco map-deco__img"
+              src={img}
+              style={{ left: `${d.x}%`, top: `${d.y}%`, width: `${d.s}px`, height: `${d.s}px` }}
+              alt=""
+              aria-hidden
+            />
+          ) : null;
+        })}
+
         {nodes.map((l) => {
           const st = statusOf(l.id);
+          const bImg = assetUrl(`building-${l.id}`);
           return (
             <button
               key={l.id}
@@ -140,8 +181,19 @@ export function MapScene({ state }: { state: GameState }) {
               style={{ left: `${l.x}%`, top: `${l.y}%` }}
               onClick={() => tapNode(l.id)}
             >
-              <span className="map-node__ico" aria-hidden>
-                {st === 'locked' ? '🔒' : l.emoji}
+              <span className="map-node__art">
+                {bImg ? (
+                  <img className="map-node__img" src={bImg} alt="" />
+                ) : (
+                  <span className="map-node__ico" aria-hidden>
+                    {l.emoji}
+                  </span>
+                )}
+                {st === 'locked' ? (
+                  <span className="map-node__lock" aria-hidden>
+                    🔒
+                  </span>
+                ) : null}
               </span>
               <span className="map-node__name">{l.name}</span>
             </button>
@@ -150,7 +202,7 @@ export function MapScene({ state }: { state: GameState }) {
 
         {playerInZone ? (
           <div className="map-player" style={{ left: `${player.x}%`, top: `${player.y}%` }} aria-hidden>
-            🧑
+            {charImg ? <img className="map-player__img" src={charImg} alt="" /> : '🧑'}
           </div>
         ) : null}
 

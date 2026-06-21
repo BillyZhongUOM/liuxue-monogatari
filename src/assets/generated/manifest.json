@@ -1,7 +1,87 @@
 {
   "updatedBy": "register-assets",
-  "count": 21,
+  "count": 51,
   "assets": [
+    {
+      "id": "building-bank",
+      "path": "/assets/generated/building-bank.png"
+    },
+    {
+      "id": "building-career",
+      "path": "/assets/generated/building-career.png"
+    },
+    {
+      "id": "building-clinic",
+      "path": "/assets/generated/building-clinic.png"
+    },
+    {
+      "id": "building-dorm",
+      "path": "/assets/generated/building-dorm.png"
+    },
+    {
+      "id": "building-gym",
+      "path": "/assets/generated/building-gym.png"
+    },
+    {
+      "id": "building-lecture",
+      "path": "/assets/generated/building-lecture.png"
+    },
+    {
+      "id": "building-library",
+      "path": "/assets/generated/building-library.png"
+    },
+    {
+      "id": "building-mall",
+      "path": "/assets/generated/building-mall.png"
+    },
+    {
+      "id": "building-market",
+      "path": "/assets/generated/building-market.png"
+    },
+    {
+      "id": "building-nightlife",
+      "path": "/assets/generated/building-nightlife.png"
+    },
+    {
+      "id": "building-park",
+      "path": "/assets/generated/building-park.png"
+    },
+    {
+      "id": "building-society",
+      "path": "/assets/generated/building-society.png"
+    },
+    {
+      "id": "building-station",
+      "path": "/assets/generated/building-station.png"
+    },
+    {
+      "id": "building-town",
+      "path": "/assets/generated/building-town.png"
+    },
+    {
+      "id": "building-work",
+      "path": "/assets/generated/building-work.png"
+    },
+    {
+      "id": "char-student",
+      "path": "/assets/generated/char-student.png"
+    },
+    {
+      "id": "deco-bench",
+      "path": "/assets/generated/deco-bench.png"
+    },
+    {
+      "id": "deco-lamppost",
+      "path": "/assets/generated/deco-lamppost.png"
+    },
+    {
+      "id": "deco-tree-autumn",
+      "path": "/assets/generated/deco-tree-autumn.png"
+    },
+    {
+      "id": "deco-tree-green",
+      "path": "/assets/generated/deco-tree-green.png"
+    },
     {
       "id": "ending_bankruptcy",
       "path": "/assets/generated/ending_bankruptcy.png"
@@ -67,6 +147,14 @@
       "path": "/assets/generated/ending_survivor.png"
     },
     {
+      "id": "ground-campus",
+      "path": "/assets/generated/ground-campus.png"
+    },
+    {
+      "id": "ground-town",
+      "path": "/assets/generated/ground-town.png"
+    },
+    {
       "id": "scene-arrival",
       "path": "/assets/generated/scene-arrival.png"
     },
@@ -85,6 +173,38 @@
     {
       "id": "scene-library",
       "path": "/assets/generated/scene-library.png"
+    },
+    {
+      "id": "skyline-birmingham",
+      "path": "/assets/generated/skyline-birmingham.png"
+    },
+    {
+      "id": "skyline-bristol",
+      "path": "/assets/generated/skyline-bristol.png"
+    },
+    {
+      "id": "skyline-cambridge",
+      "path": "/assets/generated/skyline-cambridge.png"
+    },
+    {
+      "id": "skyline-edinburgh",
+      "path": "/assets/generated/skyline-edinburgh.png"
+    },
+    {
+      "id": "skyline-london",
+      "path": "/assets/generated/skyline-london.png"
+    },
+    {
+      "id": "skyline-manchester",
+      "path": "/assets/generated/skyline-manchester.png"
+    },
+    {
+      "id": "skyline-oxford",
+      "path": "/assets/generated/skyline-oxford.png"
+    },
+    {
+      "id": "skyline-sheffield",
+      "path": "/assets/generated/skyline-sheffield.png"
     }
   ]
 }
