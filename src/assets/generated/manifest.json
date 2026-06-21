@@ -1,5 +1,26 @@
 {
   "updatedBy": "register-assets",
-  "count": 0,
-  "assets": []
+  "count": 5,
+  "assets": [
+    {
+      "id": "scene-arrival",
+      "path": "/assets/generated/scene-arrival.png"
+    },
+    {
+      "id": "scene-campus-rain",
+      "path": "/assets/generated/scene-campus-rain.png"
+    },
+    {
+      "id": "scene-career-fair",
+      "path": "/assets/generated/scene-career-fair.png"
+    },
+    {
+      "id": "scene-dorm",
+      "path": "/assets/generated/scene-dorm.png"
+    },
+    {
+      "id": "scene-library",
+      "path": "/assets/generated/scene-library.png"
+    }
+  ]
 }
