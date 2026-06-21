@@ -1,1 +1,2971 @@
-[]
+[
+  {
+    "id": "ev_seminar_silence",
+    "title": "Seminar 的死寂",
+    "description": "Tutor 抛出一个问题,然后是漫长的沉默。十几双眼睛盯着桌面,空气凝固得能切片。你心里有答案,可那句英文卡在喉咙口。",
+    "category": "study",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "硬着头皮第一个开口",
+        "resultText": "磕磕巴巴说完,tutor 眼睛一亮,顺着你的话往下讲。原来开口没那么难。",
+        "effects": {
+          "english": 5,
+          "gpa": 3,
+          "reputation": 3,
+          "stress": 5,
+          "energy": -4
+        },
+        "routeWeights": {
+          "scholar": 2,
+          "social": 1
+        }
+      },
+      {
+        "text": "等别人先打破沉默",
+        "resultText": "终于有人接话,你跟着点头补了两句。安全,但那个最好的角度被别人抢走了。",
+        "effects": {
+          "gpa": 1,
+          "english": 1,
+          "stress": -2,
+          "reputation": -1
+        }
+      },
+      {
+        "text": "低头装作在记笔记",
+        "resultText": "你把笔记本涂得很满,实际一个字没听进去。沉默熬过去了,机会也溜走了。",
+        "effects": {
+          "stress": 3,
+          "english": -1,
+          "reputation": -2
+        },
+        "routeWeights": {
+          "chill": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_essay_wordcount",
+    "title": "字数这道坎",
+    "description": "Essay 限 2000 字,你写到 2600 还没收尾,论点却个个舍不得删。提交框下面那行红字写着:超字数按比例扣分。",
+    "category": "study",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "狠心删到达标",
+        "resultText": "你忍痛砍掉两整段,逻辑反而更紧了。删字像割肉,可成品干净利落。",
+        "effects": {
+          "gpa": 5,
+          "english": 3,
+          "stress": 4,
+          "energy": -8
+        },
+        "routeWeights": {
+          "scholar": 2
+        }
+      },
+      {
+        "text": "压缩措辞硬塞进去",
+        "resultText": "把长句拆短、把废话挤干,卡着上限交了。读起来有点喘,但内容全保住了。",
+        "effects": {
+          "gpa": 2,
+          "english": 2,
+          "stress": 6,
+          "energy": -10
+        }
+      },
+      {
+        "text": "超着交,认那点扣分",
+        "resultText": "你赌内容能盖过扣分。论点是全了,marker 在页边写了句:over the limit。",
+        "effects": {
+          "gpa": -3,
+          "stress": -2,
+          "energy": -3
+        },
+        "routeWeights": {
+          "chill": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_resit_borderline",
+    "title": "39 分的悬崖",
+    "description": "一门课的平时成绩卡在 39,差一分就要补考。这门课你一直没跟上,reading 欠了一堆,期末权重还很大。",
+    "category": "study",
+    "weight": 5,
+    "pool": "",
+    "choices": [
+      {
+        "text": "豁出去恶补这一门",
+        "resultText": "你把这一周全押在它身上,旧笔记从头啃。别的科目顾不上了,但这门总算摸到及格线。",
+        "effects": {
+          "gpa": 7,
+          "stress": 8,
+          "energy": -12,
+          "health": -4
+        },
+        "routeWeights": {
+          "survivor": 3,
+          "grind": 1
+        }
+      },
+      {
+        "text": "找 tutor 摸清补考规则",
+        "resultText": "tutor 把 resit 的机制讲清楚了,你心里有了底。压力小了点,可这门还是悬着。",
+        "effects": {
+          "gpa": 2,
+          "adaptation": 4,
+          "stress": -4,
+          "english": 2,
+          "energy": -4
+        },
+        "routeWeights": {
+          "survivor": 2
+        }
+      },
+      {
+        "text": "先保住更稳的几门",
+        "resultText": "你战略性放弃了这门,把精力分给胜算大的科目。整体保住了,这门大概率要补考。",
+        "effects": {
+          "gpa": -2,
+          "stress": 4,
+          "energy": -4
+        },
+        "routeWeights": {
+          "survivor": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_dissertation_topic",
+    "title": "毕业论文选题",
+    "description": "导师让你定 dissertation 方向。一个题目新颖但数据难找,做成了是亮点;另一个稳妥好查资料,但平平无奇。截止日就在那里冷冷地看着你。",
+    "category": "study",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "挑有野心的难题",
+        "resultText": "导师眼神都变了,说这个值得做。前路荆棘,但你赌它能成为简历上最硬的一行。",
+        "effects": {
+          "gpa": 6,
+          "career": 5,
+          "reputation": 4,
+          "stress": 9,
+          "energy": -10
+        },
+        "routeWeights": {
+          "phd": 3,
+          "scholar": 2
+        }
+      },
+      {
+        "text": "选稳妥能交差的题",
+        "resultText": "资料一搜一大把,推进顺滑。不会出彩,但也绝不会翻车,睡得着觉。",
+        "effects": {
+          "gpa": 3,
+          "stress": -3,
+          "energy": -4
+        },
+        "routeWeights": {
+          "survivor": 2
+        }
+      },
+      {
+        "text": "改导师手上的现成课题",
+        "resultText": "你接了导师正在做的一个小方向,省了选题的纠结,也欠下了一份要还的人情。",
+        "effects": {
+          "gpa": 4,
+          "career": 3,
+          "reputation": 2,
+          "stress": 3,
+          "social": 2
+        },
+        "routeWeights": {
+          "phd": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_exam_cram",
+    "title": "闭卷考前一周",
+    "description": "期末是少见的闭卷笔试,一周后开考,三本厚厚的 lecture notes 你还有大半没碰。图书馆 24 小时区已经一座难求。",
+    "category": "study",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "连熬几个通宵冲刺",
+        "resultText": "靠咖啡因和意志把考纲过了一遍。分数应该稳了,黑眼圈也稳了,考完直接睡了一整天。",
+        "effects": {
+          "gpa": 7,
+          "stress": 6,
+          "energy": -16,
+          "health": -6
+        },
+        "routeWeights": {
+          "scholar": 2,
+          "grind": 1
+        }
+      },
+      {
+        "text": "做往年真题抓重点",
+        "resultText": "你翻出 past papers,押中了几个常考点。复习面窄,但效率高,赌的就是出题不偏。",
+        "effects": {
+          "gpa": 5,
+          "stress": 4,
+          "energy": -8
+        },
+        "routeWeights": {
+          "scholar": 2
+        }
+      },
+      {
+        "text": "按部就班复习,保证睡眠",
+        "resultText": "你拒绝熬夜,每天稳稳推进。考场上头脑清醒,只是有几章实在没来得及看。",
+        "effects": {
+          "gpa": 2,
+          "health": 3,
+          "stress": -3,
+          "energy": -4
+        },
+        "routeWeights": {
+          "chill": 1,
+          "survivor": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_office_hour_question",
+    "title": "Office hour 门口",
+    "description": "你卡在一个概念上整整两天,教授的 office hour 就剩最后十分钟。门虚掩着,你站在走廊上,手举到一半又放下。",
+    "category": "study",
+    "weight": 5,
+    "pool": "",
+    "choices": [
+      {
+        "text": "敲门进去问清楚",
+        "resultText": "教授不仅讲透了,还多聊了几句你的方向。困惑解开了,顺带在他心里留了个印象。",
+        "effects": {
+          "gpa": 4,
+          "english": 3,
+          "reputation": 3,
+          "stress": -2,
+          "energy": -4
+        },
+        "routeWeights": {
+          "scholar": 2,
+          "phd": 1
+        }
+      },
+      {
+        "text": "回去自己死磕",
+        "resultText": "你蹲在桌前查了一晚资料,总算自己想通了。慢是慢,但印象格外深。",
+        "effects": {
+          "gpa": 3,
+          "stress": 5,
+          "energy": -8
+        },
+        "routeWeights": {
+          "scholar": 1
+        }
+      },
+      {
+        "text": "发邮件问算了",
+        "resultText": "你打了封邮件,客气又安全。回复隔天才来,简短得很,问题勉强算解决。",
+        "effects": {
+          "gpa": 1,
+          "english": 1,
+          "stress": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_lecture_attendance",
+    "title": "九点的大课点名",
+    "description": "周一早九的大课今天要刷卡签到,昨晚赶 due 到三点的你眼皮打架。被窝在召唤,可缺勤记录会进系统。",
+    "category": "study",
+    "weight": 5,
+    "pool": "",
+    "choices": [
+      {
+        "text": "爬起来撑着去签到",
+        "resultText": "你顶着熊猫眼挪进教室,前半节在神游,后半节居然抓到几个考点。出勤保住了。",
+        "effects": {
+          "gpa": 2,
+          "energy": -8,
+          "stress": 3,
+          "reputation": 1
+        },
+        "routeWeights": {
+          "survivor": 1,
+          "scholar": 1
+        }
+      },
+      {
+        "text": "睡饱了看录播补",
+        "resultText": "你补了觉,精神回来了,可录播一直拖着没看,缺勤这笔记在了账上。",
+        "effects": {
+          "energy": 10,
+          "stress": -3,
+          "gpa": -2
+        },
+        "routeWeights": {
+          "chill": 1
+        }
+      },
+      {
+        "text": "托同学帮忙带签",
+        "resultText": "同学帮你刷了卡,你多睡了俩小时。心里却有点发虚,这事终究不太踏实。",
+        "effects": {
+          "energy": 8,
+          "stress": 4,
+          "reputation": -3
+        },
+        "routeWeights": {
+          "chill": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_reading_pile",
+    "title": "读不完的 reading list",
+    "description": "这周的 reading list 列了八篇论文外加两个章节,每篇都标着 essential。你算了算页数,一口气没上来。",
+    "category": "study",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "硬啃,一篇不落",
+        "resultText": "你逐篇读完,脑子塞得满满当当。seminar 上引经据典,代价是几乎没合眼。",
+        "effects": {
+          "gpa": 5,
+          "english": 4,
+          "energy": -12,
+          "stress": 6
+        },
+        "routeWeights": {
+          "scholar": 3
+        }
+      },
+      {
+        "text": "只读摘要和结论",
+        "resultText": "你抓 abstract 和 conclusion 速通,省下大把时间。讨论时勉强能接上话,细节一问就露馅。",
+        "effects": {
+          "gpa": 2,
+          "english": 2,
+          "energy": -5,
+          "stress": 2
+        }
+      },
+      {
+        "text": "和同学分工合读",
+        "resultText": "几个人把书单拆了,各读一块再开会同步。效率翻倍,也欠了彼此一份要还的功课。",
+        "effects": {
+          "gpa": 3,
+          "social": 4,
+          "english": 2,
+          "energy": -6
+        },
+        "routeWeights": {
+          "social": 2,
+          "scholar": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_group_presentation_q",
+    "title": "组展被追问",
+    "description": "小组 presentation 你这部分讲得挺顺,台下 tutor 忽然举手:你这个数据,来源能再说说吗?全组的目光齐刷刷转向你。",
+    "category": "study",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "沉住气正面接招",
+        "resultText": "你深吸一口气,把来源和取舍掰开讲清楚。tutor 点了点头,全组松了口气,你成了那个救场的人。",
+        "effects": {
+          "gpa": 5,
+          "english": 4,
+          "reputation": 4,
+          "stress": 6,
+          "energy": -4
+        },
+        "routeWeights": {
+          "scholar": 2,
+          "career": 1
+        }
+      },
+      {
+        "text": "坦白这点没准备充分",
+        "resultText": "你诚实地说这块还要再查,承诺课后补上。没能漂亮接住,但 tutor 欣赏这份实在。",
+        "effects": {
+          "gpa": 1,
+          "english": 2,
+          "reputation": 1,
+          "stress": 3
+        }
+      },
+      {
+        "text": "含糊几句赶紧带过",
+        "resultText": "你打了个太极把话题岔开。当场是糊过去了,tutor 笔记本上却记了一笔。",
+        "effects": {
+          "gpa": -2,
+          "reputation": -2,
+          "stress": 4
+        },
+        "routeWeights": {
+          "chill": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_marked_essay_feedback",
+    "title": "发回来的 essay",
+    "description": "批改结果出来了,你自觉写得不错,分数却比预期低了一截。页边密密麻麻的红字,有些评语你甚至没看懂。",
+    "category": "study",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "约 tutor 当面过一遍 feedback",
+        "resultText": "tutor 把每条批注讲给你听,你才明白论证差在哪。分数追不回了,下一篇却心里有谱了。",
+        "effects": {
+          "gpa": 4,
+          "english": 3,
+          "adaptation": 3,
+          "stress": -3,
+          "energy": -4
+        },
+        "routeWeights": {
+          "scholar": 2
+        }
+      },
+      {
+        "text": "自己逐条琢磨消化",
+        "resultText": "你对着红字反复推敲,大半看懂了,有几条还是似懂非懂。进步有,但走了些弯路。",
+        "effects": {
+          "gpa": 2,
+          "english": 2,
+          "stress": 3,
+          "energy": -5
+        },
+        "routeWeights": {
+          "scholar": 1
+        }
+      },
+      {
+        "text": "合上不看,先缓一缓",
+        "resultText": "你把 essay 塞进抽屉,情绪先放过自己。心是松了,可那些教训也一起被你压了下去。",
+        "effects": {
+          "stress": -5,
+          "homesick": 3,
+          "gpa": -1
+        },
+        "routeWeights": {
+          "chill": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_lab_report_redo",
+    "title": "Lab report 要重做",
+    "description": "实验报告交前一夜,你发现有一组数据记错了,整段分析全建在错的数字上。重跑一遍来不及,可错着交又过不了自己这关。",
+    "category": "study",
+    "weight": 5,
+    "pool": "",
+    "choices": [
+      {
+        "text": "通宵重算重写分析",
+        "resultText": "你推翻重来,把正确数据一路算到结论。天亮时报告扎实了,你也快散架了。",
+        "effects": {
+          "gpa": 6,
+          "stress": 7,
+          "energy": -16,
+          "health": -5
+        },
+        "routeWeights": {
+          "scholar": 2,
+          "grind": 1
+        }
+      },
+      {
+        "text": "如实标注误差再交",
+        "resultText": "你在报告里诚实写明这处数据问题和它的影响。结论打了折,但 marker 看重这份严谨。",
+        "effects": {
+          "gpa": 2,
+          "adaptation": 4,
+          "reputation": 2,
+          "stress": 3,
+          "energy": -4
+        },
+        "routeWeights": {
+          "scholar": 1,
+          "survivor": 1
+        }
+      },
+      {
+        "text": "将错就错先交了",
+        "resultText": "你揣着侥幸把错的版本交了,赌没人细看。心里那块石头一直没落地,反复地硌着你。",
+        "effects": {
+          "gpa": -4,
+          "stress": 6,
+          "health": -2
+        },
+        "routeWeights": {
+          "chill": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_heating_breakdown_winter",
+    "title": "暖气罢工的冬夜",
+    "description": "十二月的英国，房间里暖气片摸上去比你的心还凉。你裹着两层被子刷手机，呼出的气都快结霜了，房东的电话永远转语音信箱。",
+    "category": "life",
+    "weight": 7,
+    "pool": "",
+    "choices": [
+      {
+        "text": "自己买个电暖器顶一晚",
+        "resultText": "插上电暖器那一刻，房间总算有了人味。但电表转得飞快，你默默算了下这个月的电费，心在滴血。至少今晚能睡了。",
+        "effects": {
+          "money": -45,
+          "health": 6,
+          "stress": -5,
+          "energy": 4
+        },
+        "routeWeights": {
+          "survivor": 1.2,
+          "chill": 1
+        }
+      },
+      {
+        "text": "灌两个热水袋硬扛",
+        "resultText": "抱着热水袋蜷成一团，像只过冬的猫。省了钱，但半夜冻醒三次，第二天顶着黑眼圈去上课，鼻涕都快冻成冰柱了。",
+        "effects": {
+          "money": -6,
+          "health": -8,
+          "stress": 6,
+          "energy": -8
+        },
+        "routeWeights": {
+          "survivor": 1.3,
+          "grind": 0.8
+        }
+      },
+      {
+        "text": "发邮件正式投诉房东并截图存证",
+        "resultText": "你冷静地写了封措辞专业的邮件，附上室温照片，抄送中介。房东第二天就派人来修了。维权成功，但这一晚还是冻得够呛，英语邮件写到半夜。",
+        "effects": {
+          "english": 5,
+          "stress": 3,
+          "energy": -5,
+          "reputation": 4,
+          "adaptation": 5
+        },
+        "routeWeights": {
+          "survivor": 1.2,
+          "scholar": 0.9
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_chinese_supermarket_haul",
+    "title": "中超的乡愁补给",
+    "description": "坐了四十分钟公交到城里唯一的中超，货架上的家乡牌的辣酱和速冻饺子像久别的亲人。篮子越装越满，你假装没看见标价签上那个让人心碎的数字。",
+    "category": "life",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "大采购一波，家乡味管够",
+        "resultText": "拎着三大袋走出店门，胳膊都勒红了。回家煮了碗番茄鸡蛋面，那一口下去眼眶有点热。钱包瘪了，但灵魂被喂饱了。",
+        "effects": {
+          "money": -55,
+          "homesick": -12,
+          "health": 5,
+          "energy": -4
+        },
+        "routeWeights": {
+          "homebound": 1.3,
+          "chill": 1
+        }
+      },
+      {
+        "text": "只买一瓶辣酱，剩下的忍住",
+        "resultText": "理智战胜了乡愁，你只抱走一瓶家乡牌的辣酱结账。回家配着白米饭吃，虽然简朴，但精打细算的满足感也挺踏实。就是看着空荡的冰箱有点想家。",
+        "effects": {
+          "money": -10,
+          "homesick": 4,
+          "stress": 2
+        },
+        "routeWeights": {
+          "survivor": 1.2,
+          "grind": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_first_time_cooking_disaster",
+    "title": "第一次掌勺翻车",
+    "description": "你信心满满打开手机菜谱，准备复刻妈妈的红烧肉。结果糖炒糊了，肉硬得像橡皮，厨房烟雾报警器尖叫着抗议，整栋楼的人都知道你今天做饭了。",
+    "category": "life",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "硬着头皮把黑暗料理吃完",
+        "resultText": "本着不浪费的原则，你含泪扒完了这盘焦糖橡皮肉。胃有点遭罪，但你安慰自己：至少练手了，下次一定行。厨艺这东西，都是拿胃换来的。",
+        "effects": {
+          "health": -6,
+          "money": -8,
+          "adaptation": 4,
+          "stress": 3
+        },
+        "routeWeights": {
+          "survivor": 1.2,
+          "homebound": 1
+        }
+      },
+      {
+        "text": "倒掉，点个外卖犒劳自己",
+        "resultText": "果断把灾难倒进垃圾桶，手机一点，半小时后热腾腾的外卖到门口。吃得心满意足，但看着外卖费和那盘报废的食材，钱包默默流泪。",
+        "effects": {
+          "money": -22,
+          "health": 3,
+          "stress": -4,
+          "energy": 3
+        },
+        "routeWeights": {
+          "chill": 1.3,
+          "social": 0.8
+        }
+      },
+      {
+        "text": "视频连线妈妈现场教学",
+        "resultText": "你举着手机让妈妈隔空指挥，她一边嫌弃一边教你怎么控制火候。重做的那盘居然还能吃，更重要的是，跟妈妈聊了一个小时，心里暖暖的。",
+        "effects": {
+          "homesick": -10,
+          "adaptation": 5,
+          "energy": -3,
+          "health": 2
+        },
+        "routeWeights": {
+          "homebound": 1.4,
+          "chill": 0.9
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_rain_soaked_walk_home",
+    "title": "被暴雨偷袭的回家路",
+    "description": "英国的雨从不打招呼。出门时还是晴天，走到半路天就漏了，你没带伞，书包里的笔记本电脑成了重点保护对象，自己淋成了落汤鸡。",
+    "category": "life",
+    "weight": 7,
+    "pool": "",
+    "choices": [
+      {
+        "text": "冲进便利店买把贵到离谱的伞",
+        "resultText": "便利店的伞标价让你倒吸一口凉气，但电脑要紧。撑着这把抢钱伞回家，至少保住了作业。回头一看，这已经是你这学期买的第四把伞了。",
+        "effects": {
+          "money": -12,
+          "stress": -3,
+          "health": 2
+        },
+        "routeWeights": {
+          "survivor": 1.1,
+          "grind": 0.9
+        }
+      },
+      {
+        "text": "把书包护在怀里一路狂奔",
+        "resultText": "你弓着背护住书包，像护着传家宝一样冲回家。电脑保住了，但你全身湿透，当晚就开始打喷嚏。省下的伞钱，怕是要还给感冒药。",
+        "effects": {
+          "money": -5,
+          "health": -9,
+          "stress": 5,
+          "energy": -6
+        },
+        "routeWeights": {
+          "survivor": 1.3,
+          "grind": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_train_strike_stranded",
+    "title": "火车罢工困在站台",
+    "description": "你提前一小时到火车站，结果电子屏上一整排红色的Cancelled像在嘲笑你。今天又罢工，站台上挤满了同样一脸绝望的乘客，广播里只剩礼貌的道歉。",
+    "category": "life",
+    "weight": 7,
+    "pool": "",
+    "choices": [
+      {
+        "text": "咬牙打车，今天的行程不能误",
+        "resultText": "你拼了，叫了辆出租。计价器跳得你心惊肉跳，但总算准时赶到。钱包受了重伤，行程却保住了。英国的火车，真是让人又爱又恨。",
+        "effects": {
+          "money": -38,
+          "stress": -4,
+          "energy": -3,
+          "career": 3
+        },
+        "routeWeights": {
+          "career": 1.2,
+          "grind": 1
+        }
+      },
+      {
+        "text": "认命回家，改线上参加",
+        "resultText": "你叹口气回了家，打开电脑申请远程参与。省了车钱，但隔着屏幕总觉得少了点什么，错过了不少现场交流的机会。罢工面前，人类的渺小展露无遗。",
+        "effects": {
+          "money": -4,
+          "stress": 4,
+          "career": -4,
+          "social": -3
+        },
+        "routeWeights": {
+          "chill": 1.2,
+          "scholar": 0.9
+        }
+      },
+      {
+        "text": "在车站咖啡馆等替代班次",
+        "resultText": "你买了杯咖啡坐下来刷新班次信息，跟旁边同样困住的陌生人吐槽起来，居然聊得还挺投机。两小时后终于等到一班车，迟到了，但多认识了个人。",
+        "effects": {
+          "money": -9,
+          "social": 6,
+          "stress": 2,
+          "english": 4,
+          "energy": -4
+        },
+        "routeWeights": {
+          "social": 1.3,
+          "chill": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_landlord_deposit_dispute",
+    "title": "押金扣款的拉锯战",
+    "description": "退租后房东发来邮件，说墙上有几个钉子洞、地毯有点旧，要从押金里扣一大笔。你盯着那张账单，明明搬进来时就这样了，火气噌噌往上冒。",
+    "category": "life",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "翻出入住时的照片据理力争",
+        "resultText": "你冷静地找出搬进来当天拍的每一张照片，逐条反驳，引用押金保护条款。房东理亏，退还了大部分押金。维权耗了三天精力，但钱守住了，英语谈判能力也练满了。",
+        "effects": {
+          "money": 60,
+          "stress": 6,
+          "energy": -6,
+          "english": 6,
+          "adaptation": 6
+        },
+        "routeWeights": {
+          "survivor": 1.3,
+          "scholar": 0.9
+        }
+      },
+      {
+        "text": "懒得纠缠，认了这笔扣款",
+        "resultText": "你实在没精力扯皮，回了句行吧就接受了扣款。省了心力，但看着到账的押金缩水一大截，还是肉疼。有时候花钱买清静，也算一种成年人的妥协。",
+        "effects": {
+          "money": -50,
+          "stress": -5,
+          "energy": 3
+        },
+        "routeWeights": {
+          "chill": 1.3,
+          "homebound": 0.9
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_bank_letter_lost_post",
+    "title": "迟迟不来的银行信",
+    "description": "开户时柜员说激活码会邮寄到家，结果两周过去信箱里只有披萨传单和水电账单。没有这封信，你的卡就是块废塑料，租金又快到期了。",
+    "category": "life",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "亲自跑一趟网点当面解决",
+        "resultText": "你揣着护照和租房合同杀到网点，排队半小时，柜员帮你当场重置。问题解决了，卡终于能用了。来回折腾大半天，腿都站麻了，但总算不用再等那封幽灵信。",
+        "effects": {
+          "money": -5,
+          "stress": -6,
+          "energy": -7,
+          "english": 5,
+          "adaptation": 5
+        },
+        "routeWeights": {
+          "survivor": 1.2,
+          "grind": 1
+        }
+      },
+      {
+        "text": "打客服电话在线上磨",
+        "resultText": "你拨通客服，在英式口音和电子语音菜单里艰难导航了四十分钟，按了无数次数字键。最后总算重新激活，耳朵嗡嗡响。这通电话，听力练得比上课还猛。",
+        "effects": {
+          "english": 7,
+          "stress": 5,
+          "energy": -5,
+          "adaptation": 3
+        },
+        "routeWeights": {
+          "scholar": 1.1,
+          "survivor": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_black_friday_temptation",
+    "title": "黑五购物车的诱惑",
+    "description": "黑五一到，邮箱被打折邮件轰炸，购物车里躺着一只觊觎已久的降噪耳机和一堆其实用不上的东西。手指悬在结账键上，理智和欲望正在打架。",
+    "category": "life",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "下单耳机，对自己好一点",
+        "resultText": "你说服自己学习需要安静，果断下单。耳机到货那天确实香，戴上世界都清净了，写论文效率翻倍。只是月底看账单时，那份快乐打了点折扣。",
+        "effects": {
+          "money": -75,
+          "stress": -6,
+          "career": 3,
+          "gpa": 2
+        },
+        "routeWeights": {
+          "chill": 1.2,
+          "grind": 1
+        }
+      },
+      {
+        "text": "清空购物车，钱要花在刀刃上",
+        "resultText": "你深吸一口气，把购物车一键清空，关掉所有打折弹窗。钱包安然无恙，但那只耳机的影子在你脑海里盘旋了好几天。自律的胜利，总是带着一丝意难平。",
+        "effects": {
+          "money": -3,
+          "stress": 4,
+          "adaptation": 3
+        },
+        "routeWeights": {
+          "survivor": 1.3,
+          "grind": 1.1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_moving_day_alone",
+    "title": "一个人的搬家日",
+    "description": "租约到期，新住处在城市另一头。两个超大行李箱、一床被子、半箱锅碗瓢盆，全靠你一个人。看着这堆家当，你第一次深刻理解了什么叫断舍离。",
+    "category": "life",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "叫辆搬家车，一次搞定",
+        "resultText": "你忍痛预约了小型搬家车，司机帮你把行李一趟拉到新家。轻松是真轻松，省下半天力气，但这笔费用也是真不便宜。成年人的体面，明码标价。",
+        "effects": {
+          "money": -42,
+          "energy": 4,
+          "stress": -5,
+          "health": 3
+        },
+        "routeWeights": {
+          "chill": 1.2,
+          "career": 0.9
+        }
+      },
+      {
+        "text": "自己分三趟坐公交硬搬",
+        "resultText": "你拖着行李挤了三趟公交，胳膊酸到抬不起来，还被司机白眼了两次。钱是省下了，但累成一摊烂泥，新家第一晚直接躺平昏睡。这趟搬家，搬走了你半条命。",
+        "effects": {
+          "money": -8,
+          "energy": -12,
+          "health": -6,
+          "stress": 7,
+          "adaptation": 4
+        },
+        "routeWeights": {
+          "survivor": 1.4,
+          "grind": 1
+        }
+      },
+      {
+        "text": "在群里发消息求同学帮忙",
+        "resultText": "你硬着头皮在同学群求助，没想到真有两个人扛着膀子来了。三个人有说有笑半小时搞定，事后请他们喝奶茶。搬家成了一次意外的友情升温，原来开口求助没那么难。",
+        "effects": {
+          "money": -14,
+          "social": 8,
+          "energy": -5,
+          "homesick": -5
+        },
+        "routeWeights": {
+          "social": 1.4,
+          "chill": 0.9
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_gp_registration_maze",
+    "title": "注册GP的迷宫",
+    "description": "嗓子疼了一周，你想看医生，才发现得先注册GP。表格填得像在考英语阅读理解，前台让你证明住址，可你刚搬来连账单都还没寄到。健康和官僚正在赛跑。",
+    "category": "life",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "耐着性子把材料一项项补齐",
+        "resultText": "你跑回家翻出租房合同、银行信、学校证明，第二天又跑了一趟终于注册成功。流程繁琐到让人头秃，但搞定那一刻有种通关的成就感。以后生病总算有地方去了。",
+        "effects": {
+          "stress": 5,
+          "energy": -6,
+          "english": 5,
+          "adaptation": 7,
+          "health": 3
+        },
+        "routeWeights": {
+          "survivor": 1.2,
+          "scholar": 1
+        }
+      },
+      {
+        "text": "先去药店买点药顶着",
+        "resultText": "你嫌注册太麻烦，先去药店买了润喉糖和止痛药扛着。短期是省事了，但嗓子拖了好几天才好，心里也一直惦记着没注册这事。小病靠扛，是留学生的本能，也是无奈。",
+        "effects": {
+          "money": -12,
+          "health": -5,
+          "stress": 3,
+          "adaptation": -2
+        },
+        "routeWeights": {
+          "survivor": 1.1,
+          "chill": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_flatmate_party_noise",
+    "title": "深夜合租屋的派对",
+    "description": "明天一早有重要的展示，你却在凌晨一点被楼下的派对吵醒。音响震得地板发抖，笑声穿墙而过，你瞪着天花板，困意和怒气同时在线。",
+    "category": "life",
+    "weight": 7,
+    "pool": "",
+    "choices": [
+      {
+        "text": "下楼礼貌地请他们小声点",
+        "resultText": "你套上外套下楼，深呼吸，客气地解释明早有事。室友们倒是挺通情达理，连声道歉调小了音量。沟通比想象中顺利，但这一趟也彻底睡意全无，回床上翻来覆去。",
+        "effects": {
+          "english": 5,
+          "social": 4,
+          "energy": -5,
+          "stress": -3,
+          "adaptation": 4
+        },
+        "routeWeights": {
+          "social": 1.2,
+          "survivor": 1
+        }
+      },
+      {
+        "text": "塞上耳塞蒙头硬睡",
+        "resultText": "你翻出耳塞死死塞进耳朵，把头埋进枕头里。声音是小了点，但还是断断续续吵到天亮，第二天展示时哈欠连天。忍一时确实没风波，可代价是顶着熊猫眼上台。",
+        "effects": {
+          "energy": -9,
+          "stress": 6,
+          "career": -3,
+          "health": -3
+        },
+        "routeWeights": {
+          "chill": 1.1,
+          "grind": 1
+        }
+      },
+      {
+        "text": "干脆加入他们玩半小时",
+        "resultText": "既然睡不着，你索性下楼端起一杯气泡水加入了派对。聊得意外投机，认识了几个有趣的人。回房已经两点多，明天的展示只能靠咖啡续命了，但这一晚也挺值。",
+        "effects": {
+          "social": 9,
+          "energy": -8,
+          "career": -3,
+          "homesick": -5,
+          "english": 4
+        },
+        "routeWeights": {
+          "social": 1.5,
+          "chill": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_overpriced_takeaway_guilt",
+    "title": "深夜外卖的罪恶感",
+    "description": "赶due到深夜，冰箱空空如也，你点开外卖软件。配送费、服务费、小费层层叠加，一碗面的价格够你在超市买三天的菜。手指还是诚实地点了下去。",
+    "category": "life",
+    "weight": 5,
+    "pool": "",
+    "choices": [
+      {
+        "text": "下单热乎的，先填饱肚子要紧",
+        "resultText": "热腾腾的外卖送到，你边吃边赶作业，幸福感拉满。但看着账单上那串数字，下单的快乐里掺了点心虚。深夜的胃和钱包，永远站在对立面。",
+        "effects": {
+          "money": -20,
+          "health": 4,
+          "stress": -4,
+          "energy": 4
+        },
+        "routeWeights": {
+          "chill": 1.2,
+          "grind": 1
+        }
+      },
+      {
+        "text": "关掉软件煮包泡面将就",
+        "resultText": "你硬是关掉外卖，翻出最后一包泡面对付。省下的钱让你有点小骄傲，但泡面下肚总觉得对不起辛苦熬夜的自己。留学生的深夜，常常是泡面陪着熬过去的。",
+        "effects": {
+          "money": -3,
+          "health": -4,
+          "stress": 3,
+          "homesick": 3
+        },
+        "routeWeights": {
+          "survivor": 1.3,
+          "grind": 1.1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_freshers_groupchat",
+    "title": "新生群的 999+",
+    "description": "开学前的新生群一夜炸出 999+ 条消息。有人问宿舍能不能养猫，有人发了七张自拍，还有人凌晨四点在问图书馆几点关门。",
+    "category": "social",
+    "weight": 7,
+    "pool": "",
+    "choices": [
+      {
+        "text": "硬着头皮发个自我介绍",
+        "resultText": "你打了又删、删了又打，最后发出去三秒就有人回了个表情包。聊着聊着，居然约好了一起去看宿舍。",
+        "effects": {
+          "social": 7,
+          "adaptation": 3,
+          "stress": 4,
+          "energy": -3
+        },
+        "routeWeights": {
+          "social": 2
+        }
+      },
+      {
+        "text": "潜水，先观察大佬们",
+        "resultText": "你把群当连续剧追了一晚，谁是卷王谁是社牛摸得门清，就是一个人也没敢加。",
+        "effects": {
+          "adaptation": 2,
+          "stress": 2,
+          "energy": -2,
+          "homesick": 2
+        }
+      },
+      {
+        "text": "直接退群眼不见为净",
+        "resultText": "世界清净了，可开学第一天你发现别人早就组好了饭搭子小分队，只有你像个刚降落的外星人。",
+        "effects": {
+          "stress": -3,
+          "social": -4,
+          "homesick": 3
+        },
+        "routeWeights": {
+          "homebound": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_society_fair_signup",
+    "title": "社团招新摊位",
+    "description": "广场上一排排摊位，每个学长学姐都笑得像要把你拐走。攀岩社、辩论社、还有一个不知道在干嘛但奶茶免费的社。十镑会费在向你招手。",
+    "category": "social",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "一口气报了三个",
+        "resultText": "三件社团卫衣加身，你瞬间成了广场最靓的仔。一周后日历堵到怀疑人生，会费也肉痛了一下。",
+        "effects": {
+          "social": 8,
+          "money": -25,
+          "adaptation": 4,
+          "energy": -5,
+          "stress": 4
+        },
+        "routeWeights": {
+          "social": 3
+        }
+      },
+      {
+        "text": "只挑一个真感兴趣的",
+        "resultText": "你忍住了奶茶的诱惑，只报了攀岩社。精力没被掏空，还认识了两个固定搭子。",
+        "effects": {
+          "social": 4,
+          "money": -8,
+          "health": 2,
+          "adaptation": 2
+        },
+        "routeWeights": {
+          "social": 1,
+          "chill": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_flatmate_kitchen_smell",
+    "title": "厨房的国际气味战",
+    "description": "你在公用厨房热了顿麻辣香锅，香得自己陶醉。第二天厨房白板上多了一行字条：能不能麻烦做饭时开下抽风，谢谢。落款是隔壁那位每天只吃沙拉的室友。",
+    "category": "social",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "主动敲门解释，顺便端一碗过去",
+        "resultText": "你端着香锅去赔罪，室友先是愣住，尝了一口眼睛亮了。从此你多了个口味被打开的洋徒弟。",
+        "effects": {
+          "social": 6,
+          "english": 3,
+          "adaptation": 4,
+          "energy": -3
+        },
+        "routeWeights": {
+          "social": 2
+        }
+      },
+      {
+        "text": "回贴一张字条，约法三章",
+        "resultText": "你写下双方的做饭时间表，措辞客气但立场坚定。问题解决了，相处也客客气气，像在签停火协议。",
+        "effects": {
+          "adaptation": 3,
+          "english": 2,
+          "stress": 3,
+          "social": -1
+        }
+      },
+      {
+        "text": "以后只敢半夜偷偷做饭",
+        "resultText": "你把香锅改成了凌晨档，吃是吃上了，作息却跟着崩了，黑眼圈一天比一天深。",
+        "effects": {
+          "homesick": -2,
+          "energy": -6,
+          "health": -3,
+          "stress": 4
+        },
+        "routeWeights": {
+          "homebound": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_dating_app_awkward",
+    "title": "约会软件的第一次见面",
+    "description": "聊了两周的人终于线下见面，结果对方本人和头像之间隔着一整套美颜算法。咖啡端上来，空气安静得能听见拿铁的奶泡破裂。",
+    "category": "social",
+    "weight": 5,
+    "pool": "",
+    "choices": [
+      {
+        "text": "硬聊，把尴尬当口语练习",
+        "resultText": "你把这场约会当成了真人版雅思口语，话题一个接一个抛。火花没擦出来，倒是英语流利了不少。",
+        "effects": {
+          "english": 4,
+          "social": 3,
+          "stress": 3,
+          "energy": -4
+        }
+      },
+      {
+        "text": "礼貌喝完咖啡，提前撤",
+        "resultText": "你找了个不算太假的借口先走了。回宿舍路上松了口气，又有点空落落的。",
+        "effects": {
+          "stress": -2,
+          "homesick": 3,
+          "money": -5
+        },
+        "routeWeights": {
+          "homebound": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_alumni_dinner_invite",
+    "title": "校友会的晚宴邀请",
+    "description": "邮箱躺着一封烫金措辞的校友晚宴邀请，西装领带 dress code，据说会去一堆已经上岸的前辈。门票二十镑，你看了看银行卡余额又看了看衣柜。",
+    "category": "social",
+    "weight": 5,
+    "pool": "",
+    "choices": [
+      {
+        "text": "咬牙买票，借套西装去",
+        "resultText": "你跟室友借了件略大的西装，硬是混进了人脉局。要到两个前辈的联系方式，敬酒时手心全是汗。",
+        "effects": {
+          "career": 6,
+          "social": 5,
+          "money": -20,
+          "stress": 5,
+          "english": 2
+        },
+        "routeWeights": {
+          "career": 2
+        }
+      },
+      {
+        "text": "省下钱，在宿舍点个外卖",
+        "resultText": "你把二十镑换成了一顿热乎的外卖，被窝里追剧到深夜。前辈没认识到，但今晚很安逸。",
+        "effects": {
+          "stress": -5,
+          "money": -12,
+          "career": -1,
+          "homesick": -2
+        },
+        "routeWeights": {
+          "chill": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_icebreaker_game",
+    "title": "迎新破冰游戏",
+    "description": "新生周的破冰环节，主持人要求每个人说一个关于自己的有趣事实，还得配个动作。轮到你了，全场的目光齐刷刷转过来，你的脑子一片空白。",
+    "category": "social",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "豁出去，讲个家乡冷知识",
+        "resultText": "你讲了家乡那道黑暗料理，连比划带表演，全场笑成一片。一下午下来，记住你名字的人最多。",
+        "effects": {
+          "social": 7,
+          "english": 3,
+          "reputation": 3,
+          "energy": -4,
+          "stress": 3
+        },
+        "routeWeights": {
+          "social": 2
+        }
+      },
+      {
+        "text": "小声说句我喜欢睡觉",
+        "resultText": "你憋出一句最安全的答案，大家礼貌地笑了笑。没出糗，也没出彩，像背景板一样安全地度过了。",
+        "effects": {
+          "adaptation": 2,
+          "stress": -1,
+          "social": 1,
+          "energy": -4
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_potluck_hotpot",
+    "title": "公寓火锅趴",
+    "description": "几个朋友在你这开火锅趴，AA 制，每人带一样菜。结果三个人都买了金针菇，没人记得带锅底，电磁炉还跳了闸。",
+    "category": "social",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "你主动跑去中超救场",
+        "resultText": "你冒着小雨冲去中超抢了包锅底，回来时大家欢呼得像迎接英雄。这顿火锅吃到凌晨，暖到心里。",
+        "effects": {
+          "social": 7,
+          "homesick": -8,
+          "money": -15,
+          "energy": -4,
+          "health": 2
+        },
+        "routeWeights": {
+          "social": 2
+        }
+      },
+      {
+        "text": "金针菇清水锅也能吃",
+        "resultText": "没有锅底就煮清水，大家一边吐槽一边把金针菇吃了个精光。东西是简陋了点，笑声倒是管够。",
+        "effects": {
+          "social": 5,
+          "homesick": -5,
+          "stress": -4,
+          "energy": -2
+        },
+        "routeWeights": {
+          "chill": 1,
+          "survivor": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_seminar_groupwork_pair",
+    "title": "Seminar 临时配对",
+    "description": "Seminar 上 tutor 一句 find a partner，全班瞬间默契地两两组队，只剩你和另一个同样没人要的同学面面相觑，空气尴尬到能拧出水。",
+    "category": "social",
+    "weight": 5,
+    "pool": "",
+    "choices": [
+      {
+        "text": "主动伸手 hi 一下",
+        "resultText": "你先开了口，对方明显松了口气。一来二去发现两个人都是社恐，反而聊得格外投机。",
+        "effects": {
+          "social": 6,
+          "english": 3,
+          "adaptation": 3,
+          "stress": 2
+        },
+        "routeWeights": {
+          "social": 1,
+          "scholar": 1
+        }
+      },
+      {
+        "text": "埋头等对方先说话",
+        "resultText": "两个人沉默对峙了半分钟，最后还是 tutor 看不下去过来牵线。配是配上了，开场实在有点社死。",
+        "effects": {
+          "stress": 4,
+          "adaptation": 1,
+          "social": 1,
+          "energy": -2
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_pub_quiz_night",
+    "title": "酒吧问答之夜",
+    "description": "同学拉你去参加 pub quiz，题目从英超球队到上世纪本地肥皂剧无所不包。你们这桌全是留学生，看着题目集体陷入沉默，只有一道关于中国地理的题让你瞬间支棱起来。",
+    "category": "social",
+    "weight": 5,
+    "pool": "",
+    "choices": [
+      {
+        "text": "全程参与，靠气氛取胜",
+        "resultText": "答题全靠瞎蒙，名次垫底，但一桌人笑作一团。本地文化梗听了一耳朵，归属感悄悄涨了。",
+        "effects": {
+          "social": 6,
+          "english": 4,
+          "adaptation": 4,
+          "money": -12,
+          "energy": -5
+        },
+        "routeWeights": {
+          "social": 2
+        }
+      },
+      {
+        "text": "只点一杯，安静当观众",
+        "resultText": "你抿着一杯气泡水，看大家热闹。省了钱也省了力，只是融入这事，好像又往后挪了一点。",
+        "effects": {
+          "adaptation": 2,
+          "money": -6,
+          "stress": -2,
+          "social": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_birthday_far_from_home",
+    "title": "异乡的生日",
+    "description": "今天是你生日，家里的群早上就开始刷屏，这边却没几个人知道。你纠结要不要主动告诉新认识的朋友，又怕显得刻意求关注。",
+    "category": "social",
+    "weight": 5,
+    "pool": "",
+    "choices": [
+      {
+        "text": "干脆张罗一场小聚会",
+        "resultText": "你鼓起勇气在群里吆喝了一声，没想到来了一小桌人，还有人偷偷买了蛋糕。蜡烛吹灭那刻，眼眶有点热。",
+        "effects": {
+          "social": 7,
+          "homesick": -10,
+          "money": -20,
+          "stress": 2,
+          "energy": -3
+        },
+        "routeWeights": {
+          "social": 2
+        }
+      },
+      {
+        "text": "和家里视频，安静过",
+        "resultText": "你对着屏幕和爸妈一起切了个想象中的蛋糕，挂了视频后房间安静得有点过分，但心是暖的。",
+        "effects": {
+          "homesick": -4,
+          "stress": -3,
+          "money": -5
+        },
+        "routeWeights": {
+          "homebound": 1
+        }
+      },
+      {
+        "text": "假装今天和平时一样",
+        "resultText": "你谁也没告诉，照常上课写作业。日子是过去了，可那种被全世界遗忘的错觉，一整天都没散。",
+        "effects": {
+          "homesick": 8,
+          "stress": 5,
+          "gpa": 2,
+          "social": -2
+        },
+        "routeWeights": {
+          "grind": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_networking_wechat_swap",
+    "title": "行业沙龙加微信",
+    "description": "一场行业分享会结束，你逮住机会想加目标公司学姐的联系方式。掏出手机才发现，人家递过来的是 LinkedIn，而你下意识打开的是微信扫一扫。",
+    "category": "social",
+    "weight": 5,
+    "pool": "",
+    "choices": [
+      {
+        "text": "大方笑场，两个都加上",
+        "resultText": "你自嘲了一句留学生本能，学姐被逗笑，干脆两个平台都加了。一句玩笑反倒拉近了距离。",
+        "effects": {
+          "career": 5,
+          "social": 4,
+          "english": 3,
+          "stress": 2,
+          "energy": -3
+        },
+        "routeWeights": {
+          "career": 2
+        }
+      },
+      {
+        "text": "手忙脚乱切换 LinkedIn",
+        "resultText": "你红着脸退出微信重新点开 LinkedIn，加是加上了，但那两秒的慌乱让开场白全忘光了。",
+        "effects": {
+          "career": 2,
+          "adaptation": 2,
+          "stress": 4,
+          "social": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_cv_marathon_polish",
+    "title": "CV 改到第七版",
+    "description": "凌晨一点,你的 CV 已经改到第七版。每个动词都换成了更有力的那个,可你盯着屏幕越看越觉得自己像在描述另一个人。一个 bullet point 你已经重写了二十分钟。",
+    "category": "career",
+    "weight": 7,
+    "pool": "",
+    "choices": [
+      {
+        "text": "继续死磕,把每一行都打磨到完美",
+        "resultText": "天亮时你交出了一份漂亮的 CV,语法零错误,关键词全中。但你顶着黑眼圈去上课,整节课都在梦游。",
+        "effects": {
+          "career": 9,
+          "energy": -12,
+          "stress": 6,
+          "health": -4
+        },
+        "routeWeights": {
+          "career": 2,
+          "grind": 1
+        }
+      },
+      {
+        "text": "拿去学校的 careers service 让人帮你看",
+        "resultText": "顾问十分钟就圈出三处你完全没意识到的问题,还夸你项目经历写得好。你既松了口气又有点不甘心:原来不用熬这一整夜。",
+        "effects": {
+          "career": 7,
+          "english": 3,
+          "stress": -4,
+          "social": 2,
+          "energy": -4
+        },
+        "routeWeights": {
+          "career": 2
+        }
+      },
+      {
+        "text": "存档关电脑,告诉自己第七版够好了",
+        "resultText": "你给了自己一个台阶下,睡了个好觉。第二天重看那份 CV,其实真的没那么糟,只是昨晚的你太苛刻了。",
+        "effects": {
+          "energy": 4,
+          "stress": -6,
+          "career": 2,
+          "adaptation": 2
+        },
+        "routeWeights": {
+          "chill": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_internship_batch_apply",
+    "title": "一晚投三十份",
+    "description": "申请季的网申系统一个比一个折磨,每填一份都要重新输入一遍简历上已经写过的东西。你开了三十个标签页,咖啡续到第三杯,手指快要在键盘上长出茧。",
+    "category": "career",
+    "weight": 8,
+    "pool": "",
+    "choices": [
+      {
+        "text": "海投!广撒网,数量取胜",
+        "resultText": "你机械地复制粘贴,凌晨三点投完三十份。两周后收到二十六封拒信,三封没回音,一封约了面试。概率游戏,总算中了一发。",
+        "effects": {
+          "career": 6,
+          "energy": -14,
+          "stress": 8,
+          "money": -5
+        },
+        "routeWeights": {
+          "career": 1,
+          "grind": 2
+        }
+      },
+      {
+        "text": "只挑五家真心想去的,认真写每一份 cover letter",
+        "resultText": "你研究了每家公司的业务,把 cover letter 写得诚恳又具体。投得少,但你不再像台流水线机器,而且其中两家给了回复。",
+        "effects": {
+          "career": 8,
+          "english": 4,
+          "energy": -6,
+          "stress": 2
+        },
+        "routeWeights": {
+          "career": 2,
+          "scholar": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_assessment_centre_day",
+    "title": "Assessment Centre 一整天",
+    "description": "你穿着第一次买的正装,在一栋玻璃大楼里被关了一整天。group exercise 里有人疯狂抢话,有人全程沉默,而你在心里盘算:到底是该多说,还是该听。午餐三明治都不知道是什么味道。",
+    "category": "career",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "鼓起勇气主动带节奏,把讨论往前推",
+        "resultText": "你深吸一口气,开口帮小组理清了思路,还把那个沉默的同伴拉进了讨论。考官在本子上记了一笔。你回家路上腿还在抖,但站着把这一关闯过去了。",
+        "effects": {
+          "career": 10,
+          "english": 5,
+          "social": 4,
+          "stress": 7,
+          "energy": -8
+        },
+        "routeWeights": {
+          "career": 3,
+          "social": 1
+        }
+      },
+      {
+        "text": "稳住,专注做好分配给你的那部分",
+        "resultText": "你没去抢风头,把自己负责的分析做得扎实清楚。也许不够耀眼,但考官看得出你靠谱。结果未知,至少你没被那个抢话的人带乱。",
+        "effects": {
+          "career": 6,
+          "english": 3,
+          "stress": 3,
+          "adaptation": 3
+        },
+        "routeWeights": {
+          "grind": 1,
+          "career": 1
+        }
+      },
+      {
+        "text": "中途太紧张,午休时差点想直接溜走",
+        "resultText": "你躲进洗手间给家里发了条语音,平复了五分钟,最后还是逼自己走了回去。下午发挥一般,但你为自己没有逃跑而骄傲了一小下。",
+        "effects": {
+          "career": 2,
+          "stress": 5,
+          "homesick": 6,
+          "adaptation": 4,
+          "energy": -6
+        },
+        "routeWeights": {
+          "homebound": 2,
+          "survivor": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_linkedin_makeover",
+    "title": "LinkedIn 头像焦虑",
+    "description": "你刷到同届一个同学发了篇英文长文宣布拿到 offer,配图是专业摄影的职业照,下面一片恭喜。你低头看自己那张去年随手裁的头像,和空荡荡的 profile,心里咯噔一下。",
+    "category": "career",
+    "weight": 7,
+    "pool": "",
+    "choices": [
+      {
+        "text": "认真经营 profile,约同学帮你拍张像样的职业照",
+        "resultText": "你花了个周末填满经历、写好简介,还在校园找了个光线好的角落让朋友帮你拍照。profile 焕然一新,真有 recruiter 来加你了。仪式感这东西,有时候真的有用。",
+        "effects": {
+          "career": 7,
+          "social": 4,
+          "reputation": 3,
+          "money": -8,
+          "energy": -4
+        },
+        "routeWeights": {
+          "career": 2,
+          "social": 1
+        }
+      },
+      {
+        "text": "关掉 app,提醒自己别人的高光不是你的进度条",
+        "resultText": "你把手机扣在桌上,泡了杯茶。别人晒 offer 是别人的节奏,你有你的时间表。焦虑散了一些,虽然那张旧头像还挂在那儿。",
+        "effects": {
+          "stress": -5,
+          "adaptation": 4,
+          "career": -1,
+          "homesick": 2
+        },
+        "routeWeights": {
+          "chill": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_rejection_after_final",
+    "title": "终面后的拒信",
+    "description": "那家公司你过了三轮,终面聊得特别投机,考官还说'希望很快再见'。两周后邮件来了,开头是'Thank you for your interest'。你不用读完就知道结局,胸口闷了一下。",
+    "category": "career",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "回信礼貌地请对方给点反馈,问问差在哪",
+        "resultText": "出乎意料,HR 真的回了,说你表现很好只是岗位名额有限,还愿意把你推荐给同行。一扇门关上,但你没让它砰地一声摔死。",
+        "effects": {
+          "career": 5,
+          "english": 3,
+          "reputation": 4,
+          "stress": 2
+        },
+        "routeWeights": {
+          "career": 2
+        }
+      },
+      {
+        "text": "给自己放一天假,难过就难过个够",
+        "resultText": "你窝在床上看了一下午综艺,叫了顿外卖,跟室友吐槽了半小时。第二天醒来,这事好像也没那么塌天了。难过是允许的。",
+        "effects": {
+          "stress": -6,
+          "energy": 4,
+          "money": -12,
+          "homesick": 3,
+          "career": -1
+        },
+        "routeWeights": {
+          "chill": 2,
+          "homebound": 1
+        }
+      },
+      {
+        "text": "当晚就把简历投给另外五家,不给自己emo的时间",
+        "resultText": "你把拒信归档,化悲愤为网申。投完才发现自己其实手抖了一晚上。行动止住了胡思乱想,但情绪没真正处理,它只是被推后了。",
+        "effects": {
+          "career": 4,
+          "stress": 5,
+          "energy": -7,
+          "health": -3
+        },
+        "routeWeights": {
+          "grind": 2,
+          "career": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_shift_clash_deadline",
+    "title": "排班撞上 deadline",
+    "description": "兼职经理把下周排班发到群里,你的班正好压在一门作业的截止日前一晚。少上一个班这周房租就有点紧,可那门作业你还差一半没写。手机攥在手里,你盯着群消息发呆。",
+    "category": "career",
+    "weight": 8,
+    "pool": "",
+    "choices": [
+      {
+        "text": "硬着头皮去上班,作业熬夜补",
+        "resultText": "你上完一整晚班,回到宿舍接着写作业到天亮。钱是挣到了,作业也勉强交了,但接下来两天你像具行尸走肉,差点在课上睡过去。",
+        "effects": {
+          "money": 30,
+          "energy": -15,
+          "stress": 9,
+          "gpa": -3,
+          "health": -5
+        },
+        "routeWeights": {
+          "survivor": 2,
+          "grind": 1
+        }
+      },
+      {
+        "text": "在群里问有没有人能跟你换班",
+        "resultText": "你鼓起勇气发了条消息,还真有个同事愿意换。你欠了人家一个人情,下次得还,但这周作业和工资总算两头都保住了。",
+        "effects": {
+          "money": 5,
+          "social": 3,
+          "stress": -3,
+          "gpa": 2,
+          "english": 2,
+          "energy": -4
+        },
+        "routeWeights": {
+          "survivor": 1,
+          "social": 1
+        }
+      },
+      {
+        "text": "请假保作业,这周钱包勒紧一点",
+        "resultText": "你跟经理请了假,把整晚留给作业,交出了一份满意的功课。代价是这周吃了好几顿泡面就榨菜,看着银行余额你叹了口气。学业优先,但肚子也在抗议。",
+        "effects": {
+          "gpa": 5,
+          "money": -10,
+          "stress": -2,
+          "health": -2,
+          "homesick": 2
+        },
+        "routeWeights": {
+          "scholar": 2,
+          "grind": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_grad_scheme_deadline_rush",
+    "title": "Graduate Scheme 申请关门前一小时",
+    "description": "心仪的 graduate scheme 今晚午夜截止,你拖到现在才打开申请表。最后一道开放问题问'你为什么选我们公司',字数上限五百,你的脑子一片空白,光标在空白框里一闪一闪嘲笑你。",
+    "category": "career",
+    "weight": 7,
+    "pool": "",
+    "choices": [
+      {
+        "text": "稳住,认真花一小时把这段写到最好",
+        "resultText": "你逼自己沉下心,把对这家公司的真实想法一句句敲出来,踩点提交。写得不算惊艳,但是真诚的。截止前三分钟那声提交成功,让你长出一口气。",
+        "effects": {
+          "career": 7,
+          "english": 4,
+          "stress": 6,
+          "energy": -7
+        },
+        "routeWeights": {
+          "career": 2
+        }
+      },
+      {
+        "text": "把上一份申请的答案改几个公司名复制过来",
+        "resultText": "你图省事改了改套用,赶在午夜前交了。结果一周后收到秒拒,你怀疑是不是哪里漏改了公司名。捷径偶尔会反咬一口。",
+        "effects": {
+          "career": -2,
+          "stress": 3,
+          "energy": -3,
+          "money": 0
+        },
+        "routeWeights": {
+          "grind": 1,
+          "chill": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_cold_email_professor",
+    "title": "给教授发套磁邮件",
+    "description": "你想申博,盯上了一位领域内的大牛教授。套磁邮件你写了删删了写,既怕太热情显得谄媚,又怕太平淡石沉大海。称呼到底用 Dear Professor 还是 Dear Dr,你纠结了十分钟。",
+    "category": "career",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "认真读了对方两篇论文,把具体想法写进邮件再发",
+        "resultText": "你花了两个晚上啃文献,在邮件里提了个对方研究的延伸问题。三天后教授回信了,说你的角度有意思,约了线上聊聊。诚意是能被看见的。",
+        "effects": {
+          "career": 9,
+          "english": 5,
+          "gpa": 2,
+          "energy": -8,
+          "stress": 3
+        },
+        "routeWeights": {
+          "phd": 3,
+          "scholar": 1
+        }
+      },
+      {
+        "text": "用模板群发给十位教授,广撒网碰运气",
+        "resultText": "你套了个模板批量发出去,九封没回音,一封回了句'目前没有名额'。省了力气,但那种千篇一律的邮件,大牛们一眼就能看穿。",
+        "effects": {
+          "career": 1,
+          "stress": 4,
+          "energy": -4,
+          "reputation": -2
+        },
+        "routeWeights": {
+          "phd": 1,
+          "grind": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_visa_sponsor_filter",
+    "title": "那一栏要求本地工作许可",
+    "description": "你看中的岗位描述写得简直为你量身定做,直到拉到最底下那行小字:申请者须持有本地长期工作许可。你的留学签证状态卡在那道门槛外,心一下沉到了底。",
+    "category": "career",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "专门去找明确接受签证担保的雇主投",
+        "resultText": "你改变策略,筛选出一批愿意担保的公司清单,虽然数量少了一大截,但每一份投出去都更有希望。方向对了,效率反而高了。",
+        "effects": {
+          "career": 6,
+          "visa": 4,
+          "stress": 2,
+          "energy": -5
+        },
+        "routeWeights": {
+          "career": 2,
+          "survivor": 1
+        }
+      },
+      {
+        "text": "还是投了,赌一把公司愿意为你破例",
+        "resultText": "你抱着侥幸投了出去,系统自动筛掉的拒信第二天就来了,理由正是工作许可。你早该料到的,但不试一下又不甘心。",
+        "effects": {
+          "career": -1,
+          "stress": 5,
+          "visa": -1,
+          "homesick": 4
+        },
+        "routeWeights": {
+          "survivor": 1
+        }
+      },
+      {
+        "text": "去学校的国际学生办公室问清楚自己的就业政策",
+        "resultText": "顾问帮你把毕业后的工作签证路径理了一遍,原来你能走的路比想象中多。心里那块大石头落了地,虽然流程复杂得让你头大。",
+        "effects": {
+          "visa": 6,
+          "adaptation": 4,
+          "career": 3,
+          "stress": -4,
+          "english": 2,
+          "energy": -4
+        },
+        "routeWeights": {
+          "survivor": 2,
+          "career": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_part_time_promotion_offer",
+    "title": "兼职升小组长",
+    "description": "中超隔壁那家奶茶店你打了大半年工,经理突然问你愿不愿意当 shift leader,时薪加一点,但要负责带新人、排班、关店对账。机会摆在面前,你算了算手里那堆 due 的作业。",
+    "category": "career",
+    "weight": 7,
+    "pool": "",
+    "choices": [
+      {
+        "text": "接下来,多一份责任也多一行履历",
+        "resultText": "你成了店里最年轻的小组长,管人、对账、处理客诉样样上手,英文口语在实战里突飞猛进。CV 上多了亮眼一笔,只是回宿舍写论文的时间被挤得所剩无几。",
+        "effects": {
+          "money": 25,
+          "career": 7,
+          "english": 6,
+          "energy": -10,
+          "gpa": -3,
+          "stress": 5
+        },
+        "routeWeights": {
+          "survivor": 2,
+          "career": 1
+        }
+      },
+      {
+        "text": "婉拒,这学期想把重心放回学业",
+        "resultText": "你诚恳地谢绝了经理,说等忙完这阵再说。他表示理解,职位先给了别人。你守住了 GPA,但偶尔会想:那个升职机会会不会就这么溜走了。",
+        "effects": {
+          "gpa": 4,
+          "stress": -3,
+          "career": -1,
+          "money": 0,
+          "adaptation": 2
+        },
+        "routeWeights": {
+          "scholar": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_career_fair_booth_nerves",
+    "title": "Career Fair 不敢上前",
+    "description": "学校的招聘会人山人海,各家公司的展台前排着长队,西装革履的学生人手一份打印精美的简历。你攥着自己那几张,在一个展台外面来回踱步,心跳得像要参加面试,可你连话都还没开口。",
+    "category": "career",
+    "weight": 7,
+    "pool": "",
+    "choices": [
+      {
+        "text": "硬着头皮排队,练好那段三十秒自我介绍冲上去",
+        "resultText": "轮到你时,你紧张得语速飞快,但还是把准备好的开场白说完了,还要到了对方的联系方式。走开那一刻手心全是汗,可你为自己开了口而暗暗握拳。",
+        "effects": {
+          "career": 8,
+          "english": 5,
+          "social": 4,
+          "stress": 6,
+          "energy": -6
+        },
+        "routeWeights": {
+          "career": 2,
+          "social": 1
+        }
+      },
+      {
+        "text": "先在外围观察,挑没人的展台从冷门公司练手",
+        "resultText": "你聪明地避开长队,先找几家小公司热身,聊顺了再去攻心仪的大厂。等真正排到时,你已经不那么抖了。曲线救国,也是一种策略。",
+        "effects": {
+          "career": 6,
+          "english": 4,
+          "adaptation": 5,
+          "stress": 2
+        },
+        "routeWeights": {
+          "survivor": 1,
+          "career": 1
+        }
+      },
+      {
+        "text": "拿了一圈免费帆布袋和糖果就撤了",
+        "resultText": "你绕场一周,收集了满满一袋公司周边和小零食,愣是一句正经话没敢搭。回宿舍清点战利品时,你一边笑一边有点心虚:下次,下次一定开口。",
+        "effects": {
+          "stress": -4,
+          "energy": 3,
+          "career": -1,
+          "homesick": 2,
+          "money": 3
+        },
+        "routeWeights": {
+          "chill": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_homesick_food_smell",
+    "title": "楼道里的红烧味",
+    "description": "晚上回宿舍，楼道里飘来一股谁在炖红烧肉的香味，和你妈做的几乎一模一样。你在门口站了好几秒，钥匙都忘了插。",
+    "category": "emotion",
+    "weight": 7,
+    "pool": "",
+    "choices": [
+      {
+        "text": "照着记忆复刻一锅",
+        "resultText": "翻出中超买的老抽，手忙脚乱炖了一锅，味道七成像，已经够你红了眼眶又笑出来。",
+        "effects": {
+          "homesick": -12,
+          "stress": -5,
+          "money": -15,
+          "energy": -5,
+          "adaptation": 3
+        },
+        "routeWeights": {
+          "chill": 1,
+          "homebound": 1
+        }
+      },
+      {
+        "text": "视频连线让妈妈云监工",
+        "resultText": "妈妈隔着屏幕指挥火候，你俩为放不放糖拌了两句嘴，那种熟悉的拌嘴比红烧肉还治愈。",
+        "effects": {
+          "homesick": -8,
+          "social": 2,
+          "stress": -3,
+          "energy": -3
+        }
+      },
+      {
+        "text": "忍住，泡面对付一口",
+        "resultText": "告诉自己别矫情，泡面照样能填饱肚子。汤喝完了，那股空落落还在。",
+        "effects": {
+          "homesick": 6,
+          "stress": 4,
+          "health": -3,
+          "energy": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_loneliness_read_receipt",
+    "title": "消息已读的下午",
+    "description": "周六下午，你给三个群发了句「有人一起吃饭吗」，过了两小时，已读的人不少，回的人没有。手机屏幕亮了又灭。",
+    "category": "emotion",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "自己出门吃顿好的",
+        "resultText": "一个人占了靠窗的位子，点了想吃的，看着街上的人来人往，孤独是孤独，但也挺自在。",
+        "effects": {
+          "homesick": 4,
+          "stress": -4,
+          "money": -18,
+          "adaptation": 4,
+          "health": 2
+        },
+        "routeWeights": {
+          "chill": 2
+        }
+      },
+      {
+        "text": "主动约一个具体的人",
+        "resultText": "与其群发不如点名，你单独问了上次聊得来的同学，对方秒回「走啊」。原来主动一点就没那么难。",
+        "effects": {
+          "social": 7,
+          "homesick": -6,
+          "stress": -3,
+          "energy": -4,
+          "english": 2
+        },
+        "routeWeights": {
+          "social": 2
+        }
+      },
+      {
+        "text": "窝回床上刷手机",
+        "resultText": "刷了一下午别人的精彩生活，越刷越饿也越刷越空。一天就这么过去了。",
+        "effects": {
+          "homesick": 7,
+          "stress": 5,
+          "energy": -3,
+          "health": -2
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_stress_chest_tight",
+    "title": "喘不上气的清晨",
+    "description": "早上睁眼，三个 due 像三座山压在胸口，你发现自己心跳得有点快，手心冒汗，连起床穿衣服都觉得费劲。",
+    "category": "emotion",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "先出门走二十分钟",
+        "resultText": "沿着河走了一圈，冷空气灌进肺里，山还在，但至少能正常呼吸了，回来效率反而高。",
+        "effects": {
+          "stress": -10,
+          "health": 3,
+          "energy": -3,
+          "adaptation": 2
+        },
+        "routeWeights": {
+          "chill": 1,
+          "survivor": 1
+        }
+      },
+      {
+        "text": "约学校的心理咨询",
+        "resultText": "鼓起勇气填了预约表，咨询师说这叫正常的应激反应。被一句「你已经做得很好了」接住，眼泪没忍住。",
+        "effects": {
+          "stress": -12,
+          "homesick": -4,
+          "energy": -2,
+          "reputation": 2
+        }
+      },
+      {
+        "text": "硬撑着扎进 due 里",
+        "resultText": "靠咖啡和意志力往前冲，进度是赶了一点，胸口那股紧绷一整天都没松开。",
+        "effects": {
+          "gpa": 4,
+          "stress": 6,
+          "energy": -8,
+          "health": -4
+        },
+        "routeWeights": {
+          "scholar": 1,
+          "grind": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_winter_dark_4pm",
+    "title": "四点就黑的天",
+    "description": "冬令时一调，下午四点天就黑透了。你从图书馆出来，以为是深夜，看表才发现还没到饭点。一连好几天没见着太阳，心情也跟着往下沉。",
+    "category": "emotion",
+    "weight": 7,
+    "pool": "",
+    "choices": [
+      {
+        "text": "网购一盏模拟日光灯",
+        "resultText": "花钱买了个会发「太阳光」的灯，每天早上开半小时，居然真的没那么丧了，留学装备 +1。",
+        "effects": {
+          "stress": -6,
+          "health": 3,
+          "money": -30,
+          "adaptation": 3
+        },
+        "routeWeights": {
+          "chill": 1
+        }
+      },
+      {
+        "text": "约人去暖光酒馆坐坐",
+        "resultText": "几个同样被黑夜整破防的人挤在暖黄的酒馆里，聊到打烊。天还是黑的，人是暖的。",
+        "effects": {
+          "social": 6,
+          "homesick": -5,
+          "stress": -5,
+          "money": -22,
+          "energy": -4
+        },
+        "routeWeights": {
+          "social": 1
+        }
+      },
+      {
+        "text": "早睡，跟黑夜认输",
+        "resultText": "天黑就当身体提醒该睡了，作息倒是规律了，只是醒着的白天短得让人发慌。",
+        "effects": {
+          "energy": 8,
+          "stress": -3,
+          "homesick": 4
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_impostor_seminar",
+    "title": "研讨课不敢举手",
+    "description": "seminar 上同学们引经据典聊得飞起，你脑子里明明有想法，话到嘴边却怕说错、怕口音、怕被当成那个英语不好的留学生。一节课下来一句没说。",
+    "category": "emotion",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "下次硬着头皮先说一句",
+        "resultText": "你提前写好一句话，逼自己开了口。磕磕巴巴说完，导师点头说 good point。原来天没塌。",
+        "effects": {
+          "english": 4,
+          "gpa": 3,
+          "social": 2,
+          "stress": 5,
+          "energy": -4
+        },
+        "routeWeights": {
+          "scholar": 1
+        }
+      },
+      {
+        "text": "课后把想法写成邮件给导师",
+        "resultText": "当面不敢，那就写下来。你斟酌措辞写到很晚，导师认真回了长长一段，还说欢迎你多发言。底气一点点攒起来。",
+        "effects": {
+          "gpa": 3,
+          "english": 3,
+          "reputation": 2,
+          "stress": -2,
+          "energy": -4
+        },
+        "routeWeights": {
+          "phd": 1,
+          "scholar": 1
+        }
+      },
+      {
+        "text": "告诉自己听着也是学习",
+        "resultText": "安慰自己安静也没错，可看着别人发光，那点不甘心还是堵在心里。",
+        "effects": {
+          "stress": 4,
+          "homesick": 3,
+          "gpa": 2,
+          "social": -2
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_moments_comparison",
+    "title": "朋友圈的神仙打架",
+    "description": "睡前刷朋友圈：高中同学进了投行，前室友保研直博，连那个一起摆烂的发小都创业融资了。你看看自己还在改的 essay，手指悬在屏幕上不知道该点赞还是关掉。",
+    "category": "emotion",
+    "weight": 7,
+    "pool": "",
+    "choices": [
+      {
+        "text": "真诚点赞，然后回来做自己的事",
+        "resultText": "别人的赛道是别人的，你给每条都点了赞，然后把手机扣下，继续写你的 essay。比较心淡了，人踏实了。",
+        "effects": {
+          "stress": -5,
+          "gpa": 3,
+          "reputation": 2,
+          "energy": -3
+        },
+        "routeWeights": {
+          "survivor": 1,
+          "scholar": 1
+        }
+      },
+      {
+        "text": "关掉朋友圈三天",
+        "resultText": "直接给自己放了个信息斋戒，眼不见心不烦，这三天专注度高得吓人。就是偶尔手痒想点开。",
+        "effects": {
+          "stress": -6,
+          "gpa": 2,
+          "social": -3,
+          "adaptation": 2
+        },
+        "routeWeights": {
+          "chill": 1
+        }
+      },
+      {
+        "text": "躺床上 emo 到后半夜",
+        "resultText": "越想越觉得自己一事无成，刷到凌晨两点，第二天顶着黑眼圈去上课，状态全无。",
+        "effects": {
+          "stress": 7,
+          "homesick": 5,
+          "energy": -4,
+          "health": -2
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_first_distinction",
+    "title": "第一个 Distinction",
+    "description": "忐忑地点开成绩，第一份正式作业拿了 Distinction，feedback 里导师写 insightful analysis。你盯着屏幕反复看了三遍，确认不是看错，鼻子有点酸。来这一趟，好像值了。",
+    "category": "emotion",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "截图发给爸妈报喜",
+        "resultText": "爸妈虽然看不太懂 Distinction 是啥，但全班前列四个字让他们高兴了一整天。视频聊到深夜，挂了之后你也舍不得睡。",
+        "effects": {
+          "homesick": -8,
+          "stress": -5,
+          "reputation": 2,
+          "energy": -3
+        },
+        "routeWeights": {
+          "homebound": 1
+        }
+      },
+      {
+        "text": "请并肩作战的朋友吃顿饭",
+        "resultText": "拉上一起熬夜赶 due 的战友搓了一顿，互相吹彩虹屁。钱花了，但这种被看见的快乐买不到。",
+        "effects": {
+          "social": 6,
+          "stress": -6,
+          "money": -25,
+          "homesick": -3
+        },
+        "routeWeights": {
+          "social": 1
+        }
+      },
+      {
+        "text": "立刻定更高的目标",
+        "resultText": "高兴了五分钟就开始盘算下一篇怎么再上一个台阶。野心是有了，弦也绷得更紧了。",
+        "effects": {
+          "gpa": 5,
+          "career": 3,
+          "stress": 5,
+          "energy": -3
+        },
+        "routeWeights": {
+          "scholar": 2,
+          "career": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_graduation_gown",
+    "title": "毕业季的学袍",
+    "description": "群里开始接龙订学袍、约拍照，毕业典礼的日子近在眼前。一年说长不长说短不短，你忽然意识到这段日子真的要结束了，又骄傲又有点舍不得。",
+    "category": "emotion",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "张罗一场像样的散伙拍照",
+        "resultText": "你当起组织者，定学袍、约摄影、排队形，折腾得够呛。但那组照片成了所有人手机里的封面，值。",
+        "effects": {
+          "social": 7,
+          "reputation": 3,
+          "stress": 4,
+          "money": -35,
+          "energy": -6
+        },
+        "routeWeights": {
+          "social": 2
+        }
+      },
+      {
+        "text": "安静地把这一年写进日记",
+        "resultText": "没参与喧闹，你一个人坐在常去的窗边，把这一年的雨、due 和深夜全写了下来。合上本子，心里很满。",
+        "effects": {
+          "stress": -8,
+          "homesick": 3,
+          "adaptation": 3,
+          "health": 2
+        },
+        "routeWeights": {
+          "chill": 2
+        }
+      },
+      {
+        "text": "忙着投简历无暇感伤",
+        "resultText": "别人忙着拍照，你忙着赶秋招末班车。仪式感先放一边，毕竟回国还得有个着落。",
+        "effects": {
+          "career": 5,
+          "stress": 4,
+          "social": -3,
+          "energy": -4
+        },
+        "routeWeights": {
+          "career": 2,
+          "homebound": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_lunar_new_year_eve",
+    "title": "除夕夜的时差",
+    "description": "国内零点的钟声敲响时，这边才下午四点。家族群里抢红包抢得热火朝天，你这头还坐在自习室。爸妈视频里把手机举到年夜饭桌前，转了一圈让你云吃饭。",
+    "category": "emotion",
+    "weight": 7,
+    "pool": "",
+    "choices": [
+      {
+        "text": "凑一桌留学生年夜饭",
+        "resultText": "几个回不了家的凑份子，火锅、饺子、甚至还有人带了对联。异乡的年味是拼出来的，但热乎。",
+        "effects": {
+          "homesick": -13,
+          "social": 6,
+          "health": 2,
+          "money": -30,
+          "energy": -4
+        },
+        "routeWeights": {
+          "social": 1,
+          "homebound": 1
+        }
+      },
+      {
+        "text": "守着视频陪爸妈跨年",
+        "resultText": "你举着手机陪他们看完春晚开场，直到国内零点。挂了视频，自习室空荡荡的，但心里被填满了。",
+        "effects": {
+          "homesick": -7,
+          "stress": -4,
+          "gpa": 2,
+          "energy": -2
+        }
+      },
+      {
+        "text": "当成普通工作日赶进度",
+        "resultText": "把思念按进 deadline，这天的进度确实喜人。等回过神，红包早抢完了，年也过完了。",
+        "effects": {
+          "gpa": 5,
+          "homesick": 9,
+          "stress": 6,
+          "social": -2
+        },
+        "routeWeights": {
+          "scholar": 1,
+          "survivor": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_burnout_cant_get_up",
+    "title": "什么都不想做的一周",
+    "description": "也没发生什么大事，可你这一周就是提不起劲。书摊在桌上没翻，消息懒得回，连最爱的剧都觉得吵。明明该焦虑，却连焦虑的力气都没有。",
+    "category": "emotion",
+    "weight": 6,
+    "pool": "",
+    "choices": [
+      {
+        "text": "允许自己彻底躺平两天",
+        "resultText": "不设闹钟、不开电脑，睡到自然醒。两天后电量回了一格，你发现天没塌，书还在那等你。",
+        "effects": {
+          "energy": 12,
+          "stress": -6,
+          "gpa": -2,
+          "homesick": 3
+        },
+        "routeWeights": {
+          "chill": 2
+        }
+      },
+      {
+        "text": "找朋友说说这种空",
+        "resultText": "本以为没人懂，结果对方说我上个月也这样。原来这叫 burnout，不是你一个人矫情。说出来轻了不少。",
+        "effects": {
+          "stress": -7,
+          "social": 4,
+          "homesick": -4,
+          "energy": -2
+        }
+      },
+      {
+        "text": "逼自己假装正常运转",
+        "resultText": "硬撑着去上课、打卡，动作都在，人是空的。透支换来的正常，代价记在了身体账上。",
+        "effects": {
+          "gpa": 2,
+          "stress": 7,
+          "health": -5,
+          "energy": -6
+        },
+        "routeWeights": {
+          "survivor": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_call_home_pretend_fine",
+    "title": "报喜不报忧",
+    "description": "周末和爸妈视频，他们问在那边还好吗。你想起这周搞砸的 presentation、吃不惯的饭、那场没躲过的雨，话到嘴边却变成了挺好的、你们别担心。",
+    "category": "emotion",
+    "weight": 7,
+    "pool": "",
+    "choices": [
+      {
+        "text": "破例说一点真实的难处",
+        "resultText": "你试着讲了讲压力，以为他们会慌，结果爸妈很稳地开导你。藏着的事说出来，肩上轻了，也更亲了。",
+        "effects": {
+          "homesick": -8,
+          "stress": -7,
+          "social": 2,
+          "energy": -2
+        }
+      },
+      {
+        "text": "继续报喜，挂了再自己消化",
+        "resultText": "你把挺好演得很真，爸妈放心地挂了。屏幕一黑，憋着的情绪一下涌上来，但好歹没让他们担心。",
+        "effects": {
+          "homesick": 5,
+          "stress": 4,
+          "reputation": 2,
+          "health": -2
+        },
+        "routeWeights": {
+          "survivor": 1
+        }
+      },
+      {
+        "text": "转移话题逗他们开心",
+        "resultText": "你绘声绘色讲英国的奇葩见闻，把视频聊成了脱口秀。他们笑得开心，你也暂时忘了那些糟心事。",
+        "effects": {
+          "homesick": -5,
+          "stress": -3,
+          "english": 2,
+          "energy": -3
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_library_reference_panic",
+    "title": "凌晨的参考文献格式",
+    "description": "Essay 还差最后一步，参考文献。Harvard 还是 APA 你一直没分清，导师批注里那句 inconsistent referencing 像一根刺。",
+    "category": "study",
+    "weight": 5,
+    "pool": "essay_incidents",
+    "choices": [
+      {
+        "text": "老老实实学引用软件",
+        "resultText": "花一晚把 文献管理软件 摸熟，以后每篇都省事，就是今晚没睡好。",
+        "effects": {
+          "gpa": 5,
+          "english": 3,
+          "energy": -12,
+          "stress": 4
+        },
+        "routeWeights": {
+          "scholar": 2,
+          "survivor": 1
+        }
+      },
+      {
+        "text": "手动一条条对格式",
+        "resultText": "逗号句号对到眼花，总算交了，但效率低得感人。",
+        "effects": {
+          "gpa": 2,
+          "energy": -10,
+          "stress": 6
+        },
+        "routeWeights": {
+          "survivor": 1
+        }
+      },
+      {
+        "text": "随便排版，赌不扣分",
+        "resultText": "赌输了，格式分被扣了一截，导师又在批注里画了线。",
+        "effects": {
+          "gpa": -4,
+          "stress": 3,
+          "energy": 2
+        },
+        "routeWeights": {
+          "chill": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_essay_ai_temptation",
+    "title": "AI 帮我写一段",
+    "description": "卡在一段论证上两小时，光标一动不动。脑子里有个声音说，让 AI 生成一段，改改就能用。",
+    "category": "study",
+    "weight": 5,
+    "pool": "essay_incidents",
+    "choices": [
+      {
+        "text": "只用它理思路，自己写",
+        "resultText": "把它当白板用，逻辑捋顺了再自己落笔，踏实，也慢。",
+        "effects": {
+          "gpa": 4,
+          "english": 3,
+          "energy": -8,
+          "stress": 2
+        },
+        "routeWeights": {
+          "scholar": 2
+        }
+      },
+      {
+        "text": "直接抄一段交上去",
+        "resultText": "交是交了，可学校刚出了 AI 使用新规，你整晚都在担心被查。",
+        "effects": {
+          "gpa": 2,
+          "stress": 10,
+          "energy": 4
+        },
+        "routeWeights": {
+          "chill": 1,
+          "grind": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_essay_printer_meltdown",
+    "title": "交稿前的打印机",
+    "description": "这门课要交纸质版，截止前一小时，图书馆打印机集体罢工，排队的人脸都绿了。",
+    "category": "study",
+    "weight": 4,
+    "pool": "essay_incidents",
+    "choices": [
+      {
+        "text": "冲去隔壁系机房",
+        "resultText": "一路狂奔找到能用的机器，压线交上，腿软心跳还没停。",
+        "effects": {
+          "gpa": 3,
+          "energy": -8,
+          "stress": 7,
+          "adaptation": 3
+        },
+        "routeWeights": {
+          "survivor": 2
+        }
+      },
+      {
+        "text": "邮件求导师收电子版",
+        "resultText": "你礼貌解释情况，导师通融收了 PDF，松了一大口气。",
+        "effects": {
+          "gpa": 2,
+          "english": 2,
+          "stress": -2,
+          "reputation": 1,
+          "energy": -4
+        },
+        "routeWeights": {
+          "survivor": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_group_timezone_clash",
+    "title": "跨时区的小组会",
+    "description": "组里有人在英国，有人飞回了国内，约 group meeting 时间，你这边的半夜正好是别人的下午。",
+    "category": "study",
+    "weight": 5,
+    "pool": "group_incidents",
+    "choices": [
+      {
+        "text": "主动迁就，熬夜开会",
+        "resultText": "你顶着困意开完会，进度推动了，第二天的早课全靠咖啡。",
+        "effects": {
+          "gpa": 4,
+          "social": 3,
+          "energy": -14,
+          "health": -3
+        },
+        "routeWeights": {
+          "survivor": 1,
+          "scholar": 1
+        }
+      },
+      {
+        "text": "坚持错峰，用文档协作",
+        "resultText": "你提议改成共享文档异步推进，效率没想象中差，关系也没闹僵。",
+        "effects": {
+          "gpa": 3,
+          "adaptation": 4,
+          "english": 2,
+          "stress": 2
+        },
+        "routeWeights": {
+          "chill": 1,
+          "survivor": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_group_native_dominates",
+    "title": "插不上话的讨论",
+    "description": "小组头脑风暴，本地同学语速飞快地抛点子，你脑子里想好的句子还没组织完，话题已经翻篇了。",
+    "category": "study",
+    "weight": 5,
+    "pool": "group_incidents",
+    "choices": [
+      {
+        "text": "深吸一口气抢过话头",
+        "resultText": "你打断节奏说出自己的方案，居然被采纳了一半，胆子也练大了。",
+        "effects": {
+          "english": 4,
+          "social": 4,
+          "career": 2,
+          "stress": 5,
+          "energy": -6
+        },
+        "routeWeights": {
+          "social": 2
+        }
+      },
+      {
+        "text": "会后把想法整理成文字",
+        "resultText": "你把点子写进群里，逻辑清楚反而更有分量，只是当场存在感低了点。",
+        "effects": {
+          "gpa": 3,
+          "english": 2,
+          "social": -2,
+          "reputation": 2
+        },
+        "routeWeights": {
+          "scholar": 1,
+          "survivor": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_parttime_cash_in_hand",
+    "title": "现金发工资",
+    "description": "一家小馆子老板说可以给你排班，工资按现金结，不走系统。听起来省事，又好像哪里不太对。",
+    "category": "life",
+    "weight": 5,
+    "pool": "part_time_incidents",
+    "choices": [
+      {
+        "text": "婉拒，找正规打工",
+        "resultText": "你谢绝了，宁可多花时间找合规的岗位，签证材料上不留隐患。",
+        "effects": {
+          "money": -5,
+          "visa": 4,
+          "stress": 3,
+          "adaptation": 2
+        },
+        "routeWeights": {
+          "survivor": 2
+        }
+      },
+      {
+        "text": "接了，钱到手最实在",
+        "resultText": "现金确实香，可一想到记录不透明，心里那点不安一直没散。",
+        "effects": {
+          "money": 110,
+          "visa": -6,
+          "stress": 6
+        },
+        "routeWeights": {
+          "grind": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_parttime_chaoshi_shift",
+    "title": "中超的临时工",
+    "description": "常去的那家中超贴了招工告示，老板娘认得你，说周末来理货，管一顿饭还给员工折扣。",
+    "category": "life",
+    "weight": 4,
+    "pool": "part_time_incidents",
+    "choices": [
+      {
+        "text": "接下这份活",
+        "resultText": "搬货搬到胳膊酸，但那顿热乎的家常菜和老板娘的唠嗑，把想家的劲儿冲淡了。",
+        "effects": {
+          "money": 55,
+          "homesick": -8,
+          "energy": -10,
+          "social": 3
+        },
+        "routeWeights": {
+          "grind": 1,
+          "homebound": 1
+        }
+      },
+      {
+        "text": "只用员工折扣囤货",
+        "resultText": "不打工，单纯靠折扣囤了一冰箱速冻饺子，省钱，也少了份热闹。",
+        "effects": {
+          "money": -20,
+          "homesick": -3,
+          "health": 2
+        },
+        "routeWeights": {
+          "chill": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_parttime_kitchen_burn",
+    "title": "后厨烫了手",
+    "description": "打工的餐厅后厨忙到飞起，端盘子时手背蹭到烤盘，烫起一小片红印，疼得你倒吸凉气。",
+    "category": "life",
+    "weight": 4,
+    "pool": "part_time_incidents",
+    "choices": [
+      {
+        "text": "冲冷水包扎，请假回家",
+        "resultText": "你处理好伤口跟经理请了假，少赚一晚，但手得养着。",
+        "effects": {
+          "money": -15,
+          "health": 4,
+          "stress": 2,
+          "energy": -4
+        },
+        "routeWeights": {
+          "survivor": 1
+        }
+      },
+      {
+        "text": "贴个创可贴硬撑完",
+        "resultText": "你忍着疼把这班撑完，工资拿到了，伤口闷了一晚有点发烫。",
+        "effects": {
+          "money": 45,
+          "health": -6,
+          "stress": 5,
+          "energy": -10
+        },
+        "routeWeights": {
+          "grind": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_jobhunt_assessment_help",
+    "title": "网申测评有人发答案",
+    "description": "群里有人甩出某公司线上测评的所谓答案，说照着填稳过。明天就是你的测评截止日。",
+    "category": "career",
+    "weight": 4,
+    "pool": "jobhunt_incidents",
+    "choices": [
+      {
+        "text": "自己认真做完",
+        "resultText": "你关掉群消息独立做完，分数普通但心安，真本事也练了练。",
+        "effects": {
+          "career": 4,
+          "english": 2,
+          "stress": 3,
+          "energy": -6
+        },
+        "routeWeights": {
+          "career": 1,
+          "scholar": 1
+        }
+      },
+      {
+        "text": "抄答案图个稳过",
+        "resultText": "过是过了初筛，可后面还有面试，虚的部分迟早要还，心里也别扭。",
+        "effects": {
+          "career": 2,
+          "stress": 7,
+          "reputation": -2
+        },
+        "routeWeights": {
+          "grind": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_social_committee_election",
+    "title": "社团换届招新",
+    "description": "你常去的那个 society 要选新一届委员会，老成员私下问你，要不要竞选活动部干事。",
+    "category": "social",
+    "weight": 5,
+    "pool": "social_incidents",
+    "choices": [
+      {
+        "text": "报名竞选，做了简短演讲",
+        "resultText": "你硬着头皮上台拉票，当选了。多了头衔和人脉，也多了开不完的会。",
+        "effects": {
+          "social": 7,
+          "career": 3,
+          "english": 3,
+          "reputation": 3,
+          "stress": 6,
+          "energy": -8
+        },
+        "routeWeights": {
+          "social": 2,
+          "career": 1
+        }
+      },
+      {
+        "text": "只做普通成员就好",
+        "resultText": "你婉拒了职位，继续轻松参加活动，少了履历一笔，也少了一摊事。",
+        "effects": {
+          "social": 3,
+          "stress": -3,
+          "homesick": -2,
+          "energy": -4
+        },
+        "routeWeights": {
+          "chill": 1,
+          "social": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_social_pub_round",
+    "title": "酒吧里的 round",
+    "description": "社团活动结束大家去 pub，本地的规矩是轮流买单一整桌。轮到你了，可你其实不太喝酒。",
+    "category": "social",
+    "weight": 5,
+    "pool": "social_incidents",
+    "choices": [
+      {
+        "text": "大方买一轮，自己点软饮",
+        "resultText": "你笑着买了单，自己要了杯可乐。融入感拉满，钱包瘪了一圈。",
+        "effects": {
+          "social": 6,
+          "adaptation": 4,
+          "money": -35,
+          "english": 2,
+          "homesick": -3
+        },
+        "routeWeights": {
+          "social": 2
+        }
+      },
+      {
+        "text": "坦白预算紧，改约喝咖啡",
+        "resultText": "你实话说学生党手头紧，提议下次喝咖啡续摊，大家也都理解。",
+        "effects": {
+          "social": 2,
+          "adaptation": 3,
+          "money": -5,
+          "reputation": 1
+        },
+        "routeWeights": {
+          "chill": 1,
+          "homebound": 1
+        }
+      }
+    ]
+  },
+  {
+    "id": "ev_social_homesick_party",
+    "title": "party 中途的空落",
+    "description": "社团的热闹 party 正嗨，你忽然刷到家里的家庭群在视频通话。明明身边全是人，那一刻却觉得离家好远。",
+    "category": "emotion",
+    "weight": 5,
+    "pool": "social_incidents",
+    "choices": [
+      {
+        "text": "退到走廊接通家里电话",
+        "resultText": "你躲到安静处和爸妈视频了十分钟，回来时眼眶有点热，但心里踏实多了。",
+        "effects": {
+          "homesick": -10,
+          "social": -2,
+          "stress": -4,
+          "energy": -2
+        },
+        "routeWeights": {
+          "homebound": 2
+        }
+      },
+      {
+        "text": "把情绪压下，继续融入",
+        "resultText": "你深吸一口气回到人群里硬撑笑容，社交是没断，那点想家却闷在了胸口。",
+        "effects": {
+          "social": 4,
+          "homesick": 6,
+          "stress": 5,
+          "english": 2
+        },
+        "routeWeights": {
+          "social": 1
+        }
+      }
+    ]
+  }
+]

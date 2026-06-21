@@ -79,7 +79,7 @@ export const ENDINGS: Ending[] = [
   {
     id: 'ending_job_offer',
     title: '拿到 Offer',
-    desc: '改了几十版的 CV、刷了无数场面试、收了成箱的拒信，最后那封 "We are delighted to offer" 让一切都值了。Graduate Route 在向你招手。',
+    desc: '改了几十版的 CV、刷了无数场面试、收了成箱的拒信，最后那封 "We are delighted to offer" 让一切都值了。毕业后留下来工作的那条路，也在向你招手。',
     quip: '拒信是用来垫脚的，你终于站到了够得着 offer 的高度。',
     tone: 'good',
     priority: 88,
@@ -97,7 +97,7 @@ export const ENDINGS: Ending[] = [
   {
     id: 'ending_intern_to_fulltime',
     title: '实习转正',
-    desc: '那份咬牙撑下来的实习，最后一天经理把你叫进办公室，递来的不是辞别，是一份正式合同。你在团队里留下的好口碑，比任何一版 CV 都管用。Graduate Route 还没用上，工签就已经有了着落。',
+    desc: '那份咬牙撑下来的实习，最后一天经理把你叫进办公室，递来的不是辞别，是一份正式合同。你在团队里留下的好口碑，比任何一版 CV 都管用。毕业后留下来的那条路，也跟着清晰了起来。',
     quip: '别人投了一百份简历，你把一份实习，做成了一份工作。',
     tone: 'good',
     priority: 85,

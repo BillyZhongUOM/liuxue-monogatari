@@ -1,1 +1,165 @@
-[]
+[
+  {
+    "id": "xijiekong",
+    "name": "细节控",
+    "desc": "材料、格式、due date 排得明明白白，签证和行政从不踩雷，可惜一件小事能纠结到天亮。",
+    "kind": "neutral",
+    "startMods": {
+      "visa": 8,
+      "stress": 4
+    },
+    "actionTagMods": {
+      "admin": 1.4,
+      "study": 1.1,
+      "rest": 0.9
+    },
+    "startFlags": [
+      "paperwork_ready"
+    ]
+  },
+  {
+    "id": "luwang",
+    "name": "路痴",
+    "desc": "新城市像一座大迷宫，出门探索常常多走两里冤枉路，好在迷着迷着也把街区记熟了。",
+    "kind": "negative",
+    "startMods": {
+      "adaptation": -5,
+      "energy": -3
+    },
+    "actionTagMods": {
+      "explore": 0.8,
+      "admin": 0.9
+    }
+  },
+  {
+    "id": "kaojupi",
+    "name": "考据癖",
+    "desc": "一句话能查三篇文献核到底，essay 引用扎实分数稳，但写一段要改八遍，进度永远慢半拍。",
+    "kind": "neutral",
+    "startMods": {
+      "gpa": 4,
+      "english": 3,
+      "stress": 3
+    },
+    "actionTagMods": {
+      "study": 1.3,
+      "work": 0.85
+    }
+  },
+  {
+    "id": "duansheli",
+    "name": "断舍离",
+    "desc": "行李只带必需品，不囤不攒，房间清爽心也清爽；只是真到要用时，常常发现什么都没留。",
+    "kind": "positive",
+    "startMods": {
+      "stress": -6,
+      "money": -60
+    },
+    "actionTagMods": {
+      "rest": 1.2,
+      "life": 1.15,
+      "cook": 0.85
+    }
+  },
+  {
+    "id": "kuangbiao",
+    "name": "搬砖狂魔",
+    "desc": "中超、餐厅、代购的班随便接，钱包鼓得快，可身子骨也被排班表磨得吱呀响。",
+    "kind": "neutral",
+    "startMods": {
+      "money": 120,
+      "health": -4
+    },
+    "actionTagMods": {
+      "work": 1.35,
+      "study": 0.9
+    }
+  },
+  {
+    "id": "kouyincong",
+    "name": "口音敏感",
+    "desc": "对各地口音耳朵尖，模仿力强，开口练得飞快；但 lecture 上一个生词卡住，就会脸红半天。",
+    "kind": "positive",
+    "startMods": {
+      "english": 6,
+      "stress": 2
+    },
+    "actionTagMods": {
+      "social": 1.2,
+      "study": 1.05
+    }
+  },
+  {
+    "id": "yangshengka",
+    "name": "养生卡",
+    "desc": "保温杯不离手，泡枸杞、早睡、踩点吃饭，身体本钱稳；就是 deadline 一冲就心疼自己，很难拼命。",
+    "kind": "positive",
+    "startMods": {
+      "health": 8,
+      "energy": 4
+    },
+    "actionTagMods": {
+      "rest": 1.25,
+      "career": 0.9
+    }
+  },
+  {
+    "id": "shejiaoda",
+    "name": "社团咖",
+    "desc": "迎新周第一天就入了五个社团，朋友遍地、口碑响亮，可周历也塞得满满当当，正事总被挤到最后。",
+    "kind": "neutral",
+    "startMods": {
+      "social": 7,
+      "reputation": 5,
+      "gpa": -3
+    },
+    "actionTagMods": {
+      "social": 1.25,
+      "study": 0.92
+    }
+  },
+  {
+    "id": "yujimin",
+    "name": "雨季敏感",
+    "desc": "阴雨连绵就提不起劲，灰天气里精力打折；但只要放一天晴，整个人就满血复活。",
+    "kind": "negative",
+    "startMods": {
+      "energy": -5,
+      "homesick": 5
+    },
+    "actionTagMods": {
+      "explore": 0.85,
+      "rest": 1.15
+    }
+  },
+  {
+    "id": "tousha",
+    "name": "投杀手",
+    "desc": "投简历像撒网，海投不眨眼，面试机会确实多；可批量轰炸太耗神，一波下来人也虚脱。",
+    "kind": "neutral",
+    "startMods": {
+      "career": 6,
+      "energy": -4
+    },
+    "actionTagMods": {
+      "career": 1.3,
+      "rest": 0.9
+    }
+  },
+  {
+    "id": "huofo",
+    "name": "活菩萨",
+    "desc": "组里脏活累活都自己扛，同学缘和推荐信都好；只是太顾别人，常常熬到深夜还在帮人改 slides。",
+    "kind": "neutral",
+    "startMods": {
+      "reputation": 7,
+      "social": 4,
+      "stress": 5,
+      "energy": -3
+    },
+    "actionTagMods": {
+      "social": 1.15,
+      "rest": 0.85
+    }
+  }
+]

@@ -83,7 +83,7 @@ export const ACTIONS: GameAction[] = [
   {
     id: 'groceries',
     name: '去中超采购',
-    desc: '老干妈、火锅底料、速冻水饺，安全感拉满。',
+    desc: '家乡牌的辣酱、火锅底料、速冻水饺，安全感拉满。',
     emoji: '🛒',
     apCost: 1,
     effects: { money: -30, health: 4, homesick: -6, adaptation: 2, energy: -4 },
