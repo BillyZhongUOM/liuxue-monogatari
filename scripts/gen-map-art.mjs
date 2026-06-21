@@ -68,7 +68,24 @@ const SPECS = {
     ['skyline-bristol', 'A wide pixel-art skyline silhouette of a harbour, a tall suspension bridge over a gorge and colourful hillside houses, dusk amber glow, no text, no logos. ' + STYLE],
   ],
 };
-const ASPECT = { buildings: '1:1', char: '1:1', grounds: '3:4', skylines: '21:9', deco: '1:1' };
+
+// Per-city distinct terrain (each city its own ground with signature features).
+const CITY_TERRAIN = {
+  london: { town: 'a wide winding river like the Thames crossed by two stone bridges, tarmac roads and riverside walks, a faint big-city skyline of towers and a clock tower behind', campus: 'a modern urban university quad surrounded by glass and stone, lawns, paved paths and a fountain' },
+  oxford: { town: 'honey-stone college lanes, dreaming spires, a small calm river with a punt and stone bridges, cobbled streets', campus: 'a grand honey-stone collegiate quadrangle with cloisters, manicured lawns, stone paths and a fountain' },
+  cambridge: { town: 'a calm river like the Cam with punts and arched stone bridges, college chapels and spires, willow-lined banks', campus: 'a collegiate quadrangle beside a gentle river, chapel spires, lawns and stone paths' },
+  manchester: { town: 'red-brick warehouses, industrial canals with locks, tram lines and cobbled streets, a few modern glass towers', campus: 'a red-brick university campus, paved courtyards, lawns and tree-lined paths' },
+  edinburgh: { town: 'an old-town of stone closes climbing a craggy hill toward a castle silhouette, stepped lanes and cobbles', campus: 'a historic stone campus on a slope, stepped paths, lawns and old trees' },
+  birmingham: { town: 'a network of canals with brick arches and towpaths, modern curved buildings, busy roads', campus: 'a modern mixed campus, plazas, lawns, paved paths and a small water feature' },
+  sheffield: { town: 'a green hilly student city with terraced houses on slopes, leafy streets and small parks', campus: 'a green campus on a gentle hill, terraced lawns, trees and winding paths' },
+  bristol: { town: 'a colourful harbour with moored boats, a tall suspension bridge over a gorge, hillside streets of pastel houses', campus: 'a hillside campus overlooking water, terraced lawns, paths and trees' },
+};
+SPECS.citygrounds = Object.entries(CITY_TERRAIN).flatMap(([city, t]) => [
+  [`ground-town-${city}`, `A detailed top-down pixel-art city ground at dusk viewed from straight above: ${t.town}, small green squares and round tree canopies, wet amber reflections, EMPTY building plots (no buildings on them), no text, no logos. ${STYLE}`],
+  [`ground-campus-${city}`, `A detailed top-down pixel-art university campus ground viewed from straight above: ${t.campus}, round tree canopies and flowerbeds, EMPTY building plots (no buildings on them), no text, no logos. ${STYLE}`],
+]);
+
+const ASPECT = { buildings: '1:1', char: '1:1', grounds: '3:4', skylines: '21:9', deco: '1:1', citygrounds: '3:4' };
 
 function resolveKey() {
   if (process.env.GEMINI_API_KEY) return process.env.GEMINI_API_KEY.trim();
@@ -119,7 +136,7 @@ async function main() {
   mkdirSync(OUT_DIR, { recursive: true });
 
   let jobs = [];
-  const groups = ['buildings', 'char', 'grounds', 'skylines', 'deco'];
+  const groups = ['buildings', 'char', 'grounds', 'skylines', 'deco', 'citygrounds'];
   if (only) {
     for (const g of groups) for (const [id, p] of SPECS[g]) if (id === only) jobs.push([id, p, ASPECT[g]]);
     if (!jobs.length) { console.error('unknown id ' + only); process.exit(1); }

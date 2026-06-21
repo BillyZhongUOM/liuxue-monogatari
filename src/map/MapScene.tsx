@@ -132,7 +132,7 @@ export function MapScene({ state }: { state: GameState }) {
   const nodes = LOCATIONS.filter((l) => l.zone === zone);
   const player = LOCATION_BY_ID[playerNode];
   const playerInZone = player?.zone === zone;
-  const ground = assetUrl(`ground-${zone}`);
+  const ground = assetUrl(`ground-${zone}-${state.config.city}`) ?? assetUrl(`ground-${zone}`);
   const skyline = assetUrl(`skyline-${state.config.city}`);
   const charImg = assetUrl(`char-student-${state.config.gender ?? 'female'}`) ?? assetUrl('char-student');
 

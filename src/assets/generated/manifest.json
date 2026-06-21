@@ -1,6 +1,6 @@
 {
   "updatedBy": "register-assets",
-  "count": 53,
+  "count": 69,
   "assets": [
     {
       "id": "building-bank",
@@ -159,8 +159,72 @@
       "path": "/assets/generated/ground-campus.png"
     },
     {
+      "id": "ground-campus-birmingham",
+      "path": "/assets/generated/ground-campus-birmingham.png"
+    },
+    {
+      "id": "ground-campus-bristol",
+      "path": "/assets/generated/ground-campus-bristol.png"
+    },
+    {
+      "id": "ground-campus-cambridge",
+      "path": "/assets/generated/ground-campus-cambridge.png"
+    },
+    {
+      "id": "ground-campus-edinburgh",
+      "path": "/assets/generated/ground-campus-edinburgh.png"
+    },
+    {
+      "id": "ground-campus-london",
+      "path": "/assets/generated/ground-campus-london.png"
+    },
+    {
+      "id": "ground-campus-manchester",
+      "path": "/assets/generated/ground-campus-manchester.png"
+    },
+    {
+      "id": "ground-campus-oxford",
+      "path": "/assets/generated/ground-campus-oxford.png"
+    },
+    {
+      "id": "ground-campus-sheffield",
+      "path": "/assets/generated/ground-campus-sheffield.png"
+    },
+    {
       "id": "ground-town",
       "path": "/assets/generated/ground-town.png"
+    },
+    {
+      "id": "ground-town-birmingham",
+      "path": "/assets/generated/ground-town-birmingham.png"
+    },
+    {
+      "id": "ground-town-bristol",
+      "path": "/assets/generated/ground-town-bristol.png"
+    },
+    {
+      "id": "ground-town-cambridge",
+      "path": "/assets/generated/ground-town-cambridge.png"
+    },
+    {
+      "id": "ground-town-edinburgh",
+      "path": "/assets/generated/ground-town-edinburgh.png"
+    },
+    {
+      "id": "ground-town-london",
+      "path": "/assets/generated/ground-town-london.png"
+    },
+    {
+      "id": "ground-town-manchester",
+      "path": "/assets/generated/ground-town-manchester.png"
+    },
+    {
+      "id": "ground-town-oxford",
+      "path": "/assets/generated/ground-town-oxford.png"
+    },
+    {
+      "id": "ground-town-sheffield",
+      "path": "/assets/generated/ground-town-sheffield.png"
     },
     {
       "id": "scene-arrival",
