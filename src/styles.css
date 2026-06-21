@@ -427,7 +427,36 @@ button { font-family: inherit; }
 
 /* ----------------------------------------------------------------- map mode */
 .map-wrap { flex: 1; display: flex; flex-direction: column; min-height: 0; }
-.map { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+.map { position: relative; flex: 1; display: flex; flex-direction: column; min-height: 0; }
+
+/* interior scene you enter when walking into a building */
+.interior {
+  position: absolute; inset: 0; z-index: 10; display: flex; flex-direction: column;
+  background-color: #14182a; background-size: cover; background-position: center; image-rendering: pixelated;
+  animation: fadein 0.18s ease;
+}
+.interior--noart { background: linear-gradient(180deg, var(--panel-2), var(--bg)); }
+.interior__scrim {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, #0a0c1699 0%, transparent 26%, transparent 50%, #0a0c16e6 100%);
+}
+.interior__top {
+  position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between;
+  gap: 8px; padding: 10px 12px;
+}
+.interior__name { font-size: 15px; font-weight: 800; color: var(--tx); text-shadow: 1px 1px 0 #000; }
+.interior__ap { font-size: 12px; color: var(--tx-dim); text-shadow: 1px 1px 0 #000; }
+.interior__callout { position: relative; z-index: 2; margin-top: auto; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); }
+.interior__hint { font-size: 13px; color: var(--tx); text-shadow: 1px 1px 0 #000; margin-bottom: 8px; }
+.interior__actions { display: flex; flex-direction: column; gap: 8px; max-height: 48vh; overflow-y: auto; }
+.interior__empty, .interior__locked { font-size: 12px; color: var(--tx-dim); padding: 4px 2px; }
+.interior-action { display: flex; align-items: center; gap: 10px; text-align: left; background: #1f2438f2; }
+.interior-action__ico { font-size: 20px; }
+.interior-action__body { display: flex; flex-direction: column; gap: 2px; }
+.interior-action__name { font-size: 14px; font-weight: 700; }
+.interior-action__cost { color: var(--amber); }
+.interior-action__desc { font-size: 11.5px; color: var(--tx-dim); line-height: 1.3; }
+@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
 
 .map__zones {
   display: flex; align-items: center; gap: 8px;
@@ -442,7 +471,7 @@ button { font-family: inherit; }
 .map__hint { margin-left: auto; font-size: 11px; color: var(--tx-faint); }
 
 .map__stage {
-  position: relative; flex: 1; min-height: 240px; overflow: hidden;
+  position: relative; flex: 1; min-height: 240px; overflow: hidden; isolation: isolate;
   background-size: cover; background-position: center bottom; background-repeat: no-repeat;
   background-color: #1b2138;
 }
@@ -463,13 +492,8 @@ button { font-family: inherit; }
   z-index: 1;
 }
 .map-node__art { position: relative; width: 72px; height: 72px; display: flex; align-items: flex-end; justify-content: center; }
-/* soft ground shadow so the building sits on the terrain instead of floating */
-.map-node__art::before {
-  content: ""; position: absolute; left: 50%; bottom: 3px; transform: translateX(-50%);
-  width: 58px; height: 15px; border-radius: 50%;
-  background: radial-gradient(ellipse, #00000066, transparent 72%); z-index: -1;
-}
-.map-node__img { width: 72px; height: 72px; object-fit: contain; image-rendering: pixelated; }
+/* shadow follows the building silhouette (a cast shadow, not a base plate) */
+.map-node__img { width: 72px; height: 72px; object-fit: contain; image-rendering: pixelated; filter: drop-shadow(2px 3px 1px #00000077); }
 
 /* decoration layer (trees, lampposts) behind the buildings */
 .map-deco { position: absolute; transform: translate(-50%, -64%); pointer-events: none; z-index: 0; }

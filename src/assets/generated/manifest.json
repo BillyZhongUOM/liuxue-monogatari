@@ -1,6 +1,6 @@
 {
   "updatedBy": "register-assets",
-  "count": 69,
+  "count": 84,
   "assets": [
     {
       "id": "building-bank",
@@ -225,6 +225,66 @@
     {
       "id": "ground-town-sheffield",
       "path": "/assets/generated/ground-town-sheffield.png"
+    },
+    {
+      "id": "interior-bank",
+      "path": "/assets/generated/interior-bank.png"
+    },
+    {
+      "id": "interior-career",
+      "path": "/assets/generated/interior-career.png"
+    },
+    {
+      "id": "interior-clinic",
+      "path": "/assets/generated/interior-clinic.png"
+    },
+    {
+      "id": "interior-dorm",
+      "path": "/assets/generated/interior-dorm.png"
+    },
+    {
+      "id": "interior-gym",
+      "path": "/assets/generated/interior-gym.png"
+    },
+    {
+      "id": "interior-lecture",
+      "path": "/assets/generated/interior-lecture.png"
+    },
+    {
+      "id": "interior-library",
+      "path": "/assets/generated/interior-library.png"
+    },
+    {
+      "id": "interior-mall",
+      "path": "/assets/generated/interior-mall.png"
+    },
+    {
+      "id": "interior-market",
+      "path": "/assets/generated/interior-market.png"
+    },
+    {
+      "id": "interior-nightlife",
+      "path": "/assets/generated/interior-nightlife.png"
+    },
+    {
+      "id": "interior-park",
+      "path": "/assets/generated/interior-park.png"
+    },
+    {
+      "id": "interior-society",
+      "path": "/assets/generated/interior-society.png"
+    },
+    {
+      "id": "interior-station",
+      "path": "/assets/generated/interior-station.png"
+    },
+    {
+      "id": "interior-town",
+      "path": "/assets/generated/interior-town.png"
+    },
+    {
+      "id": "interior-work",
+      "path": "/assets/generated/interior-work.png"
     },
     {
       "id": "scene-arrival",

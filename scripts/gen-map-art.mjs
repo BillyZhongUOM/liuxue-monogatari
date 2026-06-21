@@ -26,21 +26,21 @@ const SPRITE =
 // id, prompt, aspect, kind
 const SPECS = {
   buildings: [
-    ['building-library', `${SPRITE} a small cute university library building, big windows, a subtle book motif, top-down 3/4 forty-five-degree view showing the roof and the facade, the building sitting on a small oval base with a soft drop shadow. ${STYLE}`],
-    ['building-dorm', `${SPRITE} a small cozy student dormitory block, a few lit windows, top-down 3/4 forty-five-degree view showing the roof and the facade, the building sitting on a small oval base with a soft drop shadow. ${STYLE}`],
-    ['building-lecture', `${SPRITE} a small academic lecture building with columns and a clock, top-down 3/4 forty-five-degree view showing the roof and the facade, the building sitting on a small oval base with a soft drop shadow. ${STYLE}`],
-    ['building-society', `${SPRITE} a small student union clubhouse with a little banner and bunting, top-down 3/4 forty-five-degree view showing the roof and the facade, the building sitting on a small oval base with a soft drop shadow. ${STYLE}`],
-    ['building-career', `${SPRITE} a small modern careers office building with a glass door, top-down 3/4 forty-five-degree view showing the roof and the facade, the building sitting on a small oval base with a soft drop shadow. ${STYLE}`],
-    ['building-gym', `${SPRITE} a small gym building with a dumbbell sign, top-down 3/4 forty-five-degree view showing the roof and the facade, the building sitting on a small oval base with a soft drop shadow. ${STYLE}`],
-    ['building-market', `${SPRITE} a small Asian grocery shopfront with red awning and lanterns (no text), top-down 3/4 forty-five-degree view showing the roof and the facade, the building sitting on a small oval base with a soft drop shadow. ${STYLE}`],
-    ['building-town', `${SPRITE} a small UK high-street row of shops with a clock tower, top-down 3/4 forty-five-degree view showing the roof and the facade, the building sitting on a small oval base with a soft drop shadow. ${STYLE}`],
-    ['building-work', `${SPRITE} a small cafe storefront where a student waits tables, top-down 3/4 forty-five-degree view showing the roof and the facade, the building sitting on a small oval base with a soft drop shadow. ${STYLE}`],
-    ['building-mall', `${SPRITE} a small shopping mall entrance with shiny doors, top-down 3/4 forty-five-degree view showing the roof and the facade, the building sitting on a small oval base with a soft drop shadow. ${STYLE}`],
-    ['building-nightlife', `${SPRITE} a small night bar with neon glow and a disco ball over the door, top-down 3/4 forty-five-degree view showing the roof and the facade, the building sitting on a small oval base with a soft drop shadow. ${STYLE}`],
-    ['building-station', `${SPRITE} a small UK train station with a platform canopy, top-down 3/4 forty-five-degree view showing the roof and the facade, the building sitting on a small oval base with a soft drop shadow. ${STYLE}`],
-    ['building-clinic', `${SPRITE} a small clinic building with a green cross sign, top-down 3/4 forty-five-degree view showing the roof and the facade, the building sitting on a small oval base with a soft drop shadow. ${STYLE}`],
-    ['building-bank', `${SPRITE} a small classic bank building with columns and a coin sign, top-down 3/4 forty-five-degree view showing the roof and the facade, the building sitting on a small oval base with a soft drop shadow. ${STYLE}`],
-    ['building-park', `${SPRITE} a small park patch with a leafy tree, a bench and a lamppost, top-down 3/4 forty-five-degree view showing the roof and the facade, the building sitting on a small oval base with a soft drop shadow. ${STYLE}`],
+    ['building-library', `${SPRITE} a small cute university library building, big windows, a subtle book motif, top-down 3/4 forty-five-degree view showing the roof and the facade, no base plate and no ground disc beneath it, just the building itself. ${STYLE}`],
+    ['building-dorm', `${SPRITE} a small cozy student dormitory block, a few lit windows, top-down 3/4 forty-five-degree view showing the roof and the facade, no base plate and no ground disc beneath it, just the building itself. ${STYLE}`],
+    ['building-lecture', `${SPRITE} a small academic lecture building with columns and a clock, top-down 3/4 forty-five-degree view showing the roof and the facade, no base plate and no ground disc beneath it, just the building itself. ${STYLE}`],
+    ['building-society', `${SPRITE} a small student union clubhouse with a little banner and bunting, top-down 3/4 forty-five-degree view showing the roof and the facade, no base plate and no ground disc beneath it, just the building itself. ${STYLE}`],
+    ['building-career', `${SPRITE} a small modern careers office building with a glass door, top-down 3/4 forty-five-degree view showing the roof and the facade, no base plate and no ground disc beneath it, just the building itself. ${STYLE}`],
+    ['building-gym', `${SPRITE} a small gym building with a dumbbell sign, top-down 3/4 forty-five-degree view showing the roof and the facade, no base plate and no ground disc beneath it, just the building itself. ${STYLE}`],
+    ['building-market', `${SPRITE} a small Asian grocery shopfront with red awning and lanterns (no text), top-down 3/4 forty-five-degree view showing the roof and the facade, no base plate and no ground disc beneath it, just the building itself. ${STYLE}`],
+    ['building-town', `${SPRITE} a small UK high-street row of shops with a clock tower, top-down 3/4 forty-five-degree view showing the roof and the facade, no base plate and no ground disc beneath it, just the building itself. ${STYLE}`],
+    ['building-work', `${SPRITE} a small cafe storefront where a student waits tables, top-down 3/4 forty-five-degree view showing the roof and the facade, no base plate and no ground disc beneath it, just the building itself. ${STYLE}`],
+    ['building-mall', `${SPRITE} a small shopping mall entrance with shiny doors, top-down 3/4 forty-five-degree view showing the roof and the facade, no base plate and no ground disc beneath it, just the building itself. ${STYLE}`],
+    ['building-nightlife', `${SPRITE} a small night bar with neon glow and a disco ball over the door, top-down 3/4 forty-five-degree view showing the roof and the facade, no base plate and no ground disc beneath it, just the building itself. ${STYLE}`],
+    ['building-station', `${SPRITE} a small UK train station with a platform canopy, top-down 3/4 forty-five-degree view showing the roof and the facade, no base plate and no ground disc beneath it, just the building itself. ${STYLE}`],
+    ['building-clinic', `${SPRITE} a small clinic building with a green cross sign, top-down 3/4 forty-five-degree view showing the roof and the facade, no base plate and no ground disc beneath it, just the building itself. ${STYLE}`],
+    ['building-bank', `${SPRITE} a small classic bank building with columns and a coin sign, top-down 3/4 forty-five-degree view showing the roof and the facade, no base plate and no ground disc beneath it, just the building itself. ${STYLE}`],
+    ['building-park', `${SPRITE} a small park patch with a leafy tree, a bench and a lamppost, top-down 3/4 forty-five-degree view showing the roof and the facade, no base plate and no ground disc beneath it, just the building itself. ${STYLE}`],
   ],
   char: [
     ['char-student', `${SPRITE} a full-body pixel sprite of a Chinese international student, casual clothes, a backpack, friendly simple face, standing front view. ${STYLE}`],
@@ -81,11 +81,34 @@ const CITY_TERRAIN = {
   bristol: { town: 'a colourful harbour with moored boats, a tall suspension bridge over a gorge, hillside streets of pastel houses', campus: 'a hillside campus overlooking water, terraced lawns, paths and trees' },
 };
 SPECS.citygrounds = Object.entries(CITY_TERRAIN).flatMap(([city, t]) => [
-  [`ground-town-${city}`, `A detailed top-down pixel-art city ground at dusk viewed from straight above: ${t.town}, small green squares and round tree canopies, wet amber reflections, EMPTY building plots (no buildings on them), no text, no logos. ${STYLE}`],
-  [`ground-campus-${city}`, `A detailed top-down pixel-art university campus ground viewed from straight above: ${t.campus}, round tree canopies and flowerbeds, EMPTY building plots (no buildings on them), no text, no logos. ${STYLE}`],
+  [`ground-town-${city}`, `A top-down pixel-art city map viewed straight from above with a calm, mostly FLAT and OPEN layout: plain green lawns and flat paved squares fill the middle, leaving several clearly flat empty plots for buildings, joined by gentle level paths. Keep the city's character (${t.town}) and ANY river, bridges, stairs, steps, slopes, hills, castle or canals ONLY along the far outer edges and in the far background, never in the middle and never under the flat plots. A few round tree canopies and flowerbeds at the sides. No buildings on the plots, no text, no logos. ${STYLE}`],
+  [`ground-campus-${city}`, `A top-down pixel-art university campus map viewed straight from above with a calm, mostly FLAT and OPEN layout: plain green lawns and flat paved courtyards fill the middle, leaving several clearly flat empty plots for buildings, joined by gentle level paths. Keep the campus character (${t.campus}) and ANY slopes, stairs, steps, water or grand architecture ONLY along the far outer edges and far background, never in the middle and never under the flat plots. A few tree canopies and flowerbeds at the sides. No buildings on the plots, no text, no logos. ${STYLE}`],
 ]);
 
-const ASPECT = { buildings: '1:1', char: '1:1', grounds: '3:4', skylines: '21:9', deco: '1:1', citygrounds: '3:4' };
+// Interior scenes you enter when you walk into a building (opaque full-scene bg).
+const INTERIORS = {
+  library: 'a university library reading room, long desks with little green lamps, tall bookshelves, a few open books',
+  dorm: 'a small cozy student dorm bedroom, a single bed, a desk with a laptop and a cup of instant noodles, posters, a rainy window',
+  lecture: 'a university lecture theatre, tiered rows of seats, a big screen and a whiteboard at the front',
+  society: 'a student society clubroom, comfy sofas, a banner and bunting, board games and a kettle',
+  career: 'a careers office, desks with computers, a jobs noticeboard, brochures on a rack',
+  gym: 'a gym interior, treadmills and weight racks, a mirrored wall, a water cooler',
+  market: 'a Chinese supermarket interior aisle, shelves stocked with snacks and sauces, a freezer, a checkout counter',
+  town: 'a UK city-centre high street at dusk seen at street level, shopfronts, a pavement and street lamps',
+  work: 'a small cafe interior, a counter with a coffee machine, tables and chairs, a tip jar',
+  mall: 'a bright shopping mall interior, shop fronts, an escalator, planters',
+  nightlife: 'a small bar and club interior, warm neon glow, a tiny dance floor and a bar counter with stools',
+  station: 'a UK train station platform, a waiting bench, a departure board with no readable text, tracks and a canopy',
+  clinic: 'a GP clinic waiting room, a row of chairs, a reception desk, a green cross sign',
+  bank: 'a bank interior, teller counters, a queue rope, a marble floor',
+  park: 'a small city park at dusk, a bench under a leafy tree, a pond and a winding path',
+};
+SPECS.interiors = Object.entries(INTERIORS).map(([loc, desc]) => [
+  `interior-${loc}`,
+  `A detailed 2.5D pixel-art interior scene of ${desc}, cozy warm dusk lighting, foreground props, no people, no text, no logos. ${STYLE}`,
+]);
+
+const ASPECT = { buildings: '1:1', char: '1:1', grounds: '3:4', skylines: '21:9', deco: '1:1', citygrounds: '3:4', interiors: '3:4' };
 
 function resolveKey() {
   if (process.env.GEMINI_API_KEY) return process.env.GEMINI_API_KEY.trim();
@@ -136,7 +159,7 @@ async function main() {
   mkdirSync(OUT_DIR, { recursive: true });
 
   let jobs = [];
-  const groups = ['buildings', 'char', 'grounds', 'skylines', 'deco', 'citygrounds'];
+  const groups = ['buildings', 'char', 'grounds', 'skylines', 'deco', 'citygrounds', 'interiors'];
   if (only) {
     for (const g of groups) for (const [id, p] of SPECS[g]) if (id === only) jobs.push([id, p, ASPECT[g]]);
     if (!jobs.length) { console.error('unknown id ' + only); process.exit(1); }

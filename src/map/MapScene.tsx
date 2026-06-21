@@ -3,6 +3,7 @@ import { availableActions } from '../game';
 import type { GameState } from '../game';
 import { useGame } from '../store';
 import { assetUrl } from '../ui/theme';
+import { InteriorScene } from './InteriorScene';
 import {
   LOCATIONS,
   LOCATION_BY_ID,
@@ -213,7 +214,7 @@ export function MapScene({ state }: { state: GameState }) {
         {toast ? <div className="map-toast">{toast}</div> : null}
       </div>
 
-      {openLoc ? <LocationSheet state={state} locId={openLoc} onClose={() => setOpenLoc(null)} /> : null}
+      {openLoc ? <InteriorScene state={state} locId={openLoc} onClose={() => setOpenLoc(null)} /> : null}
     </div>
   );
 }
