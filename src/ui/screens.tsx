@@ -93,6 +93,7 @@ function rollConfig(): CharacterConfig {
   }
   return {
     playerName: pickRandom(NAME_POOL),
+    gender: Math.random() < 0.5 ? 'female' : 'male',
     city: city.id,
     universityType: uni.id,
     major: pickRandom(MAJORS).id,
@@ -146,13 +147,24 @@ export function CharacterCreation({
       </div>
 
       <div className="field">
-        <div className="field__label">名字（可以改）</div>
+        <div className="field__label">名字 + 形象（可以改）</div>
         <input
           className="name-input"
           value={config.playerName}
           maxLength={12}
           onChange={(e) => setConfig((c) => ({ ...c, playerName: e.target.value }))}
         />
+        <div className="gender-row">
+          {(['female', 'male'] as const).map((g) => (
+            <button
+              key={g}
+              className={`gender-btn${(config.gender ?? 'female') === g ? ' gender-btn--on' : ''}`}
+              onClick={() => setConfig((c) => ({ ...c, gender: g }))}
+            >
+              {g === 'female' ? '👩 女生' : '👨 男生'}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="field">
@@ -194,7 +206,11 @@ export function CharacterCreation({
         <button className="pixel-btn pixel-btn--ghost" onClick={onBack} style={{ flex: '0 0 22%' }}>
           返回
         </button>
-        <button className="pixel-btn" onClick={() => setConfig(rollConfig())} style={{ flex: '0 0 32%' }}>
+        <button
+          className="pixel-btn"
+          onClick={() => setConfig((c) => ({ ...rollConfig(), gender: c.gender }))}
+          style={{ flex: '0 0 32%' }}
+        >
           🎲 重抽
         </button>
         <button className="pixel-btn pixel-btn--primary" onClick={() => onConfirm(config)}>

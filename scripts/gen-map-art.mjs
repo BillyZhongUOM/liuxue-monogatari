@@ -44,6 +44,8 @@ const SPECS = {
   ],
   char: [
     ['char-student', `${SPRITE} a full-body pixel sprite of a Chinese international student, casual clothes, a backpack, friendly simple face, standing front view. ${STYLE}`],
+    ['char-student-male', `${SPRITE} a full-body pixel sprite of a young Chinese male international student, casual hoodie and jeans, a backpack, short dark hair, friendly simple face, standing front view, small soft shadow. ${STYLE}`],
+    ['char-student-female', `${SPRITE} a full-body pixel sprite of a young Chinese female international student, casual jacket and jeans, a backpack, shoulder-length dark hair, friendly simple face, standing front view, small soft shadow. ${STYLE}`],
   ],
   grounds: [
     ['ground-campus', `A detailed top-down pixel-art university campus ground viewed from above: green lawns and quadrangles, pale stone footpaths forming a cross and looping walkways that lead to empty plots, a small central fountain, scattered flowerbeds and a few round tree canopies, gentle warm light, EMPTY building plots (NO buildings), NO text. ${STYLE}`],

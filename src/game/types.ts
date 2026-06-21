@@ -202,6 +202,7 @@ export type GamePhase =
 
 export interface CharacterConfig {
   playerName: string;
+  gender?: 'male' | 'female'; // player avatar; engine ignores it, presentation only
   city: string;
   universityType: string;
   major: string;

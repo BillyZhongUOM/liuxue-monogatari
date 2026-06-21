@@ -1,6 +1,6 @@
 {
   "updatedBy": "register-assets",
-  "count": 51,
+  "count": 53,
   "assets": [
     {
       "id": "building-bank",
@@ -65,6 +65,14 @@
     {
       "id": "char-student",
       "path": "/assets/generated/char-student.png"
+    },
+    {
+      "id": "char-student-female",
+      "path": "/assets/generated/char-student-female.png"
+    },
+    {
+      "id": "char-student-male",
+      "path": "/assets/generated/char-student-male.png"
     },
     {
       "id": "deco-bench",

@@ -345,6 +345,13 @@ button { font-family: inherit; }
   background: var(--bg-2); border: 2px solid var(--line); color: var(--tx); border-radius: var(--r);
 }
 .name-input::placeholder { color: var(--tx-faint); }
+.gender-row { display: flex; gap: 8px; margin-top: 8px; }
+.gender-btn {
+  flex: 1; padding: 8px; font-size: 13px; font-weight: 600; cursor: pointer;
+  background: var(--panel); border: 2px solid var(--line-soft); color: var(--tx-dim);
+  box-shadow: var(--shadow-sm); border-radius: var(--r);
+}
+.gender-btn--on { border-color: var(--amber); color: var(--amber); background: var(--panel-2); }
 .trait-row { display: flex; flex-wrap: wrap; gap: 7px; }
 .trait-chip {
   padding: 7px 11px; font-size: 13px; cursor: pointer;

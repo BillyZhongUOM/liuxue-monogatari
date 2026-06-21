@@ -134,7 +134,7 @@ export function MapScene({ state }: { state: GameState }) {
   const playerInZone = player?.zone === zone;
   const ground = assetUrl(`ground-${zone}`);
   const skyline = assetUrl(`skyline-${state.config.city}`);
-  const charImg = assetUrl('char-student');
+  const charImg = assetUrl(`char-student-${state.config.gender ?? 'female'}`) ?? assetUrl('char-student');
 
   return (
     <div className="map">
@@ -156,7 +156,6 @@ export function MapScene({ state }: { state: GameState }) {
         style={ground ? { backgroundImage: `url(${ground})` } : undefined}
       >
         {skyline ? <img className="map-skyline" src={skyline} alt="" aria-hidden /> : null}
-        {zone === 'town' ? <div className="map__rain" aria-hidden /> : null}
 
         {DECO_SPOTS[zone].map((d, i) => {
           const img = assetUrl(d.a);
