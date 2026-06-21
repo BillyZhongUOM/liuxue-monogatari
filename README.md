@@ -46,15 +46,20 @@ mv *.png public/assets/generated/
 npm run register:assets    # rebuilds the manifest so the game loads them
 ```
 
-**B. Auto-generate via OpenRouter** (Nano Banana / FLUX):
+**B. Gemini API directly (recommended, no OpenRouter)** — native image models
+(`gemini-3-pro-image` / `gemini-3.1-flash-image` = "Nano Banana"):
 
 ```bash
-cp .env.example .env       # add OPENROUTER_API_KEY (https://openrouter.ai/keys)
-npm run generate:assets    # writes public/assets/generated/*.png + manifest
+export GEMINI_API_KEY=...   # or set GEMINI_KEY_FILE to a key file
+npm run generate:gemini             # all scenes + endings
+npm run generate:gemini -- --only scene-dorm   # a single asset
+npm run register:assets
 ```
 
+**C. OpenRouter** (`npm run generate:assets`, needs `OPENROUTER_API_KEY`).
+
 See [docs/ASSET_PIPELINE.md](docs/ASSET_PIPELINE.md). Missing assets stay on
-placeholders. Never commit a real key.
+placeholders. Never commit a real key (only the generated PNGs).
 
 ## Tech
 
