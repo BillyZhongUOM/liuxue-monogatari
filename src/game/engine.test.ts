@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import {
   ALL_STAT_KEYS,
+  CITIES,
+  CITY_SCHOOLS,
   STAT_META_BY_KEY,
+  UNIVERSITY_TYPES,
   advanceWeek,
   availableActions,
   continueFromWeekly,
@@ -145,6 +148,35 @@ describe('full playthroughs', () => {
     expect(['ending_survivor', 'ending_distinction', 'ending_social_star', 'ending_return_home', 'ending_ordinary', 'ending_job_offer', 'ending_phd']).toContain(
       end.endingId,
     );
+  });
+});
+
+describe('city / school linkage', () => {
+  const schoolIds = new Set(UNIVERSITY_TYPES.map((u) => u.id));
+
+  it('every city maps only to real, existing schools', () => {
+    for (const [city, schools] of Object.entries(CITY_SCHOOLS)) {
+      expect(CITIES.some((c) => c.id === city), `${city} is a real city`).toBe(true);
+      expect(schools.length, `${city} has at least one school`).toBeGreaterThan(0);
+      for (const s of schools) expect(schoolIds.has(s), `${city} -> ${s} exists`).toBe(true);
+    }
+  });
+
+  it('every city can roll a school', () => {
+    for (const c of CITIES) {
+      expect((CITY_SCHOOLS[c.id] ?? []).length, `${c.id} rollable`).toBeGreaterThan(0);
+    }
+  });
+
+  it('G5 only in London, 牛剑 only in 牛津/剑桥 (and forced there)', () => {
+    for (const [city, schools] of Object.entries(CITY_SCHOOLS)) {
+      if (schools.includes('g5')) expect(city).toBe('london');
+      if (schools.includes('oxbridge')) expect(['oxford', 'cambridge']).toContain(city);
+      if (city === 'oxford' || city === 'cambridge') expect(schools).toEqual(['oxbridge']);
+    }
+    // 曼城 (and any non-London, non-Oxbridge city) must NOT offer a dream school
+    expect(CITY_SCHOOLS.manchester).not.toContain('g5');
+    expect(CITY_SCHOOLS.manchester).not.toContain('oxbridge');
   });
 });
 

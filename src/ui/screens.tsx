@@ -2,11 +2,13 @@ import { useState } from 'react';
 import {
   BUDGETS,
   CITIES,
+  CITY_SCHOOLS,
   ENDINGS,
   ENDING_BY_ID,
   ENGLISH_LEVELS,
   MAJORS,
   ROUTE_BY_ID,
+  TIER_LABEL,
   TRAITS,
   UNIVERSITY_TYPES,
   currentLeadingRoute,
@@ -62,11 +64,27 @@ function pickRandom<T>(arr: readonly T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+function weightedPick(list: CreationOption[]): CreationOption {
+  const total = list.reduce((s, o) => s + (o.weight ?? 1), 0);
+  let r = Math.random() * total;
+  for (const o of list) {
+    r -= o.weight ?? 1;
+    if (r <= 0) return o;
+  }
+  return list[list.length - 1];
+}
+
 function optById(list: CreationOption[], id: string): CreationOption | undefined {
   return list.find((o) => o.id === id);
 }
 
 function rollConfig(): CharacterConfig {
+  // City first (weighted; 牛津/剑桥 are rare), then a school the city can actually have.
+  const city = weightedPick(CITIES);
+  const schoolIds = CITY_SCHOOLS[city.id] ?? UNIVERSITY_TYPES.map((u) => u.id);
+  const schools = schoolIds.map((id) => optById(UNIVERSITY_TYPES, id)).filter(Boolean) as CreationOption[];
+  const uni = pickRandom(schools);
+
   const n = 1 + Math.floor(Math.random() * 3); // 1 to 3 traits
   const pool = [...TRAITS];
   const traits: string[] = [];
@@ -75,13 +93,28 @@ function rollConfig(): CharacterConfig {
   }
   return {
     playerName: pickRandom(NAME_POOL),
-    city: pickRandom(CITIES).id,
-    universityType: pickRandom(UNIVERSITY_TYPES).id,
+    city: city.id,
+    universityType: uni.id,
     major: pickRandom(MAJORS).id,
     budget: pickRandom(BUDGETS).id,
     englishLevel: pickRandom(ENGLISH_LEVELS).id,
     traits,
   };
+}
+
+const TIER_RANK: Record<string, number> = { common: 0, rare: 1, epic: 2, legend: 3 };
+
+function startTier(config: CharacterConfig): 'legend' | 'epic' | 'rare' | 'common' {
+  return optById(UNIVERSITY_TYPES, config.universityType)?.tier ?? 'common';
+}
+
+function startDifficulty(config: CharacterConfig): number {
+  let d = optById(UNIVERSITY_TYPES, config.universityType)?.difficulty ?? 3;
+  if (config.budget === 'tight') d += 1;
+  if (config.budget === 'comfortable') d -= 1;
+  if (config.englishLevel === 'just_passed') d += 1;
+  if (config.englishLevel === 'fluent') d -= 1;
+  return Math.max(1, Math.min(5, d));
 }
 
 // Random start each new game: the player rolls an identity (reroll until happy),
@@ -94,6 +127,8 @@ export function CharacterCreation({
   onBack: () => void;
 }) {
   const [config, setConfig] = useState<CharacterConfig>(rollConfig);
+  const tier = startTier(config);
+  const diff = startDifficulty(config);
 
   const rows = [
     { label: '城市', opt: optById(CITIES, config.city) },
@@ -121,6 +156,13 @@ export function CharacterCreation({
       </div>
 
       <div className="field">
+        <div className={`roll-banner roll-banner--${tier}`}>
+          <span className="roll-tier">{TIER_LABEL[tier]}开局</span>
+          <span className="roll-diff">
+            难度 <b>{'★'.repeat(diff)}</b>
+            <span className="roll-diff__off">{'★'.repeat(5 - diff)}</span>
+          </span>
+        </div>
         <div className="roll-card">
           {rows.map((r) => (
             <div key={r.label} className="roll-row">

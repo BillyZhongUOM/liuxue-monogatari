@@ -82,24 +82,49 @@ export interface CreationOption {
   weeklyStipend?: number;
   /** starting money override contribution */
   startMoney?: number;
+  /** relative draw weight for the random roll (default 1); lower = rarer */
+  weight?: number;
+  /** prestige/rarity tier (university only): legend > epic > rare > common */
+  tier?: 'legend' | 'epic' | 'rare' | 'common';
+  /** baseline difficulty contribution 1..5 (university only) */
+  difficulty?: number;
 }
 
 export const CITIES: CreationOption[] = [
-  { id: 'london', name: '伦敦', desc: '机会最多，房租也最杀人。', costMult: 1.6, mods: { career: 6, social: 4, adaptation: -2 } },
-  { id: 'manchester', name: '曼彻斯特', desc: '热闹、性价比高、雨也不少。', costMult: 1.0, mods: { social: 4, adaptation: 3 } },
-  { id: 'edinburgh', name: '爱丁堡', desc: '风景如画，风也如刀。', costMult: 1.05, mods: { adaptation: 4, stress: -3, homesick: 3 } },
-  { id: 'birmingham', name: '伯明翰', desc: '居中务实，生活方便。', costMult: 0.95, mods: { adaptation: 3, money: 80 } },
-  { id: 'sheffield', name: '谢菲尔德', desc: '安静的学生城，物价友好。', costMult: 0.85, mods: { stress: -4, money: 120, career: -2 } },
-  { id: 'bristol', name: '布里斯托', desc: '文艺、宜居、坡很多。', costMult: 1.05, mods: { social: 3, health: 2 } },
+  { id: 'london', name: '伦敦', desc: '机会最多，房租也最杀人。', costMult: 1.6, weight: 3, mods: { career: 6, social: 4, adaptation: -2 } },
+  { id: 'manchester', name: '曼彻斯特', desc: '热闹、性价比高、雨也不少。', costMult: 1.0, weight: 5, mods: { social: 4, adaptation: 3 } },
+  { id: 'edinburgh', name: '爱丁堡', desc: '风景如画，风也如刀。', costMult: 1.05, weight: 4, mods: { adaptation: 4, stress: -3, homesick: 3 } },
+  { id: 'birmingham', name: '伯明翰', desc: '居中务实，生活方便。', costMult: 0.95, weight: 5, mods: { adaptation: 3, money: 80 } },
+  { id: 'sheffield', name: '谢菲尔德', desc: '安静的学生城，物价友好。', costMult: 0.85, weight: 5, mods: { stress: -4, money: 120, career: -2 } },
+  { id: 'bristol', name: '布里斯托', desc: '文艺、宜居、坡很多。', costMult: 1.05, weight: 4, mods: { social: 3, health: 2 } },
+  // The two dream cities: rare to roll, and they force the 牛剑 school below.
+  { id: 'oxford', name: '牛津', desc: '千年学府，光环与窒息感并存。', costMult: 1.5, weight: 1, mods: { reputation: 6, stress: 4 } },
+  { id: 'cambridge', name: '剑桥', desc: '康河的柔波，和赶不完的 due。', costMult: 1.5, weight: 1, mods: { reputation: 6, stress: 4 } },
 ];
 
 export const UNIVERSITY_TYPES: CreationOption[] = [
-  { id: 'g5', name: 'G5 梦校', desc: '光环拉满，卷度也拉满。', mods: { reputation: 8, career: 5, gpa: -4, stress: 6 } },
-  { id: 'redbrick', name: '红砖大学', desc: '老牌稳健，口碑扎实。', mods: { reputation: 5, gpa: 2 } },
-  { id: 'modern', name: '现代大学', desc: '务实灵活，压力相对小。', mods: { stress: -4, adaptation: 3, reputation: -2 } },
-  { id: 'arts', name: '艺术院校', desc: '创意为王，履历看作品。', mods: { social: 4, career: 2, gpa: -2 } },
-  { id: 'business', name: '商学院', desc: '人脉与西装的主场。', mods: { career: 6, social: 3, money: -80 } },
+  // 牛剑: only rollable in 牛津/剑桥, the highest prestige and the hardest run.
+  { id: 'oxbridge', name: '牛剑', desc: '天花板级的光环，地狱级的卷度。导师的期待能把人压垮。', tier: 'legend', difficulty: 5, mods: { reputation: 14, career: 7, gpa: -8, stress: 14, money: -140 } },
+  { id: 'g5', name: 'G5 梦校', desc: '伦敦的顶尖学府，光环拉满，卷度也拉满。', tier: 'epic', difficulty: 4, mods: { reputation: 8, career: 5, gpa: -4, stress: 6 } },
+  { id: 'redbrick', name: '红砖大学', desc: '老牌稳健，口碑扎实。', tier: 'rare', difficulty: 3, mods: { reputation: 5, gpa: 2 } },
+  { id: 'business', name: '商学院', desc: '人脉与西装的主场。', tier: 'rare', difficulty: 3, mods: { career: 6, social: 3, money: -80 } },
+  { id: 'arts', name: '艺术院校', desc: '创意为王，履历看作品。', tier: 'common', difficulty: 2, mods: { social: 4, career: 2, gpa: -2 } },
+  { id: 'modern', name: '现代大学', desc: '务实灵活，压力相对小。', tier: 'common', difficulty: 2, mods: { stress: -4, adaptation: 3, reputation: -2 } },
 ];
+
+// Which schools each city can produce. 牛津/剑桥 force 牛剑; G5 only exists in 伦敦.
+export const CITY_SCHOOLS: Record<string, string[]> = {
+  london: ['g5', 'redbrick', 'business', 'modern', 'arts'],
+  oxford: ['oxbridge'],
+  cambridge: ['oxbridge'],
+  manchester: ['redbrick', 'business', 'modern', 'arts'],
+  edinburgh: ['redbrick', 'modern', 'arts'],
+  birmingham: ['redbrick', 'business', 'modern'],
+  sheffield: ['redbrick', 'modern'],
+  bristol: ['redbrick', 'modern', 'arts'],
+};
+
+export const TIER_LABEL: Record<string, string> = { legend: '传说', epic: '史诗', rare: '稀有', common: '普通' };
 
 export const MAJORS: CreationOption[] = [
   { id: 'business', name: '商科', desc: '小组作业与 networking 的故乡。', mods: { social: 4, career: 4 } },
