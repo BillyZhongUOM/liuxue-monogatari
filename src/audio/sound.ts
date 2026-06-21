@@ -97,7 +97,7 @@ export const sfx = {
 
 // ----------------------------------------------------------------- ambient pad
 const PAD_CHORDS: Record<Exclude<PadKind, 'none'>, number[]> = {
-  // soft, consonant, low — a quiet bed, not a melody
+  // soft, consonant, low, a quiet bed rather than a melody
   menu: [146.83, 220, 277.18], // Dm-ish, melancholic
   play: [164.81, 246.94, 329.63], // E minor-ish, warm
   ended: [130.81, 196, 261.63], // C, resolved

@@ -43,20 +43,18 @@ function TopBar({
   }
   return (
     <div className="topbar">
-      <button className="pixel-btn pixel-btn--ghost" style={{ padding: '6px 9px' }} onClick={toMenu} aria-label="菜单">
+      <button className="pixel-btn pixel-btn--ghost topbar__btn" onClick={toMenu} aria-label="菜单">
         ≡
       </button>
       <button
-        className="pixel-btn pixel-btn--ghost"
-        style={{ padding: '6px 9px' }}
+        className="pixel-btn pixel-btn--ghost topbar__btn"
         onClick={onToggleView}
         aria-label="切换视图"
       >
         {view === 'map' ? '📋' : '🗺️'}
       </button>
       <button
-        className="pixel-btn pixel-btn--ghost"
-        style={{ padding: '6px 9px' }}
+        className="pixel-btn pixel-btn--ghost topbar__btn"
         onClick={toggleMuted}
         aria-label={muted ? '开启声音' : '静音'}
       >

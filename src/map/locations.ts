@@ -2,7 +2,7 @@ import { ACTIONS } from '../data';
 import type { GameAction } from '../game';
 
 // Map nodes for the 游戏发展国-style overworld. Pure presentation data: the engine
-// has no concept of "location" — actions just carry a `location` tag and the map
+// has no concept of "location"; actions just carry a `location` tag and the map
 // groups them.
 //
 // Coordinates are authored on a LOGICAL GRID (col/row + footprint w/h) so the 15
@@ -33,9 +33,10 @@ export interface MapLocation {
 
 type GridNode = Omit<MapLocation, 'x' | 'y'>;
 
-// Reserved safe play-band: footprint-centre x in [12,88], feet y in [26,86].
-// The regenerated terrain keeps river/stairs/castle in the top strip + side
-// gutters only, so every node lands on the flat central band.
+// Reserved safe play-band: footprint-centre x in [12,88], feet y in [21,86] (the
+// two row-1 crown nodes, library + town hub, ride a touch higher into the top
+// strip by design). The regenerated terrain keeps river/stairs/castle in that top
+// strip + side gutters only, so every node still lands on the flat central band.
 //
 // Layout is deliberately IRREGULAR (not a tidy grid): buildings are staggered in
 // both axes so the map reads like a real campus / town, while each still sits in

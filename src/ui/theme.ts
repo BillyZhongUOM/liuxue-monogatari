@@ -56,7 +56,7 @@ export function effectChips(fx: Effects | undefined): FxChip[] {
 // Call-out skins. Each map location and each event category gets a themed colour
 // + glyph so the interior action panel and the event "someone calls you" bubble
 // read as diegetic call-outs. These colours are DATA ENCODING (like STAT_COLORS),
-// not page chrome — the chrome stays amber.
+// not page chrome; the chrome stays amber.
 // =============================================================================
 export type LocCategory = 'study' | 'money' | 'health' | 'social' | 'life';
 

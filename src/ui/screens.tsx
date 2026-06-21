@@ -286,7 +286,7 @@ export function EndingScreen({
         <span className="grade__letter">{grade}</span>
         <span className="grade__meta">
           <span className="grade__line">{gradeLine[grade]}</span>
-          <span className="grade__score">综合评分 {score}</span>
+          <span className="grade__score">综合评分 {Math.min(100, score)}</span>
         </span>
       </div>
       <p className="ending__desc">{ending.desc}</p>
