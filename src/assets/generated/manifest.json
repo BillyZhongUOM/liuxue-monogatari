@@ -1,7 +1,71 @@
 {
   "updatedBy": "register-assets",
-  "count": 5,
+  "count": 21,
   "assets": [
+    {
+      "id": "ending_bankruptcy",
+      "path": "/assets/generated/ending_bankruptcy.png"
+    },
+    {
+      "id": "ending_burnout",
+      "path": "/assets/generated/ending_burnout.png"
+    },
+    {
+      "id": "ending_distinction",
+      "path": "/assets/generated/ending_distinction.png"
+    },
+    {
+      "id": "ending_grew_but_unsure",
+      "path": "/assets/generated/ending_grew_but_unsure.png"
+    },
+    {
+      "id": "ending_health_collapse",
+      "path": "/assets/generated/ending_health_collapse.png"
+    },
+    {
+      "id": "ending_homesick_quit",
+      "path": "/assets/generated/ending_homesick_quit.png"
+    },
+    {
+      "id": "ending_intern_to_fulltime",
+      "path": "/assets/generated/ending_intern_to_fulltime.png"
+    },
+    {
+      "id": "ending_job_offer",
+      "path": "/assets/generated/ending_job_offer.png"
+    },
+    {
+      "id": "ending_midnight_lonely",
+      "path": "/assets/generated/ending_midnight_lonely.png"
+    },
+    {
+      "id": "ending_ordinary",
+      "path": "/assets/generated/ending_ordinary.png"
+    },
+    {
+      "id": "ending_phd",
+      "path": "/assets/generated/ending_phd.png"
+    },
+    {
+      "id": "ending_rain_philosopher",
+      "path": "/assets/generated/ending_rain_philosopher.png"
+    },
+    {
+      "id": "ending_resit_exam",
+      "path": "/assets/generated/ending_resit_exam.png"
+    },
+    {
+      "id": "ending_return_home",
+      "path": "/assets/generated/ending_return_home.png"
+    },
+    {
+      "id": "ending_social_star",
+      "path": "/assets/generated/ending_social_star.png"
+    },
+    {
+      "id": "ending_survivor",
+      "path": "/assets/generated/ending_survivor.png"
+    },
     {
       "id": "scene-arrival",
       "path": "/assets/generated/scene-arrival.png"
