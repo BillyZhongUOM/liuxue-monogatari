@@ -164,7 +164,7 @@ export function MapScene({ state }: { state: GameState }) {
               key={i}
               className="map-deco map-deco__img"
               src={img}
-              style={{ left: `${d.x}%`, top: `${d.y}%`, width: `${d.s}px`, height: `${d.s}px` }}
+              style={{ left: `${d.x}%`, top: `${d.y}%`, width: `${d.s}px`, height: `${d.s}px`, zIndex: Math.round(d.y) }}
               alt=""
               aria-hidden
             />
@@ -178,7 +178,7 @@ export function MapScene({ state }: { state: GameState }) {
             <button
               key={l.id}
               className={`map-node map-node--${st}`}
-              style={{ left: `${l.x}%`, top: `${l.y}%` }}
+              style={{ left: `${l.x}%`, top: `${l.y}%`, zIndex: Math.round(l.y) }}
               onClick={() => tapNode(l.id)}
             >
               <span className="map-node__art">
@@ -201,7 +201,11 @@ export function MapScene({ state }: { state: GameState }) {
         })}
 
         {playerInZone ? (
-          <div className="map-player" style={{ left: `${player.x}%`, top: `${player.y}%` }} aria-hidden>
+          <div
+            className="map-player"
+            style={{ left: `${player.x}%`, top: `${player.y}%`, zIndex: Math.round(player.y) + 1 }}
+            aria-hidden
+          >
             {charImg ? <img className="map-player__img" src={charImg} alt="" /> : '🧑'}
           </div>
         ) : null}
