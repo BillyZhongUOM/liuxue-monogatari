@@ -156,6 +156,7 @@ export function MapScene({ state }: { state: GameState }) {
         style={ground ? { backgroundImage: `url(${ground})` } : undefined}
       >
         {skyline ? <img className="map-skyline" src={skyline} alt="" aria-hidden /> : null}
+        {zone === 'town' ? <div className="map__rain" aria-hidden /> : null}
 
         {DECO_SPOTS[zone].map((d, i) => {
           const img = assetUrl(d.a);
