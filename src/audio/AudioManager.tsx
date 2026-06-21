@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useGame } from '../store';
 import { useAudio } from './audioStore';
-import { isUnlocked, setMuted, setPad, setRain, sfx, unlock } from './sound';
+import { isUnlocked, setMuted, setRain, setTrack, sfx, unlock } from './sound';
 
 type Ambience = 'menu' | 'play' | 'ended';
 
@@ -13,11 +13,11 @@ function ambienceFor(state: ReturnType<typeof useGame.getState>['state']): Ambie
 
 function applyAmbience(a: Ambience): void {
   if (a === 'ended') {
-    setPad('ended');
+    setTrack('ended');
     setRain(false);
   } else {
     // menu + play both get the dusk rain bed; MapScene mutes rain for the town zone
-    setPad(a === 'menu' ? 'menu' : 'play');
+    setTrack(a === 'menu' ? 'menu' : 'play');
     setRain(true);
   }
 }

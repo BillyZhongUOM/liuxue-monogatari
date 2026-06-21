@@ -1,13 +1,14 @@
 // Procedural Web Audio layer. Fully synthesised (no audio files, so nothing to
-// download and zero copyright surface) and original. Kept deliberately quiet and
-// consonant: short soft SFX + a low ambient pad + an optional gentle rain layer
-// that fits the dusk theme. A real CC0 BGM track can later replace setPad() by
-// routing a looping <audio> through musicBus; the rest of the API stays.
+// download and zero copyright surface) and original. A small generative engine
+// plays a gentle looping chord progression with a higher-register arpeggio
+// (which is what actually carries on phone speakers) plus a soft bass + pad and
+// an optional rain layer. Soft UI SFX on top. A real CC0 track could later route
+// a looping <audio> through musicBus instead, but this is audible on its own.
 //
 // iOS Safari blocks audible autoplay until a user gesture, so the context starts
 // suspended and unlock() must run inside a real tap (AudioManager wires that up).
 
-type PadKind = 'menu' | 'play' | 'ended' | 'none';
+type TrackKind = 'menu' | 'play' | 'ended' | 'none';
 
 let ctx: AudioContext | null = null;
 let master: GainNode | null = null;
@@ -16,9 +17,7 @@ let sfxBus: GainNode | null = null;
 let unlocked = false;
 let muted = false;
 
-// live ambient voices, so we can crossfade/stop them
-let pad: { gain: GainNode; stop: () => void; kind: PadKind } | null = null;
-let rain: { gain: GainNode; on: boolean } | null = null;
+const mtof = (m: number) => 440 * Math.pow(2, (m - 69) / 12);
 
 function ensure(): boolean {
   if (ctx) return true;
@@ -28,13 +27,13 @@ function ensure(): boolean {
     if (!AC) return false;
     ctx = new AC();
     master = ctx.createGain();
-    master.gain.value = muted ? 0 : 0.85;
+    master.gain.value = muted ? 0.0001 : 0.9;
     master.connect(ctx.destination);
     musicBus = ctx.createGain();
-    musicBus.gain.value = 0.9;
+    musicBus.gain.value = 0.85;
     musicBus.connect(master);
     sfxBus = ctx.createGain();
-    sfxBus.gain.value = 0.6;
+    sfxBus.gain.value = 0.7;
     sfxBus.connect(master);
     return true;
   } catch {
@@ -49,7 +48,6 @@ export function isUnlocked(): boolean {
 export function unlock(): void {
   if (!ensure() || !ctx) return;
   if (ctx.state === 'suspended') void ctx.resume();
-  // a few ms of silence to fully wake the graph on iOS
   const b = ctx.createBufferSource();
   b.buffer = ctx.createBuffer(1, 1, ctx.sampleRate);
   b.connect(master!);
@@ -62,13 +60,13 @@ export function setMuted(m: boolean): void {
   if (!ctx || !master) return;
   const t = ctx.currentTime;
   master.gain.cancelScheduledValues(t);
-  master.gain.setValueAtTime(master.gain.value, t);
-  master.gain.linearRampToValueAtTime(m ? 0.0001 : 0.85, t + 0.18);
+  master.gain.setValueAtTime(Math.max(0.0001, master.gain.value), t);
+  master.gain.linearRampToValueAtTime(m ? 0.0001 : 0.9, t + 0.18);
 }
 
 // ----------------------------------------------------------------- SFX
 function blip(freqs: number[], dur: number, type: OscillatorType, gain: number): void {
-  if (!ensure() || !ctx || !sfxBus || muted) return;
+  if (!ensure() || !ctx || !sfxBus) return;
   const t0 = ctx.currentTime + 0.001;
   const step = dur * 0.6;
   freqs.forEach((f, i) => {
@@ -88,85 +86,141 @@ function blip(freqs: number[], dur: number, type: OscillatorType, gain: number):
 }
 
 export const sfx = {
-  tap: () => blip([600], 0.06, 'triangle', 0.09),
+  tap: () => blip([600], 0.06, 'triangle', 0.08),
   confirm: () => blip([523.25, 784], 0.15, 'sine', 0.12),
   week: () => blip([392, 523.25, 659.25], 0.17, 'sine', 0.11),
-  event: () => blip([880, 1174.7], 0.16, 'triangle', 0.09),
-  ending: () => blip([523.25, 659.25, 784, 1046.5], 0.2, 'sine', 0.13),
+  event: () => blip([784, 1046.5, 1318.5], 0.18, 'triangle', 0.12),
+  reveal: () => blip([659.25, 880], 0.16, 'sine', 0.1),
+  ending: () => blip([523.25, 659.25, 784, 1046.5], 0.22, 'sine', 0.14),
 };
 
-// ----------------------------------------------------------------- ambient pad
-const PAD_CHORDS: Record<Exclude<PadKind, 'none'>, number[]> = {
-  // soft, consonant, low, a quiet bed rather than a melody
-  menu: [146.83, 220, 277.18], // Dm-ish, melancholic
-  play: [164.81, 246.94, 329.63], // E minor-ish, warm
-  ended: [130.81, 196, 261.63], // C, resolved
+// ----------------------------------------------------------------- generative BGM
+// Each chord: pad midi notes (low bed), bass root midi, arp midi notes (the
+// audible melody, one per beat). All progressions are consonant by construction.
+interface Chord { pad: number[]; bass: number; arp: number[] }
+interface Track { barDur: number; prog: Chord[] }
+
+const TRACKS: Record<Exclude<TrackKind, 'none'>, Track> = {
+  // warm, gentle lo-fi: Em - C - G - D, an arpeggio per bar
+  play: {
+    barDur: 2.0,
+    prog: [
+      { pad: [52, 55, 59], bass: 40, arp: [64, 67, 71, 67] },
+      { pad: [48, 52, 55], bass: 36, arp: [60, 64, 67, 64] },
+      { pad: [55, 59, 62], bass: 43, arp: [67, 71, 74, 71] },
+      { pad: [50, 54, 57], bass: 38, arp: [62, 66, 69, 66] },
+    ],
+  },
+  // sparser, melancholic dusk: Am - F - C - G
+  menu: {
+    barDur: 2.6,
+    prog: [
+      { pad: [45, 48, 52], bass: 33, arp: [69, 72, 76, 72] },
+      { pad: [41, 45, 48], bass: 29, arp: [65, 69, 72, 69] },
+      { pad: [48, 52, 55], bass: 36, arp: [72, 76, 79, 76] },
+      { pad: [43, 47, 50], bass: 31, arp: [67, 71, 74, 71] },
+    ],
+  },
+  // resolved, hopeful: C - G - Am - F
+  ended: {
+    barDur: 2.2,
+    prog: [
+      { pad: [48, 52, 55], bass: 36, arp: [72, 76, 79, 76] },
+      { pad: [43, 47, 50], bass: 31, arp: [67, 71, 74, 79] },
+      { pad: [45, 48, 52], bass: 33, arp: [69, 72, 76, 72] },
+      { pad: [41, 45, 48], bass: 29, arp: [65, 69, 72, 76] },
+    ],
+  },
 };
 
-export function setPad(kind: PadKind): void {
-  if (!ensure() || !ctx || !musicBus) return;
-  if (pad && pad.kind === kind) return;
-  const t = ctx.currentTime;
-  if (pad) {
-    const old = pad;
-    old.gain.gain.cancelScheduledValues(t);
-    old.gain.gain.setValueAtTime(old.gain.gain.value, t);
-    old.gain.gain.linearRampToValueAtTime(0.0001, t + 1.1);
-    window.setTimeout(() => old.stop(), 1300);
-    pad = null;
-  }
-  if (kind === 'none') return;
+let bgm: { kind: TrackKind; timer: number; nextTime: number; bar: number; track: Track } | null = null;
 
-  const padGain = ctx.createGain();
-  padGain.gain.setValueAtTime(0.0001, t);
-  padGain.gain.linearRampToValueAtTime(0.06, t + 1.4); // very quiet bed
-  const lp = ctx.createBiquadFilter();
-  lp.type = 'lowpass';
-  lp.frequency.value = 900;
-  // slow breathing LFO on the pad gain
-  const lfo = ctx.createOscillator();
-  const lfoGain = ctx.createGain();
-  lfo.frequency.value = 0.06;
-  lfoGain.gain.value = 0.02;
-  lfo.connect(lfoGain);
-  lfoGain.connect(padGain.gain);
-  lfo.start(t);
-
-  const oscs = PAD_CHORDS[kind].map((f, i) => {
+function scheduleBar(c: Chord, t: number, barDur: number): void {
+  if (!ctx || !musicBus) return;
+  // pad: soft sustained chord
+  c.pad.forEach((m) => {
     const o = ctx!.createOscillator();
-    o.type = i === 0 ? 'sine' : 'triangle';
-    o.frequency.value = f;
-    const detune = ctx!.createOscillator();
-    detune.frequency.value = 0.1 + i * 0.05;
-    const dg = ctx!.createGain();
-    dg.gain.value = 2.5;
-    detune.connect(dg);
-    dg.connect(o.detune);
-    detune.start(t);
-    o.connect(lp);
+    const g = ctx!.createGain();
+    o.type = 'triangle';
+    o.frequency.value = mtof(m);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.linearRampToValueAtTime(0.05, t + 0.25);
+    g.gain.setValueAtTime(0.05, t + barDur * 0.7);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + barDur * 1.02);
+    o.connect(g);
+    g.connect(musicBus!);
     o.start(t);
-    return { o, detune };
+    o.stop(t + barDur * 1.05);
   });
-  lp.connect(padGain);
-  padGain.connect(musicBus);
+  // bass: soft root (felt more than heard on phones)
+  {
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.type = 'sine';
+    o.frequency.value = mtof(c.bass);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.linearRampToValueAtTime(0.11, t + 0.04);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + barDur * 0.92);
+    o.connect(g);
+    g.connect(musicBus);
+    o.start(t);
+    o.stop(t + barDur);
+  }
+  // arpeggio: the audible melody, one pluck per beat (higher register)
+  const beat = barDur / c.arp.length;
+  c.arp.forEach((m, i) => {
+    const s = t + i * beat;
+    const o = ctx!.createOscillator();
+    const o2 = ctx!.createOscillator();
+    const g = ctx!.createGain();
+    o.type = 'triangle';
+    o2.type = 'sine';
+    o.frequency.value = mtof(m);
+    o2.frequency.value = mtof(m + 12); // a soft octave shimmer
+    g.gain.setValueAtTime(0.0001, s);
+    g.gain.linearRampToValueAtTime(0.16, s + 0.015);
+    g.gain.exponentialRampToValueAtTime(0.0001, s + beat * 0.95);
+    o.connect(g);
+    o2.connect(g);
+    g.connect(musicBus!);
+    o.start(s);
+    o2.start(s);
+    o.stop(s + beat);
+    o2.stop(s + beat);
+  });
+}
 
-  pad = {
-    gain: padGain,
-    kind,
-    stop: () => {
-      oscs.forEach(({ o, detune }) => {
-        try { o.stop(); detune.stop(); } catch { /* already stopped */ }
-      });
-      try { lfo.stop(); } catch { /* already stopped */ }
-    },
+function stopTrack(): void {
+  if (bgm) {
+    window.clearInterval(bgm.timer);
+    bgm = null; // already-scheduled notes (<= ~0.5s) ring out naturally
+  }
+}
+
+export function setTrack(kind: TrackKind): void {
+  if (!ensure() || !ctx) return;
+  if (bgm && bgm.kind === kind) return;
+  stopTrack();
+  if (kind === 'none') return;
+  const track = TRACKS[kind];
+  const tick = () => {
+    if (!bgm || !ctx) return;
+    while (bgm.nextTime < ctx.currentTime + 0.6) {
+      scheduleBar(track.prog[bgm.bar % track.prog.length], bgm.nextTime, track.barDur);
+      bgm.nextTime += track.barDur;
+      bgm.bar += 1;
+    }
   };
+  bgm = { kind, timer: window.setInterval(tick, 80), nextTime: ctx.currentTime + 0.12, bar: 0, track };
+  tick();
 }
 
 // ----------------------------------------------------------------- rain layer
+let rain: { gain: GainNode; on: boolean } | null = null;
+
 export function setRain(on: boolean): void {
   if (!ensure() || !ctx || !musicBus) return;
   if (!rain) {
-    // looping filtered noise = gentle rain
     const buf = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate);
     const data = buf.getChannelData(0);
     for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1) * 0.6;
@@ -189,6 +243,6 @@ export function setRain(on: boolean): void {
   rain.on = on;
   const t = ctx.currentTime;
   rain.gain.gain.cancelScheduledValues(t);
-  rain.gain.gain.setValueAtTime(rain.gain.gain.value, t);
-  rain.gain.gain.linearRampToValueAtTime(on ? 0.04 : 0.0001, t + 0.8);
+  rain.gain.gain.setValueAtTime(Math.max(0.0001, rain.gain.gain.value), t);
+  rain.gain.gain.linearRampToValueAtTime(on ? 0.05 : 0.0001, t + 0.8);
 }
