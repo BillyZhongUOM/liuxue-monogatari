@@ -491,9 +491,22 @@ button { font-family: inherit; }
   background: transparent; border: none; box-shadow: none; padding: 0; cursor: pointer;
   z-index: 1;
 }
-.map-node__art { position: relative; width: 72px; height: 72px; display: flex; align-items: flex-end; justify-content: center; }
-/* shadow follows the building silhouette (a cast shadow, not a base plate) */
-.map-node__img { width: 72px; height: 72px; object-fit: contain; image-rendering: pixelated; filter: drop-shadow(2px 3px 1px #00000077); }
+.map-node__art { position: relative; width: 72px; height: 84px; display: flex; align-items: flex-end; justify-content: center; }
+/* (1) plot pad: the cleared patch of ground under the building (warm, low contrast, NOT a disc) */
+.map-node__art::before {
+  content: ""; position: absolute; left: 50%; bottom: 4px;
+  transform: translateX(-50%) scaleY(0.42); width: 58px; height: 58px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(238,226,200,0.16) 0%, rgba(238,226,200,0.08) 46%, transparent 68%);
+  z-index: 0; pointer-events: none;
+}
+/* (2) contact shadow: small, dusk-cool, offset down-right to match the upper-left key light (a CAST shadow, not a base plate) */
+.map-node__art::after {
+  content: ""; position: absolute; left: 50%; bottom: 5px;
+  transform: translateX(-50%) translateX(3px) scaleY(0.34); width: 40px; height: 40px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(10,12,22,0.46) 0%, rgba(10,12,22,0.30) 40%, transparent 70%);
+  z-index: 0; pointer-events: none;
+}
+.map-node__img { position: relative; z-index: 1; width: 72px; height: 72px; object-fit: contain; image-rendering: pixelated; filter: drop-shadow(2px 2px 0 rgba(8,10,20,0.32)); }
 
 /* decoration layer (trees, lampposts) behind the buildings */
 .map-deco { position: absolute; transform: translate(-50%, -64%); pointer-events: none; z-index: 0; }
@@ -504,14 +517,16 @@ button { font-family: inherit; }
   background: #0e1120cc; padding: 1px 6px; margin-top: -2px;
 }
 .map-node--open .map-node__name { color: var(--amber); }
-.map-node--open .map-node__art::after {
-  content: ""; position: absolute; left: 50%; bottom: -3px; transform: translateX(-50%);
-  width: 50px; height: 12px; border-radius: 50%;
-  background: radial-gradient(ellipse, #f4b04a66, transparent 70%);
+/* available buildings get a warm breathing ground pad; the dark contact shadow on ::after stays for grounding */
+.map-node--open .map-node__art::before {
+  background: radial-gradient(circle, rgba(244,176,74,0.30) 0%, rgba(244,176,74,0.12) 48%, transparent 70%);
+  animation: glowpulse 2.6s ease-in-out infinite;
 }
 .map-node--open:active { transform: translate(-50%, -50%) scale(0.93); }
 .map-node--locked .map-node__img,
 .map-node--dim .map-node__img { filter: grayscale(0.9) brightness(0.55); }
+.map-node--locked .map-node__art::before,
+.map-node--dim .map-node__art::before { opacity: 0.4; }
 .map-node--locked .map-node__name,
 .map-node--dim .map-node__name { opacity: 0.7; }
 .map-node__lock { position: absolute; top: 46%; left: 50%; transform: translate(-50%, -50%); font-size: 22px; }
@@ -528,9 +543,8 @@ button { font-family: inherit; }
 }
 @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
 
-/* liveliness: available buildings breathe, town drizzles */
+/* liveliness: available buildings breathe (glow lives on the ground pad, see .map-node--open ::before) */
 @keyframes glowpulse { 0%, 100% { opacity: 0.45; } 50% { opacity: 1; } }
-.map-node--open .map-node__art::after { animation: glowpulse 2.6s ease-in-out infinite; }
 .map__rain {
   position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0.5;
   background-image: repeating-linear-gradient(101deg, rgba(200,215,255,0.10) 0 1px, transparent 1px 9px);

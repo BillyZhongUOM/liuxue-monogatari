@@ -15,20 +15,22 @@ import type { Zone } from './locations';
 
 type NodeStatus = 'open' | 'locked' | 'dim';
 
-// Decoration layer: trees / lampposts / benches tucked into the gaps between
-// buildings for depth. Purely cosmetic, sits behind the building layer.
+// Decoration layer: trees / lampposts / benches tucked into the gaps between the
+// building rows for depth. Purely cosmetic, sits behind the building layer. The
+// grid puts campus buildings in two rows (feet y~28 + y~75) leaving a wide open
+// central band (y~38-62) and town in three rows (y~28/50/71); deco fills the gaps.
 const DECO_SPOTS: Record<Zone, { x: number; y: number; a: string; s: number }[]> = {
   campus: [
-    { x: 35, y: 47, a: 'deco-tree-autumn', s: 52 },
-    { x: 66, y: 51, a: 'deco-tree-autumn', s: 46 },
-    { x: 50, y: 60, a: 'deco-lamppost', s: 30 },
-    { x: 11, y: 56, a: 'deco-tree-green', s: 44 },
+    { x: 30, y: 48, a: 'deco-tree-autumn', s: 52 },
+    { x: 70, y: 50, a: 'deco-tree-autumn', s: 46 },
+    { x: 50, y: 40, a: 'deco-tree-green', s: 42 },
+    { x: 50, y: 57, a: 'deco-lamppost', s: 30 },
   ],
   town: [
-    { x: 35, y: 38, a: 'deco-lamppost', s: 30 },
-    { x: 66, y: 65, a: 'deco-bench', s: 40 },
-    { x: 34, y: 67, a: 'deco-tree-green', s: 46 },
-    { x: 67, y: 38, a: 'deco-tree-green', s: 42 },
+    { x: 31, y: 39, a: 'deco-lamppost', s: 30 },
+    { x: 69, y: 39, a: 'deco-tree-green', s: 42 },
+    { x: 31, y: 61, a: 'deco-bench', s: 40 },
+    { x: 69, y: 61, a: 'deco-tree-green', s: 44 },
   ],
 };
 
@@ -165,7 +167,7 @@ export function MapScene({ state }: { state: GameState }) {
               key={i}
               className="map-deco map-deco__img"
               src={img}
-              style={{ left: `${d.x}%`, top: `${d.y}%`, width: `${d.s}px`, height: `${d.s}px`, zIndex: Math.round(d.y) }}
+              style={{ left: `${d.x}%`, top: `${d.y}%`, width: `${d.s}px`, height: `${d.s}px`, zIndex: Math.round(d.y * 10) - 5 }}
               alt=""
               aria-hidden
             />
@@ -179,7 +181,7 @@ export function MapScene({ state }: { state: GameState }) {
             <button
               key={l.id}
               className={`map-node map-node--${st}`}
-              style={{ left: `${l.x}%`, top: `${l.y}%`, zIndex: Math.round(l.y) }}
+              style={{ left: `${l.x}%`, top: `${l.y}%`, zIndex: Math.round(l.y * 10) }}
               onClick={() => tapNode(l.id)}
             >
               <span className="map-node__art">
@@ -204,7 +206,7 @@ export function MapScene({ state }: { state: GameState }) {
         {playerInZone ? (
           <div
             className="map-player"
-            style={{ left: `${player.x}%`, top: `${player.y}%`, zIndex: Math.round(player.y) + 1 }}
+            style={{ left: `${player.x}%`, top: `${player.y}%`, zIndex: Math.round(player.y * 10) + 5 }}
             aria-hidden
           >
             {charImg ? <img className="map-player__img" src={charImg} alt="" /> : '🧑'}
