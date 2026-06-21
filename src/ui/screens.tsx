@@ -14,7 +14,7 @@ import {
   currentLeadingRoute,
 } from '../game';
 import type { CharacterConfig, CreationOption, GameState } from '../game';
-import { assetUrl } from './theme';
+import { assetUrl, computeGrade, gradeTier } from './theme';
 
 const FINALE_ENDINGS = ENDINGS.filter((e) => !e.crisis).length;
 
@@ -241,6 +241,14 @@ export function EndingScreen({
   const route = currentLeadingRoute(state);
   const routeName = route ? ROUTE_BY_ID[route]?.name : '随遇而安';
   const s = state.stats;
+  const { grade, score } = computeGrade(state.config, ending, s);
+  const gradeLine: Record<string, string> = {
+    S: '近乎传说的一年',
+    A: '漂亮的一年',
+    B: '扎实的一年',
+    C: '磕磕绊绊的一年',
+    D: '难熬的一年',
+  };
   const finalStats: [string, string][] = [
     ['学业', `${s.gpa}`],
     ['英语', `${s.english}`],
@@ -264,6 +272,13 @@ export function EndingScreen({
         );
       })()}
       <h1 className="ending__title">{ending.title}</h1>
+      <div className={`grade grade--${gradeTier(grade)}`}>
+        <span className="grade__letter">{grade}</span>
+        <span className="grade__meta">
+          <span className="grade__line">{gradeLine[grade]}</span>
+          <span className="grade__score">综合评分 {score}</span>
+        </span>
+      </div>
       <p className="ending__desc">{ending.desc}</p>
       <p className="ending__quip">{ending.quip}</p>
       <div className="ending__stats">

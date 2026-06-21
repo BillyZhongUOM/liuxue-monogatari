@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { availableActions } from '../game';
 import type { GameState } from '../game';
 import { useGame } from '../store';
-import { assetUrl } from '../ui/theme';
+import { assetUrl, locSkin } from '../ui/theme';
 import { LOCATION_BY_ID, actionsAtLocation } from './locations';
 
 // You walk into a building and ENTER its interior: a full 2.5D scene with the
@@ -20,6 +20,7 @@ export function InteriorScene({
   const act = useGame((s) => s.act);
   const loc = LOCATION_BY_ID[locId];
   const bg = assetUrl(`interior-${locId}`);
+  const skin = locSkin(locId);
   const availSet = useMemo(() => new Set(availableActions(state).map((a) => a.id)), [state]);
   const here = actionsAtLocation(locId);
   const open = here.filter((a) => availSet.has(a.id));
@@ -27,7 +28,10 @@ export function InteriorScene({
   const out = state.actionPoints <= 0;
 
   return (
-    <div className={`interior${bg ? '' : ' interior--noart'}`} style={bg ? { backgroundImage: `url(${bg})` } : undefined}>
+    <div
+      className={`interior${bg ? '' : ' interior--noart'}`}
+      style={{ ['--skin' as string]: skin.color, ...(bg ? { backgroundImage: `url(${bg})` } : {}) }}
+    >
       <div className="interior__scrim" />
       <div className="interior__top">
         <button className="pixel-btn pixel-btn--ghost" onClick={onClose}>
@@ -40,7 +44,12 @@ export function InteriorScene({
       </div>
 
       <div className="interior__callout">
-        <div className="interior__hint">{out ? '行动点用完了，出门回宿舍睡一觉推进到下一周。' : '在这里可以做点什么？'}</div>
+        <div className="interior__hint">
+          <span className="interior__tag" style={{ color: skin.color, borderColor: skin.color }}>
+            {skin.emoji} {skin.label}
+          </span>
+          {out ? '行动点用完了，出门回宿舍睡一觉推进到下一周。' : '在这里可以做点什么？'}
+        </div>
         <div className="interior__actions">
           {open.length === 0 ? <div className="interior__empty">这周这里暂时没什么可做的。</div> : null}
           {open.map((a) => (

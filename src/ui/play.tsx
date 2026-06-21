@@ -11,6 +11,7 @@ import type { GameState } from '../game';
 import { useGame } from '../store';
 import { MapScene } from '../map/MapScene';
 import { SceneStrip, StatHud } from './bits';
+import { eventSkin } from './theme';
 
 // pick a scene id + caption from the current calendar position
 function sceneFor(state: GameState): { artId: string; caption: string } {
@@ -105,14 +106,23 @@ function EventModal({ state }: { state: GameState }) {
   const resolve = useGame((s) => s.resolve);
   const ev = state.pendingEventId ? EVENT_BY_ID[state.pendingEventId] : undefined;
   if (!ev) return null;
+  const skin = eventSkin(ev.category);
   const choices = ev.choices
     .map((c, idx) => ({ c, idx }))
     .filter(({ c }) => evaluateCondition(c.requires, state));
   return (
     <div className="modal-backdrop" role="dialog" aria-modal="true">
-      <div className="modal">
-        <div className="modal__kicker">突发事件</div>
-        <h2 className="modal__title">{ev.title}</h2>
+      <div className="modal modal--call" style={{ ['--skin' as string]: skin.color }}>
+        <div className="call__head">
+          <span className="call__avatar" aria-hidden>
+            {skin.emoji}
+            <span className="call__bang">!</span>
+          </span>
+          <div className="call__head-tx">
+            <div className="modal__kicker" style={{ color: skin.color }}>{skin.kicker}</div>
+            <h2 className="modal__title">{ev.title}</h2>
+          </div>
+        </div>
         <p className="modal__desc">{ev.description}</p>
         <div className="choice-list">
           {choices.map(({ c, idx }) => (

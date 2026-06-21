@@ -36,24 +36,29 @@ type GridNode = Omit<MapLocation, 'x' | 'y'>;
 // Reserved safe play-band: footprint-centre x in [12,88], feet y in [26,86].
 // The regenerated terrain keeps river/stairs/castle in the top strip + side
 // gutters only, so every node lands on the flat central band.
+//
+// Layout is deliberately IRREGULAR (not a tidy grid): buildings are staggered in
+// both axes so the map reads like a real campus / town, while each still sits in
+// a sensible spot (library central + prominent, dorm tucked in a corner, station
+// a mid crossroads, park out on an edge) and keeps enough gap to not collide.
 const GRID: GridNode[] = [
-  // --- campus (compact, warm quad) ---
-  { id: 'career', name: '职业中心', emoji: '💼', zone: 'campus', col: 1, row: 2, w: 2, h: 2 },
+  // --- campus (staggered quad, library is the high crown) ---
   { id: 'library', name: '图书馆', emoji: '📚', zone: 'campus', col: 5, row: 1, w: 2, h: 2 },
+  { id: 'career', name: '职业中心', emoji: '💼', zone: 'campus', col: 1, row: 3, w: 2, h: 2 },
   { id: 'lecture', name: '教学楼', emoji: '🏛️', zone: 'campus', col: 9, row: 2, w: 2, h: 2 },
+  { id: 'society', name: '社团楼', emoji: '🎉', zone: 'campus', col: 8, row: 6, w: 2, h: 2 },
   { id: 'dorm', name: '宿舍', emoji: '🛏️', zone: 'campus', col: 1, row: 8, w: 2, h: 2 },
-  { id: 'gym', name: '健身房', emoji: '🏋️', zone: 'campus', col: 5, row: 9, w: 2, h: 2 },
-  { id: 'society', name: '社团楼', emoji: '🎉', zone: 'campus', col: 9, row: 8, w: 2, h: 2 },
-  // --- town (spread out, cooler 3x3 city block) ---
+  { id: 'gym', name: '健身房', emoji: '🏋️', zone: 'campus', col: 4, row: 9, w: 2, h: 2 },
+  // --- town (staggered streets around the central hub) ---
+  { id: 'town', name: '城中心', emoji: '🏙️', zone: 'town', col: 4, row: 1, w: 2, h: 2 },
   { id: 'market', name: '中超', emoji: '🛒', zone: 'town', col: 1, row: 2, w: 2, h: 2 },
-  { id: 'town', name: '城中心', emoji: '🏙️', zone: 'town', col: 5, row: 2, w: 2, h: 2 },
   { id: 'work', name: '打工', emoji: '🧾', zone: 'town', col: 9, row: 2, w: 2, h: 2 },
-  { id: 'mall', name: '商场', emoji: '🛍️', zone: 'town', col: 1, row: 5, w: 2, h: 2 },
-  { id: 'station', name: '火车站', emoji: '🚉', zone: 'town', col: 5, row: 5, w: 2, h: 2 },
+  { id: 'station', name: '火车站', emoji: '🚉', zone: 'town', col: 6, row: 4, w: 2, h: 2 },
+  { id: 'mall', name: '商场', emoji: '🛍️', zone: 'town', col: 1, row: 6, w: 2, h: 2 },
   { id: 'nightlife', name: '夜店', emoji: '🪩', zone: 'town', col: 9, row: 5, w: 2, h: 2 },
-  { id: 'clinic', name: '医院', emoji: '🏥', zone: 'town', col: 1, row: 8, w: 2, h: 2 },
+  { id: 'clinic', name: '医院', emoji: '🏥', zone: 'town', col: 2, row: 9, w: 2, h: 2 },
   { id: 'bank', name: '银行', emoji: '🏦', zone: 'town', col: 5, row: 8, w: 2, h: 2 },
-  { id: 'park', name: '公园', emoji: '🌳', zone: 'town', col: 9, row: 8, w: 2, h: 2 },
+  { id: 'park', name: '公园', emoji: '🌳', zone: 'town', col: 8, row: 9, w: 2, h: 2 },
 ];
 
 const pct = (v: number) => Math.round(v * 10) / 10;

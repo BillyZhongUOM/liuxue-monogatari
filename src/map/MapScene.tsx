@@ -15,22 +15,22 @@ import type { Zone } from './locations';
 
 type NodeStatus = 'open' | 'locked' | 'dim';
 
-// Decoration layer: trees / lampposts / benches tucked into the gaps between the
-// building rows for depth. Purely cosmetic, sits behind the building layer. The
-// grid puts campus buildings in two rows (feet y~28 + y~75) leaving a wide open
-// central band (y~38-62) and town in three rows (y~28/50/71); deco fills the gaps.
+// Decoration layer: trees / lampposts / benches tucked into the gaps left by the
+// staggered building layout for depth. Purely cosmetic, sits behind the building
+// layer (zIndex below). Positions are picked to fill the open patches between the
+// irregular node positions without crowding any building.
 const DECO_SPOTS: Record<Zone, { x: number; y: number; a: string; s: number }[]> = {
   campus: [
-    { x: 30, y: 48, a: 'deco-tree-autumn', s: 52 },
-    { x: 70, y: 50, a: 'deco-tree-autumn', s: 46 },
-    { x: 50, y: 40, a: 'deco-tree-green', s: 42 },
-    { x: 50, y: 57, a: 'deco-lamppost', s: 30 },
+    { x: 57, y: 47, a: 'deco-tree-autumn', s: 50 },
+    { x: 30, y: 57, a: 'deco-tree-green', s: 44 },
+    { x: 67, y: 39, a: 'deco-lamppost', s: 30 },
+    { x: 51, y: 64, a: 'deco-tree-autumn', s: 42 },
   ],
   town: [
-    { x: 31, y: 39, a: 'deco-lamppost', s: 30 },
-    { x: 69, y: 39, a: 'deco-tree-green', s: 42 },
-    { x: 31, y: 61, a: 'deco-bench', s: 40 },
-    { x: 69, y: 61, a: 'deco-tree-green', s: 44 },
+    { x: 30, y: 44, a: 'deco-lamppost', s: 30 },
+    { x: 66, y: 32, a: 'deco-tree-green', s: 40 },
+    { x: 38, y: 59, a: 'deco-bench', s: 38 },
+    { x: 70, y: 63, a: 'deco-tree-green', s: 44 },
   ],
 };
 
