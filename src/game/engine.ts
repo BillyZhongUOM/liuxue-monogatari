@@ -347,9 +347,8 @@ export function advanceWeek(prev: GameState): GameState {
   const crisis = checkEndings(state, false);
   if (crisis) return endGame(state, crisis);
 
-  // 6. weekly summary + maybe a general event next
-  const moneyNote = stipend - cost >= 0 ? `家里打了 £${stipend}，房租水电吃掉 £${cost}` : `房租水电吃掉 £${cost}，家里补了 £${stipend}`;
-  pushLog(state, `第 ${state.year} 年 第 ${state.term} 学期 第 ${state.week} 周。${moneyNote}。`, 'weekly');
+  // 6. weekly summary + maybe a general event next (kept qualitative, no明牌 numbers)
+  pushLog(state, `第 ${state.year} 年 第 ${state.term} 学期 第 ${state.week} 周。家里照常打了生活费，房租水电也照常扣走。`, 'weekly');
 
   const rng = makeRng(state.rngState);
   const willFire = rng.chance(0.62);
@@ -378,8 +377,8 @@ export function continueFromWeekly(prev: GameState): GameState {
 
 function termEndAssessment(state: GameState): void {
   // light end-of-term beat; deeper content can hang events off the milestone flag
-  const grade = state.stats.gpa >= 70 ? 'Distinction 边缘' : state.stats.gpa >= 50 ? '稳稳及格' : '挂科边缘';
-  pushLog(state, `学期结束，成绩单出来了：${grade}（学业 ${state.stats.gpa}）。`, 'milestone');
+  const grade = state.stats.gpa >= 70 ? '稳稳走在 Distinction 边缘' : state.stats.gpa >= 50 ? '总算稳稳及格' : '在挂科边缘晃悠';
+  pushLog(state, `学期结束，成绩单出来了，你${grade}。`, 'milestone');
   state.flags[`term_done_${(state.year - 1) * TERMS_PER_YEAR + (state.term - 1)}`] = true;
 }
 

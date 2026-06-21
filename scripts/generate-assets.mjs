@@ -22,8 +22,9 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
-const OUT_DIR = join(ROOT, 'src', 'assets', 'generated');
-const MANIFEST = join(OUT_DIR, 'manifest.json');
+// PNGs are served statically from public/; the manifest (ids only) lives in src/.
+const OUT_DIR = join(ROOT, 'public', 'assets', 'generated');
+const MANIFEST = join(ROOT, 'src', 'assets', 'generated', 'manifest.json');
 const ENDPOINT = 'https://openrouter.ai/api/v1/chat/completions';
 
 // ---- shared style spine so every asset looks like one game ------------------
@@ -101,6 +102,7 @@ async function main() {
   const cap = Number(env.MAX_ASSET_GENERATIONS_PER_RUN || 20);
 
   mkdirSync(OUT_DIR, { recursive: true });
+  mkdirSync(dirname(MANIFEST), { recursive: true });
   const manifest = readManifest();
   const have = new Map(manifest.assets.map((a) => [a.id, a]));
 

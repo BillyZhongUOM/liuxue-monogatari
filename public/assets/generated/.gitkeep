@@ -1,0 +1,2 @@
+# Drop generated pixel-art PNGs here (named <asset-id>.png), then run
+# `npm run register:assets`. They are served at /assets/generated/<id>.png.

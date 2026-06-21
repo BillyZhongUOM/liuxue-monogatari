@@ -35,16 +35,26 @@ npm run typecheck  # tsc --noEmit
 ## Pixel art (optional)
 
 The game ships with emoji / CSS pixel placeholders and is fully playable with no
-API key. To generate original pixel-art scene backgrounds:
+art. Two ways to add pixel art (scene backgrounds + ending illustrations):
+
+**A. Bring your own (e.g. GPT Image 2)** — prompts + exact filenames are in
+[docs/IMAGE_PROMPTS.md](docs/IMAGE_PROMPTS.md):
+
+```bash
+# save each image as <asset-id>.png, then:
+mv *.png public/assets/generated/
+npm run register:assets    # rebuilds the manifest so the game loads them
+```
+
+**B. Auto-generate via OpenRouter** (Nano Banana / FLUX):
 
 ```bash
 cp .env.example .env       # add OPENROUTER_API_KEY (https://openrouter.ai/keys)
-npm run generate:assets    # writes src/assets/generated/*.png + manifest.json
+npm run generate:assets    # writes public/assets/generated/*.png + manifest
 ```
 
-Image generation runs through OpenRouter's Nano Banana
-(`google/gemini-3.1-flash-image-preview`) or a FLUX model. See
-[docs/ASSET_PIPELINE.md](docs/ASSET_PIPELINE.md). Never commit a real key.
+See [docs/ASSET_PIPELINE.md](docs/ASSET_PIPELINE.md). Missing assets stay on
+placeholders. Never commit a real key.
 
 ## Tech
 

@@ -52,22 +52,20 @@ export function effectChips(fx: Effects | undefined): FxChip[] {
   return chips;
 }
 
-// Asset resolution. Until pixel art is generated into the manifest, every id
-// falls back to its emoji glyph, so the game is fully playable with no assets.
-let manifest: Record<string, string> = {};
-try {
-  // populated by scripts/generate-assets.mjs; optional at runtime
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const mod = import.meta.glob('../assets/generated/manifest.json', { eager: true });
-  const found = Object.values(mod)[0] as { assets?: { id: string; path: string }[] } | undefined;
-  if (found?.assets) {
-    for (const a of found.assets) manifest[a.id] = a.path;
-  }
-} catch {
-  manifest = {};
-}
+// Asset resolution.
+// Drop a PNG named "<id>.png" into public/assets/generated/, run
+// `npm run register:assets`, and it appears in-game. The manifest lists which
+// ids exist so we never request a missing image (no 404s). With an empty
+// manifest every id falls back to its emoji/CSS placeholder.
+import manifest from '../assets/generated/manifest.json';
+
+const available = new Set<string>(
+  ((manifest as { assets?: { id: string }[] }).assets ?? []).map((a) => a.id),
+);
 
 /** Returns a generated image URL for an asset id, or undefined to use a fallback. */
 export function assetUrl(id: string): string | undefined {
-  return manifest[id];
+  if (!available.has(id)) return undefined;
+  // BASE_URL is './' so this resolves correctly under a GitHub Pages subpath.
+  return `${import.meta.env.BASE_URL}assets/generated/${id}.png`;
 }

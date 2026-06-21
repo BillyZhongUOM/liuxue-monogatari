@@ -9,7 +9,7 @@ import {
 } from '../game';
 import type { GameState } from '../game';
 import { useGame } from '../store';
-import { FxChips, SceneStrip, StatHud } from './bits';
+import { SceneStrip, StatHud } from './bits';
 
 // pick a scene id + caption from the current calendar position
 function sceneFor(state: GameState): { artId: string; caption: string } {
@@ -64,7 +64,6 @@ function ActionGrid({ state }: { state: GameState }) {
             <span className="action-card__name">{a.name}</span>
           </span>
           <span className="action-card__desc">{a.desc}</span>
-          <FxChips fx={a.effects} />
         </button>
       ))}
     </div>
@@ -103,7 +102,6 @@ function EventModal({ state }: { state: GameState }) {
           {choices.map(({ c, idx }) => (
             <button key={idx} className="pixel-btn choice" onClick={() => resolve(idx)}>
               <span>{c.text}</span>
-              <FxChips fx={c.effects} />
             </button>
           ))}
         </div>

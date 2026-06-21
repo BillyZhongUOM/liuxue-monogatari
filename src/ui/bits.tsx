@@ -50,7 +50,16 @@ export function SceneStrip({ artId, caption, route }: { artId: string; caption: 
   const url = assetUrl(artId);
   return (
     <div className="scene">
-      {url ? <img className="scene__art" src={url} alt="" /> : null}
+      {url ? (
+        <img
+          className="scene__art"
+          src={url}
+          alt=""
+          onError={(e) => {
+            e.currentTarget.style.display = 'none';
+          }}
+        />
+      ) : null}
       <div className="scene__rain" aria-hidden />
       <div className="scene__cap">
         {caption}

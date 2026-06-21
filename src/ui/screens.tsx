@@ -12,6 +12,7 @@ import {
   currentLeadingRoute,
 } from '../game';
 import type { CharacterConfig, CreationOption, GameState } from '../game';
+import { assetUrl } from './theme';
 
 const FINALE_ENDINGS = ENDINGS.filter((e) => !e.crisis).length;
 
@@ -54,38 +55,37 @@ export function MainMenu({
   );
 }
 
-// ---------------------------------------------------------------- creation
-function OptRow({
-  label,
-  options,
-  value,
-  onPick,
-  cols = 2,
-}: {
-  label: string;
-  options: CreationOption[];
-  value: string;
-  onPick: (id: string) => void;
-  cols?: 2 | 3;
-}) {
-  return (
-    <div className="field">
-      <div className="field__label">{label}</div>
-      <div className={`opt-grid${cols === 3 ? ' opt-grid--3' : ''}`}>
-        {options.map((o) => {
-          const sel = o.id === value;
-          return (
-            <button key={o.id} className={`opt${sel ? ' opt--selected' : ''}`} onClick={() => onPick(o.id)}>
-              <div className={`opt__name${sel ? ' opt__name--sel' : ''}`}>{o.name}</div>
-              <div className="opt__desc">{o.desc}</div>
-            </button>
-          );
-        })}
-      </div>
-    </div>
-  );
+// ---------------------------------------------------------------- creation (random roll)
+const NAME_POOL = ['小林', '阿哲', '子瑜', '大壮', '一帆', '悠悠', '晓彤', '点点', 'momo', '阿 May', 'Vivian', 'Leo', 'Mike', 'Cindy', 'Kevin', 'Tony'];
+
+function pickRandom<T>(arr: readonly T[]): T {
+  return arr[Math.floor(Math.random() * arr.length)];
 }
 
+function optById(list: CreationOption[], id: string): CreationOption | undefined {
+  return list.find((o) => o.id === id);
+}
+
+function rollConfig(): CharacterConfig {
+  const n = 1 + Math.floor(Math.random() * 3); // 1 to 3 traits
+  const pool = [...TRAITS];
+  const traits: string[] = [];
+  for (let i = 0; i < n && pool.length; i++) {
+    traits.push(pool.splice(Math.floor(Math.random() * pool.length), 1)[0].id);
+  }
+  return {
+    playerName: pickRandom(NAME_POOL),
+    city: pickRandom(CITIES).id,
+    universityType: pickRandom(UNIVERSITY_TYPES).id,
+    major: pickRandom(MAJORS).id,
+    budget: pickRandom(BUDGETS).id,
+    englishLevel: pickRandom(ENGLISH_LEVELS).id,
+    traits,
+  };
+}
+
+// Random start each new game: the player rolls an identity (reroll until happy),
+// only the name is editable. Keeps every run different and replayable.
 export function CharacterCreation({
   onConfirm,
   onBack,
@@ -93,85 +93,69 @@ export function CharacterCreation({
   onConfirm: (config: CharacterConfig) => void;
   onBack: () => void;
 }) {
-  const [name, setName] = useState('');
-  const [city, setCity] = useState(CITIES[1].id);
-  const [uni, setUni] = useState(UNIVERSITY_TYPES[1].id);
-  const [major, setMajor] = useState(MAJORS[0].id);
-  const [budget, setBudget] = useState(BUDGETS[1].id);
-  const [english, setEnglish] = useState(ENGLISH_LEVELS[1].id);
-  const [traits, setTraits] = useState<string[]>([]);
+  const [config, setConfig] = useState<CharacterConfig>(rollConfig);
 
-  const toggleTrait = (id: string) => {
-    setTraits((cur) => {
-      if (cur.includes(id)) return cur.filter((t) => t !== id);
-      if (cur.length >= 3) return cur;
-      return [...cur, id];
-    });
-  };
-
-  const confirm = () => {
-    onConfirm({
-      playerName: name.trim() || '留学生',
-      city,
-      universityType: uni,
-      major,
-      budget,
-      englishLevel: english,
-      traits,
-    });
-  };
+  const rows = [
+    { label: '城市', opt: optById(CITIES, config.city) },
+    { label: '学校', opt: optById(UNIVERSITY_TYPES, config.universityType) },
+    { label: '专业', opt: optById(MAJORS, config.major) },
+    { label: '家境', opt: optById(BUDGETS, config.budget) },
+    { label: '英语', opt: optById(ENGLISH_LEVELS, config.englishLevel) },
+  ];
 
   return (
     <div className="creation">
       <div className="creation__head">
-        <h2>开局设定</h2>
-        <p>这些选择会决定你起步时的家底和性格。怎么开局，都有自己的活法。</p>
+        <h2>🎲 开局抽签</h2>
+        <p>命运给你发了一手牌。不满意就重抽，每一把都是不一样的留学人生。</p>
       </div>
 
       <div className="field">
-        <div className="field__label">名字</div>
+        <div className="field__label">名字（可以改）</div>
         <input
           className="name-input"
-          value={name}
+          value={config.playerName}
           maxLength={12}
-          placeholder="给自己起个名字（默认：留学生）"
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => setConfig((c) => ({ ...c, playerName: e.target.value }))}
         />
       </div>
 
-      <OptRow label="城市" options={CITIES} value={city} onPick={setCity} cols={3} />
-      <OptRow label="学校类型" options={UNIVERSITY_TYPES} value={uni} onPick={setUni} />
-      <OptRow label="专业方向" options={MAJORS} value={major} onPick={setMajor} cols={3} />
-      <OptRow label="家庭预算" options={BUDGETS} value={budget} onPick={setBudget} cols={3} />
-      <OptRow label="英语基础" options={ENGLISH_LEVELS} value={english} onPick={setEnglish} cols={3} />
-
       <div className="field">
-        <div className="field__label">性格特质（选 1 到 3 个）</div>
-        <div className="trait-row">
-          {TRAITS.map((t) => {
-            const on = traits.includes(t.id);
-            return (
-              <button
-                key={t.id}
-                className={`trait-chip ${on ? 'trait-chip--on' : 'trait-chip--off'}`}
-                onClick={() => toggleTrait(t.id)}
-                title={t.desc}
-              >
-                {t.name}
-              </button>
-            );
-          })}
-        </div>
-        <div className="trait-hint">
-          {traits.length === 0 ? '至少选一个' : traits.map((id) => TRAITS.find((t) => t.id === id)?.desc).join(' / ')}
+        <div className="roll-card">
+          {rows.map((r) => (
+            <div key={r.label} className="roll-row">
+              <span className="roll-row__k">{r.label}</span>
+              <span className="roll-row__v">{r.opt?.name}</span>
+              <span className="roll-row__d">{r.opt?.desc}</span>
+            </div>
+          ))}
+          <div className="roll-row roll-row--traits">
+            <span className="roll-row__k">性格</span>
+            <span className="roll-traits">
+              {config.traits.map((id) => {
+                const t = TRAITS.find((x) => x.id === id);
+                return (
+                  <span key={id} className="trait-chip trait-chip--on" title={t?.desc}>
+                    {t?.name}
+                  </span>
+                );
+              })}
+            </span>
+          </div>
+          <div className="roll-traits__desc">
+            {config.traits.map((id) => TRAITS.find((t) => t.id === id)?.desc).join(' ')}
+          </div>
         </div>
       </div>
 
       <div className="sticky-foot">
-        <button className="pixel-btn pixel-btn--ghost" onClick={onBack} style={{ flex: '0 0 30%' }}>
+        <button className="pixel-btn pixel-btn--ghost" onClick={onBack} style={{ flex: '0 0 22%' }}>
           返回
         </button>
-        <button className="pixel-btn pixel-btn--primary" onClick={confirm} disabled={traits.length === 0}>
+        <button className="pixel-btn" onClick={() => setConfig(rollConfig())} style={{ flex: '0 0 32%' }}>
+          🎲 重抽
+        </button>
+        <button className="pixel-btn pixel-btn--primary" onClick={() => onConfirm(config)}>
           开始留学 →
         </button>
       </div>
@@ -211,9 +195,16 @@ export function EndingScreen({
   return (
     <div className="ending">
       <div className={`ending__badge ending__badge--${ending.tone}`}>{TONE_LABEL[ending.tone] ?? '结局'}</div>
-      <div className="ending__art" aria-hidden>
-        {ending.art ?? TONE_ART[ending.tone] ?? '🎓'}
-      </div>
+      {(() => {
+        const art = assetUrl(ending.art ?? ending.id);
+        return art ? (
+          <img className="ending__art-img" src={art} alt="" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+        ) : (
+          <div className="ending__art" aria-hidden>
+            {TONE_ART[ending.tone] ?? '🎓'}
+          </div>
+        );
+      })()}
       <h1 className="ending__title">{ending.title}</h1>
       <p className="ending__desc">{ending.desc}</p>
       <p className="ending__quip">{ending.quip}</p>
