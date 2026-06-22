@@ -277,7 +277,10 @@ button { font-family: inherit; }
 .modal__title { font-size: 19px; font-weight: 800; margin: 0 0 8px; line-height: 1.3; }
 .modal__desc { font-size: 14.5px; color: var(--tx); line-height: 1.6; margin: 0 0 14px; }
 .choice-list { display: flex; flex-direction: column; gap: 8px; }
-.choice { width: 100%; }
+.choice { position: relative; width: 100%; text-align: left; padding-left: 18px; padding-right: 26px; }
+.choice::before { content: ""; position: absolute; left: 0; top: 5px; bottom: 5px; width: 4px; background: var(--skin, var(--amber)); }
+.choice::after { content: "›"; position: absolute; right: 11px; top: 50%; transform: translateY(-50%); font-size: 19px; font-weight: 900; color: var(--skin, var(--amber)); opacity: 0.6; transition: right 0.12s ease, opacity 0.12s ease; }
+.choice:active::after { right: 8px; opacity: 1; }
 .choice__result { font-size: 13px; color: var(--tx-dim); line-height: 1.5; margin-top: 6px; }
 
 @keyframes slideup { from { transform: translateY(18px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
@@ -446,14 +449,21 @@ button { font-family: inherit; }
 }
 
 /* ----------------------------------------------------------------- event call bubble */
-.modal--call { border-top: 3px solid var(--skin, var(--amber)); }
-.call__head { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+/* event = an "incoming moment": a category-tinted header band over a padded body,
+   springing up from the bottom. The band carries the avatar + who/what is calling. */
+.modal--call { padding: 0; overflow: hidden; animation: callSlide 0.32s cubic-bezier(0.34, 1.4, 0.5, 1); }
+.call__head {
+  position: relative; display: flex; align-items: center; gap: 12px;
+  padding: 13px 14px 12px; background: var(--panel-2);
+  border-bottom: 2px solid var(--skin, var(--amber));
+}
+.call__head::before { content: ""; position: absolute; inset: 0; background: var(--skin, var(--amber)); opacity: 0.12; pointer-events: none; }
 .call__avatar {
-  position: relative; flex: 0 0 auto;
-  width: 46px; height: 46px; display: flex; align-items: center; justify-content: center;
-  font-size: 26px; line-height: 1;
-  background: var(--panel-2); border: 2px solid var(--skin, var(--amber)); box-shadow: var(--shadow-sm);
-  animation: callpop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative; z-index: 1; flex: 0 0 auto;
+  width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
+  font-size: 28px; line-height: 1;
+  background: var(--bg-2); border: 2px solid var(--skin, var(--amber)); box-shadow: var(--shadow-sm);
+  animation: callpop 0.34s cubic-bezier(0.34, 1.4, 0.5, 1);
 }
 .call__bang {
   position: absolute; top: -8px; right: -8px;
@@ -462,10 +472,12 @@ button { font-family: inherit; }
   background: var(--amber); border: 2px solid var(--amber-deep); border-radius: 50%;
   animation: bangpulse 1.1s ease-in-out infinite;
 }
-.call__head-tx { min-width: 0; }
-.call__head-tx .modal__kicker { margin-bottom: 2px; }
+.call__head-tx { position: relative; z-index: 1; min-width: 0; }
+.call__kicker { font-size: 11.5px; font-weight: 700; letter-spacing: 1px; color: var(--skin, var(--amber)); margin-bottom: 2px; }
 .call__head-tx .modal__title { margin: 0; }
+.call__body { padding: 14px 14px calc(16px + env(safe-area-inset-bottom)); }
 @keyframes callpop { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes callSlide { from { transform: translateY(26px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 @keyframes bangpulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.18); } }
 
 /* a content scroll area between sticky topbar and bottom bar */
@@ -665,8 +677,9 @@ button { font-family: inherit; }
 
 /* ----------------------------------------------------------------- event result reveal */
 .reveal { display: flex; flex-direction: column; gap: 12px; animation: revealIn 0.24s cubic-bezier(0.16, 1, 0.3, 1); }
-.reveal__text { font-size: 14.5px; color: var(--tx); line-height: 1.6; margin: 0; }
-.reveal__fx { display: flex; flex-wrap: wrap; gap: 5px; }
+.reveal__text { font-size: 14.5px; color: var(--tx); line-height: 1.65; margin: 0; padding-left: 12px; border-left: 3px solid var(--skin, var(--amber)); }
+.reveal__fx { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.reveal__fx-label { font-size: 11.5px; color: var(--tx-faint); margin-right: 1px; }
 .reveal__fx .fx { margin-top: 0; }
 .reveal__fx .fx__chip { animation: chipPop 0.3s cubic-bezier(0.16, 1, 0.3, 1) both; }
 .reveal__fx .fx__chip:nth-child(1) { animation-delay: 0.1s; }

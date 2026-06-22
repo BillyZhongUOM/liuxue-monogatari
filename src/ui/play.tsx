@@ -141,32 +141,35 @@ function EventModal({ state }: { state: GameState }) {
             <span className="call__bang">!</span>
           </span>
           <div className="call__head-tx">
-            <div className="modal__kicker" style={{ color: skin.color }}>{skin.kicker}</div>
+            <div className="call__kicker">{skin.kicker}</div>
             <h2 className="modal__title">{ev.title}</h2>
           </div>
         </div>
-        {chosen ? (
-          <div className="reveal">
-            <p className="reveal__text">{chosen.resultText}</p>
-            <div className="reveal__fx">
-              <FxChips fx={chosen.effects} />
+        <div className="call__body">
+          {chosen ? (
+            <div className="reveal">
+              <p className="reveal__text">{chosen.resultText}</p>
+              <div className="reveal__fx">
+                <span className="reveal__fx-label">这一下</span>
+                <FxChips fx={chosen.effects} />
+              </div>
+              <button className="pixel-btn pixel-btn--primary reveal__go" onClick={() => resolve(picked!)}>
+                继续 →
+              </button>
             </div>
-            <button className="pixel-btn pixel-btn--primary reveal__go" onClick={() => resolve(picked!)}>
-              继续 →
-            </button>
-          </div>
-        ) : (
-          <>
-            <p className="modal__desc">{ev.description}</p>
-            <div className="choice-list">
-              {choices.map(({ c, idx }) => (
-                <button key={idx} className="pixel-btn choice" onClick={() => setPicked(idx)}>
-                  <span>{c.text}</span>
-                </button>
-              ))}
-            </div>
-          </>
-        )}
+          ) : (
+            <>
+              <p className="modal__desc">{ev.description}</p>
+              <div className="choice-list">
+                {choices.map(({ c, idx }) => (
+                  <button key={idx} className="pixel-btn choice" onClick={() => setPicked(idx)}>
+                    <span>{c.text}</span>
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -190,20 +193,29 @@ function WeeklySummary({ state, delta }: { state: GameState; delta: Effects }) {
   const hasDelta = Object.keys(delta).length > 0;
   return (
     <div className="modal-backdrop" role="dialog" aria-modal="true">
-      <div className="modal">
-        <div className="modal__kicker">周末结算</div>
-        <h2 className="modal__title">第 {state.year} 年 · 第 {state.term} 学期</h2>
-        <p className="modal__desc">{line}</p>
-        {hasDelta ? (
-          <div className="weekly__delta">
-            <span className="weekly__delta-label">本周自然变化</span>
-            <FxChips fx={delta} />
+      <div className="modal modal--call" style={{ ['--skin' as string]: 'var(--amber)' }}>
+        <div className="call__head">
+          <span className="call__avatar" aria-hidden>
+            📅
+          </span>
+          <div className="call__head-tx">
+            <div className="call__kicker">周末结算</div>
+            <h2 className="modal__title">第 {state.year} 年 · 第 {state.term} 学期</h2>
           </div>
-        ) : null}
-        {showMilestone ? <p className="weekly__line">{milestone!.text}</p> : null}
-        <button className="pixel-btn pixel-btn--primary" onClick={cont} style={{ width: '100%' }}>
-          继续
-        </button>
+        </div>
+        <div className="call__body">
+          <p className="modal__desc">{line}</p>
+          {hasDelta ? (
+            <div className="weekly__delta">
+              <span className="weekly__delta-label">本周自然变化</span>
+              <FxChips fx={delta} />
+            </div>
+          ) : null}
+          {showMilestone ? <p className="weekly__line">{milestone!.text}</p> : null}
+          <button className="pixel-btn pixel-btn--primary" onClick={cont} style={{ width: '100%' }}>
+            继续
+          </button>
+        </div>
       </div>
     </div>
   );
