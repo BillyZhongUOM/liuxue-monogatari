@@ -7,7 +7,7 @@ import type { Ending, GameAction, GameEvent, Trait } from '../game/types';
 import { ACTIONS as BASE_ACTIONS } from './actions';
 import { ENDINGS as BASE_ENDINGS } from './endings';
 import { EVENTS as BASE_EVENTS } from './events';
-import { STORY_EVENTS } from './story';
+import { STORY_EVENTS, STORY_FLAVOR } from './story';
 import { TRAITS as BASE_TRAITS } from './traits';
 import genActions from './generated/actions.json';
 import genEndings from './generated/endings.json';
@@ -40,7 +40,7 @@ const baseActionsWithLoc: GameAction[] = BASE_ACTIONS.map((a) =>
 
 export const ACTIONS: GameAction[] = merge(baseActionsWithLoc, genActions as unknown as GameAction[]);
 // Story beats join the hand-authored pool (they win over any generated id clash).
-export const EVENTS: GameEvent[] = merge([...STORY_EVENTS, ...BASE_EVENTS], genEvents as unknown as GameEvent[]);
+export const EVENTS: GameEvent[] = merge([...STORY_EVENTS, ...STORY_FLAVOR, ...BASE_EVENTS], genEvents as unknown as GameEvent[]);
 export const TRAITS: Trait[] = merge(BASE_TRAITS, genTraits as unknown as Trait[]);
 export const ENDINGS: Ending[] = merge(BASE_ENDINGS, genEndings as unknown as Ending[]);
 
