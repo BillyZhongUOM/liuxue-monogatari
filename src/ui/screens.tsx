@@ -264,7 +264,10 @@ export function EndingScreen({
     <div className="ending">
       <div className={`ending__badge ending__badge--${ending.tone}`}>{TONE_LABEL[ending.tone] ?? '结局'}</div>
       {(() => {
-        const art = assetUrl(ending.art ?? ending.id);
+        // Prefer the gender-specific illustration, fall back to the neutral one.
+        const baseArt = ending.art ?? ending.id;
+        const gender = state.config.gender ?? 'female';
+        const art = assetUrl(`${baseArt}_${gender}`) ?? assetUrl(baseArt);
         return art ? (
           <img className="ending__art-img" src={art} alt="" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
         ) : (
