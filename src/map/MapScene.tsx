@@ -198,7 +198,8 @@ export function MapScene({ state }: { state: GameState }) {
 
         {nodes.map((l) => {
           const st = statusOf(l.id);
-          const bImg = assetUrl(`building-${l.id}`);
+          // Prefer a city-specific building sprite, fall back to the shared one.
+          const bImg = assetUrl(`building-${l.id}-${state.config.city}`) ?? assetUrl(`building-${l.id}`);
           return (
             <button
               key={l.id}

@@ -1,6 +1,6 @@
 {
   "updatedBy": "register-assets",
-  "count": 94,
+  "count": 141,
   "assets": [
     {
       "id": "bgm-birmingham",
@@ -47,60 +47,120 @@
       "path": "/assets/generated/building-bank.png"
     },
     {
+      "id": "building-bank-oxford",
+      "path": "/assets/generated/building-bank-oxford.png"
+    },
+    {
       "id": "building-career",
       "path": "/assets/generated/building-career.png"
+    },
+    {
+      "id": "building-career-oxford",
+      "path": "/assets/generated/building-career-oxford.png"
     },
     {
       "id": "building-clinic",
       "path": "/assets/generated/building-clinic.png"
     },
     {
+      "id": "building-clinic-oxford",
+      "path": "/assets/generated/building-clinic-oxford.png"
+    },
+    {
       "id": "building-dorm",
       "path": "/assets/generated/building-dorm.png"
+    },
+    {
+      "id": "building-dorm-oxford",
+      "path": "/assets/generated/building-dorm-oxford.png"
     },
     {
       "id": "building-gym",
       "path": "/assets/generated/building-gym.png"
     },
     {
+      "id": "building-gym-oxford",
+      "path": "/assets/generated/building-gym-oxford.png"
+    },
+    {
       "id": "building-lecture",
       "path": "/assets/generated/building-lecture.png"
+    },
+    {
+      "id": "building-lecture-oxford",
+      "path": "/assets/generated/building-lecture-oxford.png"
     },
     {
       "id": "building-library",
       "path": "/assets/generated/building-library.png"
     },
     {
+      "id": "building-library-oxford",
+      "path": "/assets/generated/building-library-oxford.png"
+    },
+    {
       "id": "building-mall",
       "path": "/assets/generated/building-mall.png"
+    },
+    {
+      "id": "building-mall-oxford",
+      "path": "/assets/generated/building-mall-oxford.png"
     },
     {
       "id": "building-market",
       "path": "/assets/generated/building-market.png"
     },
     {
+      "id": "building-market-oxford",
+      "path": "/assets/generated/building-market-oxford.png"
+    },
+    {
       "id": "building-nightlife",
       "path": "/assets/generated/building-nightlife.png"
+    },
+    {
+      "id": "building-nightlife-oxford",
+      "path": "/assets/generated/building-nightlife-oxford.png"
     },
     {
       "id": "building-park",
       "path": "/assets/generated/building-park.png"
     },
     {
+      "id": "building-park-oxford",
+      "path": "/assets/generated/building-park-oxford.png"
+    },
+    {
       "id": "building-society",
       "path": "/assets/generated/building-society.png"
+    },
+    {
+      "id": "building-society-oxford",
+      "path": "/assets/generated/building-society-oxford.png"
     },
     {
       "id": "building-station",
       "path": "/assets/generated/building-station.png"
     },
     {
+      "id": "building-station-oxford",
+      "path": "/assets/generated/building-station-oxford.png"
+    },
+    {
       "id": "building-town",
       "path": "/assets/generated/building-town.png"
     },
     {
+      "id": "building-town-oxford",
+      "path": "/assets/generated/building-town-oxford.png"
+    },
+    {
       "id": "building-work",
       "path": "/assets/generated/building-work.png"
+    },
+    {
+      "id": "building-work-oxford",
+      "path": "/assets/generated/building-work-oxford.png"
     },
     {
       "id": "char-student",
@@ -135,64 +195,192 @@
       "path": "/assets/generated/ending_bankruptcy.png"
     },
     {
+      "id": "ending_bankruptcy_female",
+      "path": "/assets/generated/ending_bankruptcy_female.png"
+    },
+    {
+      "id": "ending_bankruptcy_male",
+      "path": "/assets/generated/ending_bankruptcy_male.png"
+    },
+    {
       "id": "ending_burnout",
       "path": "/assets/generated/ending_burnout.png"
+    },
+    {
+      "id": "ending_burnout_female",
+      "path": "/assets/generated/ending_burnout_female.png"
+    },
+    {
+      "id": "ending_burnout_male",
+      "path": "/assets/generated/ending_burnout_male.png"
     },
     {
       "id": "ending_distinction",
       "path": "/assets/generated/ending_distinction.png"
     },
     {
+      "id": "ending_distinction_female",
+      "path": "/assets/generated/ending_distinction_female.png"
+    },
+    {
+      "id": "ending_distinction_male",
+      "path": "/assets/generated/ending_distinction_male.png"
+    },
+    {
       "id": "ending_grew_but_unsure",
       "path": "/assets/generated/ending_grew_but_unsure.png"
+    },
+    {
+      "id": "ending_grew_but_unsure_female",
+      "path": "/assets/generated/ending_grew_but_unsure_female.png"
+    },
+    {
+      "id": "ending_grew_but_unsure_male",
+      "path": "/assets/generated/ending_grew_but_unsure_male.png"
     },
     {
       "id": "ending_health_collapse",
       "path": "/assets/generated/ending_health_collapse.png"
     },
     {
+      "id": "ending_health_collapse_female",
+      "path": "/assets/generated/ending_health_collapse_female.png"
+    },
+    {
+      "id": "ending_health_collapse_male",
+      "path": "/assets/generated/ending_health_collapse_male.png"
+    },
+    {
       "id": "ending_homesick_quit",
       "path": "/assets/generated/ending_homesick_quit.png"
+    },
+    {
+      "id": "ending_homesick_quit_female",
+      "path": "/assets/generated/ending_homesick_quit_female.png"
+    },
+    {
+      "id": "ending_homesick_quit_male",
+      "path": "/assets/generated/ending_homesick_quit_male.png"
     },
     {
       "id": "ending_intern_to_fulltime",
       "path": "/assets/generated/ending_intern_to_fulltime.png"
     },
     {
+      "id": "ending_intern_to_fulltime_female",
+      "path": "/assets/generated/ending_intern_to_fulltime_female.png"
+    },
+    {
+      "id": "ending_intern_to_fulltime_male",
+      "path": "/assets/generated/ending_intern_to_fulltime_male.png"
+    },
+    {
       "id": "ending_job_offer",
       "path": "/assets/generated/ending_job_offer.png"
+    },
+    {
+      "id": "ending_job_offer_female",
+      "path": "/assets/generated/ending_job_offer_female.png"
+    },
+    {
+      "id": "ending_job_offer_male",
+      "path": "/assets/generated/ending_job_offer_male.png"
     },
     {
       "id": "ending_midnight_lonely",
       "path": "/assets/generated/ending_midnight_lonely.png"
     },
     {
+      "id": "ending_midnight_lonely_female",
+      "path": "/assets/generated/ending_midnight_lonely_female.png"
+    },
+    {
+      "id": "ending_midnight_lonely_male",
+      "path": "/assets/generated/ending_midnight_lonely_male.png"
+    },
+    {
       "id": "ending_ordinary",
       "path": "/assets/generated/ending_ordinary.png"
+    },
+    {
+      "id": "ending_ordinary_female",
+      "path": "/assets/generated/ending_ordinary_female.png"
+    },
+    {
+      "id": "ending_ordinary_male",
+      "path": "/assets/generated/ending_ordinary_male.png"
     },
     {
       "id": "ending_phd",
       "path": "/assets/generated/ending_phd.png"
     },
     {
+      "id": "ending_phd_female",
+      "path": "/assets/generated/ending_phd_female.png"
+    },
+    {
+      "id": "ending_phd_male",
+      "path": "/assets/generated/ending_phd_male.png"
+    },
+    {
       "id": "ending_rain_philosopher",
       "path": "/assets/generated/ending_rain_philosopher.png"
+    },
+    {
+      "id": "ending_rain_philosopher_female",
+      "path": "/assets/generated/ending_rain_philosopher_female.png"
+    },
+    {
+      "id": "ending_rain_philosopher_male",
+      "path": "/assets/generated/ending_rain_philosopher_male.png"
     },
     {
       "id": "ending_resit_exam",
       "path": "/assets/generated/ending_resit_exam.png"
     },
     {
+      "id": "ending_resit_exam_female",
+      "path": "/assets/generated/ending_resit_exam_female.png"
+    },
+    {
+      "id": "ending_resit_exam_male",
+      "path": "/assets/generated/ending_resit_exam_male.png"
+    },
+    {
       "id": "ending_return_home",
       "path": "/assets/generated/ending_return_home.png"
+    },
+    {
+      "id": "ending_return_home_female",
+      "path": "/assets/generated/ending_return_home_female.png"
+    },
+    {
+      "id": "ending_return_home_male",
+      "path": "/assets/generated/ending_return_home_male.png"
     },
     {
       "id": "ending_social_star",
       "path": "/assets/generated/ending_social_star.png"
     },
     {
+      "id": "ending_social_star_female",
+      "path": "/assets/generated/ending_social_star_female.png"
+    },
+    {
+      "id": "ending_social_star_male",
+      "path": "/assets/generated/ending_social_star_male.png"
+    },
+    {
       "id": "ending_survivor",
       "path": "/assets/generated/ending_survivor.png"
+    },
+    {
+      "id": "ending_survivor_female",
+      "path": "/assets/generated/ending_survivor_female.png"
+    },
+    {
+      "id": "ending_survivor_male",
+      "path": "/assets/generated/ending_survivor_male.png"
     },
     {
       "id": "ground-campus",
