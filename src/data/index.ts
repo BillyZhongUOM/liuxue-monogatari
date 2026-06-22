@@ -9,6 +9,7 @@ import { ENDINGS as BASE_ENDINGS } from './endings';
 import { EVENTS as BASE_EVENTS } from './events';
 import { STORY_EVENTS, STORY_FLAVOR } from './story';
 import { STORY_CITY, STORY_MAJOR } from './story_city';
+import { STORY_MEME } from './story_meme';
 import { TRAITS as BASE_TRAITS } from './traits';
 import genActions from './generated/actions.json';
 import genEndings from './generated/endings.json';
@@ -42,7 +43,7 @@ const baseActionsWithLoc: GameAction[] = BASE_ACTIONS.map((a) =>
 export const ACTIONS: GameAction[] = merge(baseActionsWithLoc, genActions as unknown as GameAction[]);
 // Story beats join the hand-authored pool (they win over any generated id clash).
 export const EVENTS: GameEvent[] = merge(
-  [...STORY_EVENTS, ...STORY_FLAVOR, ...STORY_CITY, ...STORY_MAJOR, ...BASE_EVENTS],
+  [...STORY_EVENTS, ...STORY_FLAVOR, ...STORY_CITY, ...STORY_MAJOR, ...STORY_MEME, ...BASE_EVENTS],
   genEvents as unknown as GameEvent[],
 );
 export const TRAITS: Trait[] = merge(BASE_TRAITS, genTraits as unknown as Trait[]);
