@@ -1,7 +1,47 @@
 {
   "updatedBy": "register-assets",
-  "count": 84,
+  "count": 94,
   "assets": [
+    {
+      "id": "bgm-birmingham",
+      "path": "/assets/generated/bgm-birmingham.mp3"
+    },
+    {
+      "id": "bgm-bristol",
+      "path": "/assets/generated/bgm-bristol.mp3"
+    },
+    {
+      "id": "bgm-cambridge",
+      "path": "/assets/generated/bgm-cambridge.mp3"
+    },
+    {
+      "id": "bgm-edinburgh",
+      "path": "/assets/generated/bgm-edinburgh.mp3"
+    },
+    {
+      "id": "bgm-ended",
+      "path": "/assets/generated/bgm-ended.mp3"
+    },
+    {
+      "id": "bgm-london",
+      "path": "/assets/generated/bgm-london.mp3"
+    },
+    {
+      "id": "bgm-manchester",
+      "path": "/assets/generated/bgm-manchester.mp3"
+    },
+    {
+      "id": "bgm-menu",
+      "path": "/assets/generated/bgm-menu.mp3"
+    },
+    {
+      "id": "bgm-oxford",
+      "path": "/assets/generated/bgm-oxford.mp3"
+    },
+    {
+      "id": "bgm-sheffield",
+      "path": "/assets/generated/bgm-sheffield.mp3"
+    },
     {
       "id": "building-bank",
       "path": "/assets/generated/building-bank.png"

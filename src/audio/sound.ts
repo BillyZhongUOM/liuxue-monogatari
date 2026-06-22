@@ -1,26 +1,9 @@
-// Procedural Web Audio layer. Fully synthesised (no audio files, so nothing to
-// download and zero copyright surface) and original. A small generative engine
-// plays a gentle looping chord progression with a higher-register arpeggio
-// (which is what actually carries on phone speakers) plus a soft bass + pad and
-// an optional rain layer. Soft UI SFX on top. A real CC0 track could later route
-// a looping <audio> through musicBus instead, but this is audible on its own.
-//
-// iOS Safari blocks audible autoplay until a user gesture, so the context starts
-// suspended and unlock() must run inside a real tap (AudioManager wires that up).
-
-// 'play' resolves to a per-city track; menu/ended are fixed; 'none' stops the BGM.
-type TrackKind =
-  | 'menu'
-  | 'ended'
-  | 'none'
-  | 'london'
-  | 'manchester'
-  | 'edinburgh'
-  | 'birmingham'
-  | 'sheffield'
-  | 'bristol'
-  | 'oxford'
-  | 'cambridge';
+// Web Audio layer. BGM = real generated songs (Lyria, one MP3 per city) routed
+// through a music bus and crossfaded on change; UI SFX + a rain bed are
+// synthesised on top. Lazy: only the current track downloads. iOS Safari blocks
+// audible autoplay until a user gesture, so the context starts suspended and
+// unlock() must run inside a real tap (AudioManager wires that up).
+import manifest from '../assets/generated/manifest.json';
 
 let ctx: AudioContext | null = null;
 let master: GainNode | null = null;
@@ -28,8 +11,6 @@ let musicBus: GainNode | null = null;
 let sfxBus: GainNode | null = null;
 let unlocked = false;
 let muted = false;
-
-const mtof = (m: number) => 440 * Math.pow(2, (m - 69) / 12);
 
 function ensure(): boolean {
   if (ctx) return true;
@@ -106,224 +87,62 @@ export const sfx = {
   ending: () => blip([523.25, 659.25, 784, 1046.5], 0.22, 'sine', 0.14),
 };
 
-// ----------------------------------------------------------------- generative BGM
-// Each chord: pad midi notes (low bed), bass root midi, arp midi notes (the
-// audible melody, one per beat). All progressions are consonant by construction.
-interface Chord { pad: number[]; bass: number; arp: number[] }
-// lead = the chiptune voice of the melody; hat = a noise tick for groove cities.
-interface Track { barDur: number; lead: OscillatorType; hat: boolean; prog: Chord[] }
+// ----------------------------------------------------------------- BGM (per-city)
+// Real generated songs (Lyria, one MP3 per city) routed through musicBus. Lazy:
+// only the current track downloads; on change we crossfade and retire the old
+// element. Track keys = city ids plus 'menu' / 'ended'. Falls back to silence if
+// a track is not registered yet (404-proof).
+const REGISTERED = new Set<string>(
+  ((manifest as { assets?: { id: string }[] }).assets ?? []).map((a) => a.id),
+);
 
-// Eight per-city themes plus menu + ended, all chiptune-flavoured (square/pulse
-// lead over a triangle bass, optional noise hat). Each city leans into its motif:
-// London urban-jazz lonely, Oxford stately organ, Cambridge gentle harp,
-// Manchester driving indie, Edinburgh modal bagpipe, Birmingham funk, Sheffield
-// warm acoustic, Bristol downtempo trip-hop.
-const TRACKS: Record<Exclude<TrackKind, 'none'>, Track> = {
-  // urban jazz, lonely and cool: Am7 - Dm7 - Em7 - Am7
-  london: {
-    barDur: 2.3, lead: 'square', hat: false,
-    prog: [
-      { pad: [57, 60, 64, 67], bass: 45, arp: [72, 76, 79, 76] },
-      { pad: [50, 53, 57, 60], bass: 38, arp: [74, 77, 81, 77] },
-      { pad: [52, 55, 59, 62], bass: 40, arp: [76, 79, 83, 79] },
-      { pad: [57, 60, 64, 67], bass: 45, arp: [72, 79, 76, 72] },
-    ],
-  },
-  // driving indie rock, punchy: Em - C - G - D, fast, with a hat
-  manchester: {
-    barDur: 1.5, lead: 'square', hat: true,
-    prog: [
-      { pad: [52, 55, 59], bass: 40, arp: [64, 67, 71, 74] },
-      { pad: [48, 52, 55], bass: 36, arp: [72, 67, 64, 67] },
-      { pad: [55, 59, 62], bass: 43, arp: [74, 71, 67, 71] },
-      { pad: [50, 54, 57], bass: 38, arp: [69, 66, 62, 66] },
-    ],
-  },
-  // modal, desolate bagpipe drone: Dm - C - Dm - A
-  edinburgh: {
-    barDur: 2.0, lead: 'square', hat: false,
-    prog: [
-      { pad: [50, 53, 57], bass: 38, arp: [62, 65, 69, 67] },
-      { pad: [48, 52, 55], bass: 36, arp: [60, 64, 67, 64] },
-      { pad: [50, 53, 57], bass: 38, arp: [65, 69, 72, 69] },
-      { pad: [45, 49, 52], bass: 33, arp: [69, 68, 65, 64] },
-    ],
-  },
-  // funk, syncopated and bright: Cmaj7 - Fmaj7 - Dm7 - G7, with a hat
-  birmingham: {
-    barDur: 1.6, lead: 'sawtooth', hat: true,
-    prog: [
-      { pad: [48, 52, 55, 59], bass: 36, arp: [60, 64, 67, 64] },
-      { pad: [53, 57, 60, 64], bass: 41, arp: [65, 69, 72, 69] },
-      { pad: [50, 53, 57, 60], bass: 38, arp: [62, 65, 69, 65] },
-      { pad: [55, 59, 62, 65], bass: 43, arp: [67, 71, 65, 71] },
-    ],
-  },
-  // warm acoustic, healing: G - Em - C - D, fingerpicked feel
-  sheffield: {
-    barDur: 2.1, lead: 'triangle', hat: false,
-    prog: [
-      { pad: [55, 59, 62], bass: 43, arp: [67, 74, 71, 74] },
-      { pad: [52, 55, 59], bass: 40, arp: [64, 71, 67, 71] },
-      { pad: [48, 52, 55], bass: 36, arp: [60, 67, 64, 67] },
-      { pad: [50, 54, 57], bass: 38, arp: [62, 69, 66, 69] },
-    ],
-  },
-  // trip-hop, downtempo and mellow: Cm - Ab - Eb - Bb, slow, soft hat
-  bristol: {
-    barDur: 2.4, lead: 'triangle', hat: true,
-    prog: [
-      { pad: [48, 51, 55], bass: 36, arp: [72, 75, 79, 75] },
-      { pad: [44, 48, 51], bass: 32, arp: [68, 72, 75, 72] },
-      { pad: [51, 55, 58], bass: 39, arp: [75, 79, 82, 79] },
-      { pad: [46, 50, 53], bass: 34, arp: [70, 74, 77, 74] },
-    ],
-  },
-  // stately organ, grand: C - F - Am - G, slow with big chords
-  oxford: {
-    barDur: 2.4, lead: 'square', hat: false,
-    prog: [
-      { pad: [48, 52, 55, 60], bass: 36, arp: [60, 64, 67, 72] },
-      { pad: [53, 57, 60, 65], bass: 41, arp: [65, 69, 72, 77] },
-      { pad: [57, 60, 64, 69], bass: 45, arp: [69, 72, 76, 72] },
-      { pad: [55, 59, 62, 67], bass: 43, arp: [67, 71, 74, 79] },
-    ],
-  },
-  // gentle flowing harp: D - A - Bm - G
-  cambridge: {
-    barDur: 2.0, lead: 'triangle', hat: false,
-    prog: [
-      { pad: [50, 54, 57], bass: 38, arp: [62, 66, 69, 74] },
-      { pad: [45, 49, 52], bass: 33, arp: [69, 73, 76, 69] },
-      { pad: [47, 50, 54], bass: 35, arp: [71, 74, 78, 74] },
-      { pad: [55, 59, 62], bass: 43, arp: [67, 71, 74, 79] },
-    ],
-  },
-  // sparser, melancholic dusk: Am - F - C - G (used for the menu)
-  menu: {
-    barDur: 2.6, lead: 'triangle', hat: false,
-    prog: [
-      { pad: [45, 48, 52], bass: 33, arp: [69, 72, 76, 72] },
-      { pad: [41, 45, 48], bass: 29, arp: [65, 69, 72, 69] },
-      { pad: [48, 52, 55], bass: 36, arp: [72, 76, 79, 76] },
-      { pad: [43, 47, 50], bass: 31, arp: [67, 71, 74, 71] },
-    ],
-  },
-  // resolved, hopeful: C - G - Am - F (the ending)
-  ended: {
-    barDur: 2.2, lead: 'square', hat: false,
-    prog: [
-      { pad: [48, 52, 55], bass: 36, arp: [72, 76, 79, 76] },
-      { pad: [43, 47, 50], bass: 31, arp: [67, 71, 74, 79] },
-      { pad: [45, 48, 52], bass: 33, arp: [69, 72, 76, 72] },
-      { pad: [41, 45, 48], bass: 29, arp: [65, 69, 72, 76] },
-    ],
-  },
-};
-
-let bgm: { kind: string; timer: number; nextTime: number; bar: number; track: Track } | null = null;
-
-function noiseTick(t: number, dur: number, gain: number): void {
-  if (!ctx || !musicBus) return;
-  const buf = ctx.createBuffer(1, Math.ceil(ctx.sampleRate * dur), ctx.sampleRate);
-  const data = buf.getChannelData(0);
-  for (let i = 0; i < data.length; i++) data[i] = (Math.random() * 2 - 1);
-  const src = ctx.createBufferSource();
-  src.buffer = buf;
-  const hp = ctx.createBiquadFilter();
-  hp.type = 'highpass';
-  hp.frequency.value = 6000;
-  const g = ctx.createGain();
-  g.gain.setValueAtTime(gain, t);
-  g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-  src.connect(hp);
-  hp.connect(g);
-  g.connect(musicBus);
-  src.start(t);
-  src.stop(t + dur + 0.01);
+function bgmUrl(key: string): string | null {
+  return REGISTERED.has(`bgm-${key}`)
+    ? `${import.meta.env.BASE_URL}assets/generated/bgm-${key}.mp3`
+    : null;
 }
 
-function scheduleBar(c: Chord, t: number, track: Track): void {
-  if (!ctx || !musicBus) return;
-  const barDur = track.barDur;
-  // pad: soft sustained chord
-  c.pad.forEach((m) => {
-    const o = ctx!.createOscillator();
-    const g = ctx!.createGain();
-    o.type = 'triangle';
-    o.frequency.value = mtof(m);
-    g.gain.setValueAtTime(0.0001, t);
-    g.gain.linearRampToValueAtTime(0.045, t + 0.25);
-    g.gain.setValueAtTime(0.045, t + barDur * 0.7);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + barDur * 1.02);
-    o.connect(g);
-    g.connect(musicBus!);
-    o.start(t);
-    o.stop(t + barDur * 1.05);
-  });
-  // bass: triangle root (NES-style)
-  {
-    const o = ctx.createOscillator();
-    const g = ctx.createGain();
-    o.type = 'triangle';
-    o.frequency.value = mtof(c.bass);
-    g.gain.setValueAtTime(0.0001, t);
-    g.gain.linearRampToValueAtTime(0.13, t + 0.04);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + barDur * 0.92);
-    o.connect(g);
-    g.connect(musicBus);
-    o.start(t);
-    o.stop(t + barDur);
-  }
-  // arpeggio: the chiptune melody, one note per beat (higher register)
-  const beat = barDur / c.arp.length;
-  c.arp.forEach((m, i) => {
-    const s = t + i * beat;
-    const o = ctx!.createOscillator();
-    const o2 = ctx!.createOscillator();
-    const g = ctx!.createGain();
-    o.type = track.lead;
-    o2.type = 'sine';
-    o.frequency.value = mtof(m);
-    o2.frequency.value = mtof(m + 12); // a soft octave shimmer
-    g.gain.setValueAtTime(0.0001, s);
-    g.gain.linearRampToValueAtTime(0.15, s + 0.012);
-    g.gain.exponentialRampToValueAtTime(0.0001, s + beat * 0.95);
-    o.connect(g);
-    o2.connect(g);
-    g.connect(musicBus!);
-    o.start(s);
-    o2.start(s);
-    o.stop(s + beat);
-    o2.stop(s + beat);
-    // hat on the off-beats for groove cities
-    if (track.hat && i % 2 === 1) noiseTick(s, 0.05, 0.05);
-  });
-}
+interface Voice { key: string; el: HTMLAudioElement; node: MediaElementAudioSourceNode; gain: GainNode }
+let current: Voice | null = null;
 
-function stopTrack(): void {
-  if (bgm) {
-    window.clearInterval(bgm.timer);
-    bgm = null; // already-scheduled notes (<= ~0.6s) ring out naturally
-  }
+function retire(v: Voice, fade: number): void {
+  if (!ctx) return;
+  const t = ctx.currentTime;
+  v.gain.gain.cancelScheduledValues(t);
+  v.gain.gain.setValueAtTime(Math.max(0.0001, v.gain.gain.value), t);
+  v.gain.gain.linearRampToValueAtTime(0.0001, t + fade);
+  window.setTimeout(() => {
+    try { v.el.pause(); v.node.disconnect(); v.gain.disconnect(); } catch { /* already gone */ }
+  }, fade * 1000 + 150);
 }
 
 export function setTrack(kind: string): void {
-  if (!ensure() || !ctx) return;
-  if (bgm && bgm.kind === kind) return;
-  stopTrack();
-  if (kind === 'none' || !(kind in TRACKS)) return;
-  const track = TRACKS[kind as Exclude<TrackKind, 'none'>];
-  const tick = () => {
-    if (!bgm || !ctx) return;
-    while (bgm.nextTime < ctx.currentTime + 0.6) {
-      scheduleBar(track.prog[bgm.bar % track.prog.length], bgm.nextTime, track);
-      bgm.nextTime += track.barDur;
-      bgm.bar += 1;
-    }
-  };
-  bgm = { kind, timer: window.setInterval(tick, 80), nextTime: ctx.currentTime + 0.12, bar: 0, track };
-  tick();
+  if (!ensure() || !ctx || !musicBus) return;
+  if (current && current.key === kind) return;
+  const url = kind === 'none' ? null : bgmUrl(kind);
+
+  if (current) { retire(current, 1.0); current = null; }
+  if (!url) return;
+
+  const el = new Audio();
+  el.src = url;
+  el.loop = true;
+  el.preload = 'auto';
+  let node: MediaElementAudioSourceNode;
+  try {
+    node = ctx.createMediaElementSource(el);
+  } catch {
+    return; // element already wired (should not happen with a fresh element)
+  }
+  const gain = ctx.createGain();
+  gain.gain.value = 0.0001;
+  node.connect(gain);
+  gain.connect(musicBus);
+  const t = ctx.currentTime;
+  gain.gain.setValueAtTime(0.0001, t);
+  gain.gain.linearRampToValueAtTime(0.78, t + 1.0);
+  void el.play().catch(() => { /* starts once the context is unlocked */ });
+  current = { key: kind, el, node, gain };
 }
 
 // ----------------------------------------------------------------- rain layer

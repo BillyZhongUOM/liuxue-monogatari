@@ -15,14 +15,14 @@ const MANIFEST = join(ROOT, 'src', 'assets', 'generated', 'manifest.json');
 
 mkdirSync(dirname(MANIFEST), { recursive: true });
 const files = existsSync(IMG_DIR)
-  ? readdirSync(IMG_DIR).filter((f) => /\.png$/i.test(f))
+  ? readdirSync(IMG_DIR).filter((f) => /\.(png|mp3)$/i.test(f))
   : [];
 const assets = files
-  .map((f) => ({ id: f.replace(/\.png$/i, ''), path: `/assets/generated/${f}` }))
+  .map((f) => ({ id: f.replace(/\.(png|mp3)$/i, ''), path: `/assets/generated/${f}` }))
   .sort((a, b) => a.id.localeCompare(b.id));
 
 writeFileSync(
   MANIFEST,
   `${JSON.stringify({ updatedBy: 'register-assets', count: assets.length, assets }, null, 2)}\n`,
 );
-console.log(`[register] ${assets.length} asset(s): ${assets.map((a) => a.id).join(', ') || '(none — drop PNGs into public/assets/generated/)'}`);
+console.log(`[register] ${assets.length} asset(s): ${assets.map((a) => a.id).join(', ') || '(none, drop PNGs into public/assets/generated/)'}`);
