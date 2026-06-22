@@ -10,6 +10,7 @@ import {
 import type { Effects, GameState } from '../game';
 import { useGame } from '../store';
 import { AudioPanel } from './AudioPanel';
+import { useNotify } from './notifyStore';
 import { MapScene } from '../map/MapScene';
 import { ChapterBanner } from './ChapterBanner';
 import { EventBurst } from './EventBurst';
@@ -37,6 +38,8 @@ function TopBar({
   onToggleView: () => void;
 }) {
   const toMenu = useGame((s) => s.toMenu);
+  const openPhone = useNotify((s) => s.openPhone);
+  const unread = useNotify((s) => s.unread);
   const dots = [];
   for (let i = 0; i < state.maxActionPoints; i++) {
     dots.push(<span key={i} className={`ap-dot${i < state.actionPoints ? ' ap-dot--full' : ''}`} />);
@@ -54,6 +57,14 @@ function TopBar({
         {view === 'map' ? '📋' : '🗺️'}
       </button>
       <AudioPanel />
+      <button
+        className="pixel-btn pixel-btn--ghost topbar__btn phone-btn"
+        onClick={openPhone}
+        aria-label="手机"
+      >
+        📱
+        {unread > 0 ? <span className="phone-btn__badge">{unread > 9 ? '9+' : unread}</span> : null}
+      </button>
       <div className="topbar__time">
         第 <b>{state.year}</b> 年 · T<b>{state.term}</b> · <b>{state.week}</b>/{WEEKS_PER_TERM} 周
       </div>

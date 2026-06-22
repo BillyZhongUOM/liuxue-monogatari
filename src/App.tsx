@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useGame } from './store';
 import { AudioManager } from './audio/AudioManager';
+import { PhoneManager } from './ui/PhoneManager';
+import { PhoneBanner, PhoneScreen } from './ui/Phone';
 import { PlayScreen } from './ui/play';
 import { CharacterCreation, EndingScreen, MainMenu } from './ui/screens';
 
@@ -51,7 +53,10 @@ export default function App() {
   return (
     <div className="app-shell">
       <AudioManager />
+      <PhoneManager />
       {body}
+      <PhoneBanner />
+      <PhoneScreen state={state} />
     </div>
   );
 }

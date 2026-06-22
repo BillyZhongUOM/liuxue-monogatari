@@ -1,7 +1,31 @@
 {
   "updatedBy": "register-assets",
-  "count": 250,
+  "count": 257,
   "assets": [
+    {
+      "id": "app-bank",
+      "path": "/assets/generated/app-bank.png"
+    },
+    {
+      "id": "app-chat",
+      "path": "/assets/generated/app-chat.png"
+    },
+    {
+      "id": "app-mail",
+      "path": "/assets/generated/app-mail.png"
+    },
+    {
+      "id": "app-moments",
+      "path": "/assets/generated/app-moments.png"
+    },
+    {
+      "id": "app-school",
+      "path": "/assets/generated/app-school.png"
+    },
+    {
+      "id": "app-system",
+      "path": "/assets/generated/app-system.png"
+    },
     {
       "id": "bgm-birmingham",
       "path": "/assets/generated/bgm-birmingham.mp3"
@@ -949,6 +973,10 @@
     {
       "id": "interior-work",
       "path": "/assets/generated/interior-work.png"
+    },
+    {
+      "id": "phone-wallpaper",
+      "path": "/assets/generated/phone-wallpaper.png"
     },
     {
       "id": "scene-arrival",
