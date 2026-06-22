@@ -55,6 +55,7 @@ export function MainMenu({
       <p className="menu__foot">
         结局图鉴：{collectionCount} / {FINALE_ENDINGS}
       </p>
+      <p className="menu__ver">版本 {__APP_VERSION__} · {__BUILD_DATE__}</p>
     </div>
   );
 }
