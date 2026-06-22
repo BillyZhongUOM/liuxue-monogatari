@@ -11,13 +11,17 @@ function ambienceFor(state: ReturnType<typeof useGame.getState>['state']): Ambie
   return 'play';
 }
 
-function applyAmbience(a: Ambience): void {
+function applyAmbience(a: Ambience, city: string): void {
   if (a === 'ended') {
     setTrack('ended');
     setRain(false);
+  } else if (a === 'menu') {
+    setTrack('menu');
+    setRain(true);
   } else {
-    // menu + play both get the dusk rain bed; MapScene mutes rain for the town zone
-    setTrack(a === 'menu' ? 'menu' : 'play');
+    // play: each city gets its own chiptune theme; the dusk rain bed plays too
+    // (MapScene mutes rain for the town zone)
+    setTrack(city);
     setRain(true);
   }
 }
@@ -35,7 +39,8 @@ export function AudioManager() {
     function onFirstGesture() {
       unlock();
       setMuted(useAudio.getState().muted);
-      applyAmbience(ambienceFor(useGame.getState().state));
+      const s = useGame.getState().state;
+      applyAmbience(ambienceFor(s), s?.config.city ?? 'manchester');
       window.removeEventListener('pointerdown', onFirstGesture);
       window.removeEventListener('keydown', onFirstGesture);
     }
@@ -67,7 +72,7 @@ export function AudioManager() {
     if (!isUnlocked()) return;
     const a = ambienceFor(state);
     if (a !== prev.current.ambience) {
-      applyAmbience(a);
+      applyAmbience(a, state?.config.city ?? 'manchester');
       prev.current.ambience = a;
     }
     if (state) {
