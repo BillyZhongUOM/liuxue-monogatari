@@ -24,6 +24,7 @@ import { fileURLToPath } from 'node:url';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT_DIR = join(ROOT, 'public', 'assets', 'generated');
 const KNOCKOUT = join(ROOT, 'scripts', 'knockout-bg.py');
+const KNOCKOUT_FLOOD = join(ROOT, 'scripts', 'knockout-flood.py');
 const BASE = 'https://generativelanguage.googleapis.com/v1beta';
 const MODELS = ['models/gemini-2.5-flash-image', 'models/gemini-3.1-flash-image', 'models/gemini-3-pro-image'];
 const REQ_TIMEOUT_MS = 75000;
@@ -134,9 +135,12 @@ async function gen(city, loc, key, force) {
       process.stdout.write(`gen ${id} (${model.split('/').pop()}) ... `);
       const buf = await callGemini(model, prompt, key);
       writeFileSync(file, buf);
-      // magenta -> transparent, then downscale (same pipeline as gen-map-art)
+      // magenta -> transparent; then a corner flood-fill in case the model
+      // ignored the magenta screen and returned a flat neutral background; then
+      // downscale (same pipeline as gen-map-art).
       try {
         execFileSync('python3', [KNOCKOUT, file], { stdio: 'ignore' });
+        execFileSync('python3', [KNOCKOUT_FLOOD, file], { stdio: 'ignore' });
         execFileSync('sips', ['-Z', '256', file], { stdio: 'ignore' });
       } catch (e) {
         console.log(`(post-process warn: ${String(e.message).slice(0, 30)})`);
