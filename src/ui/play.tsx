@@ -9,7 +9,7 @@ import {
 } from '../game';
 import type { Effects, GameState } from '../game';
 import { useGame } from '../store';
-import { useAudio } from '../audio/audioStore';
+import { AudioPanel } from './AudioPanel';
 import { MapScene } from '../map/MapScene';
 import { ChapterBanner } from './ChapterBanner';
 import { EventBurst } from './EventBurst';
@@ -37,8 +37,6 @@ function TopBar({
   onToggleView: () => void;
 }) {
   const toMenu = useGame((s) => s.toMenu);
-  const muted = useAudio((s) => s.muted);
-  const toggleMuted = useAudio((s) => s.toggleMuted);
   const dots = [];
   for (let i = 0; i < state.maxActionPoints; i++) {
     dots.push(<span key={i} className={`ap-dot${i < state.actionPoints ? ' ap-dot--full' : ''}`} />);
@@ -55,13 +53,7 @@ function TopBar({
       >
         {view === 'map' ? '📋' : '🗺️'}
       </button>
-      <button
-        className="pixel-btn pixel-btn--ghost topbar__btn"
-        onClick={toggleMuted}
-        aria-label={muted ? '开启声音' : '静音'}
-      >
-        {muted ? '🔇' : '🔊'}
-      </button>
+      <AudioPanel />
       <div className="topbar__time">
         第 <b>{state.year}</b> 年 · T<b>{state.term}</b> · <b>{state.week}</b>/{WEEKS_PER_TERM} 周
       </div>

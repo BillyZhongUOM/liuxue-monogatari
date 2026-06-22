@@ -14,7 +14,7 @@ import {
   currentLeadingRoute,
 } from '../game';
 import type { CharacterConfig, CreationOption, GameState } from '../game';
-import { useAudio } from '../audio/audioStore';
+import { AudioPanel } from './AudioPanel';
 import { assetUrl, computeGrade, gradeTier } from './theme';
 
 const FINALE_ENDINGS = ENDINGS.filter((e) => !e.crisis).length;
@@ -31,17 +31,9 @@ export function MainMenu({
   hasSave: boolean;
   collectionCount: number;
 }) {
-  const muted = useAudio((s) => s.muted);
-  const toggleMuted = useAudio((s) => s.toggleMuted);
   return (
     <div className="menu">
-      <button
-        className="pixel-btn pixel-btn--ghost menu__mute"
-        onClick={toggleMuted}
-        aria-label={muted ? '开启声音' : '静音'}
-      >
-        {muted ? '🔇' : '🔊'}
-      </button>
+      <AudioPanel triggerClassName="pixel-btn pixel-btn--ghost menu__mute" />
       <div className="menu__art" aria-hidden>
         🌧️🎓
       </div>

@@ -11,6 +11,10 @@ let musicBus: GainNode | null = null;
 let sfxBus: GainNode | null = null;
 let unlocked = false;
 let muted = false;
+let musicVol = 0.8; // 0..1 user music volume
+let sfxVol = 0.9; // 0..1 user sfx volume
+const MUSIC_CEIL = 0.92; // headroom so 100% does not clip
+const SFX_CEIL = 0.85;
 
 function ensure(): boolean {
   if (ctx) return true;
@@ -23,10 +27,10 @@ function ensure(): boolean {
     master.gain.value = muted ? 0.0001 : 0.9;
     master.connect(ctx.destination);
     musicBus = ctx.createGain();
-    musicBus.gain.value = 0.85;
+    musicBus.gain.value = musicVol * MUSIC_CEIL;
     musicBus.connect(master);
     sfxBus = ctx.createGain();
-    sfxBus.gain.value = 0.7;
+    sfxBus.gain.value = sfxVol * SFX_CEIL;
     sfxBus.connect(master);
     return true;
   } catch {
@@ -55,6 +59,24 @@ export function setMuted(m: boolean): void {
   master.gain.cancelScheduledValues(t);
   master.gain.setValueAtTime(Math.max(0.0001, master.gain.value), t);
   master.gain.linearRampToValueAtTime(m ? 0.0001 : 0.9, t + 0.18);
+}
+
+// Independent music + SFX volume (0..1). The module vars update even before the
+// context exists, so persisted values from the store take effect once ensure()
+// runs. A short ramp keeps music changes smooth; SFX is set instantly.
+export function setMusicVolume(v: number): void {
+  musicVol = Math.max(0, Math.min(1, v));
+  if (!ctx || !musicBus) return;
+  const t = ctx.currentTime;
+  musicBus.gain.cancelScheduledValues(t);
+  musicBus.gain.setValueAtTime(Math.max(0.0001, musicBus.gain.value), t);
+  musicBus.gain.linearRampToValueAtTime(Math.max(0.0001, musicVol * MUSIC_CEIL), t + 0.12);
+}
+
+export function setSfxVolume(v: number): void {
+  sfxVol = Math.max(0, Math.min(1, v));
+  if (!ctx || !sfxBus) return;
+  sfxBus.gain.value = Math.max(0.0001, sfxVol * SFX_CEIL);
 }
 
 // ----------------------------------------------------------------- SFX
@@ -86,6 +108,11 @@ export const sfx = {
   reveal: () => blip([659.25, 880], 0.16, 'sine', 0.1),
   ending: () => blip([523.25, 659.25, 784, 1046.5], 0.22, 'sine', 0.14),
 };
+
+/** A short audible blip so the user can hear the SFX level while adjusting it. */
+export function previewSfx(): void {
+  blip([660, 880], 0.1, 'triangle', 0.12);
+}
 
 // ----------------------------------------------------------------- BGM (per-city)
 // Real generated songs (Lyria, one MP3 per city) routed through musicBus. Lazy:
