@@ -48,7 +48,7 @@ function withRisk(a: GameAction): GameAction {
   if (a.risk) return a;
   const byTag = (a.tags ?? []).map((t) => RISK_POOL_BY_TAG[t]).find(Boolean);
   const pool = RISK_POOL_BY_ID[a.id] ?? byTag ?? 'life_incidents';
-  return { ...a, risk: { chance: 0.25, eventPool: pool } };
+  return { ...a, risk: { chance: 0.4, eventPool: pool } };
 }
 
 function merge<T extends { id: string }>(base: T[], extra: T[]): T[] {
