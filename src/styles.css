@@ -565,22 +565,22 @@ button { font-family: inherit; }
   background: transparent; border: none; box-shadow: none; padding: 0; cursor: pointer;
   z-index: 1;
 }
-.map-node__art { position: relative; width: 72px; height: 84px; display: flex; align-items: flex-end; justify-content: center; }
+.map-node__art { position: relative; width: 90px; height: 102px; display: flex; align-items: flex-end; justify-content: center; }
 /* (1) plot pad: the cleared patch of ground under the building (warm, low contrast, NOT a disc) */
 .map-node__art::before {
   content: ""; position: absolute; left: 50%; bottom: 4px;
-  transform: translateX(-50%) scaleY(0.42); width: 58px; height: 58px; border-radius: 50%;
+  transform: translateX(-50%) scaleY(0.42); width: 72px; height: 72px; border-radius: 50%;
   background: radial-gradient(circle, rgba(238,226,200,0.16) 0%, rgba(238,226,200,0.08) 46%, transparent 68%);
   z-index: 0; pointer-events: none;
 }
 /* (2) contact shadow: small, dusk-cool, offset down-right to match the upper-left key light (a CAST shadow, not a base plate) */
 .map-node__art::after {
   content: ""; position: absolute; left: 50%; bottom: 5px;
-  transform: translateX(-50%) translateX(3px) scaleY(0.34); width: 40px; height: 40px; border-radius: 50%;
+  transform: translateX(-50%) translateX(3px) scaleY(0.34); width: 52px; height: 52px; border-radius: 50%;
   background: radial-gradient(circle, rgba(10,12,22,0.46) 0%, rgba(10,12,22,0.30) 40%, transparent 70%);
   z-index: 0; pointer-events: none;
 }
-.map-node__img { position: relative; z-index: 1; width: 72px; height: 72px; object-fit: contain; image-rendering: pixelated; filter: drop-shadow(2px 2px 0 rgba(8,10,20,0.32)); }
+.map-node__img { position: relative; z-index: 1; width: 90px; height: 90px; object-fit: contain; image-rendering: pixelated; filter: drop-shadow(2px 3px 0 rgba(8,10,20,0.36)); }
 
 /* decoration layer (trees, lampposts) behind the buildings */
 .map-deco { position: absolute; transform: translate(-50%, -64%); pointer-events: none; z-index: 0; }
@@ -842,6 +842,59 @@ button { font-family: inherit; }
   font-size: 14px; font-weight: 600; cursor: pointer;
 }
 .phone-close:active { background: #ffffff10; }
+
+/* ----------------------------------------------------------------- map ambience */
+/* animated life layers over the diorama: drifting clouds, a shimmering river on
+   the town map, and a per-city landmark (London Eye turning, balloon, flag,
+   punt, birds). Sits behind the building nodes (z 0); pointer-events none. */
+.map-amb { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+
+.amb-cloud {
+  position: absolute; border-radius: 40px;
+  background: radial-gradient(closest-side, rgba(243,238,226,0.18), rgba(243,238,226,0.07) 70%, transparent);
+  filter: blur(1px);
+}
+.amb-cloud--1 { top: 10%; width: 90px; height: 26px; animation: ambCloud 46s linear infinite; }
+.amb-cloud--2 { top: 19%; width: 64px; height: 20px; opacity: 0.8; animation: ambCloud 64s linear infinite; animation-delay: -20s; }
+.amb-cloud--3 { top: 6%; width: 110px; height: 30px; opacity: 0.6; animation: ambCloud 80s linear infinite; animation-delay: -50s; }
+@keyframes ambCloud { from { transform: translateX(-130px); } to { transform: translateX(calc(100vw + 130px)); } }
+
+/* flowing river: a soft caustic shimmer drifting across the top water strip */
+.amb-river {
+  position: absolute; top: 0; left: 0; right: 0; height: 42%;
+  background-image: repeating-linear-gradient(74deg, rgba(159,182,216,0) 0 8px, rgba(159,182,216,0.10) 9px, rgba(200,220,255,0.14) 11px, rgba(159,182,216,0) 13px 26px);
+  background-size: 240px 100%;
+  -webkit-mask-image: linear-gradient(180deg, transparent 4%, #000 30%, #000 60%, transparent 100%);
+          mask-image: linear-gradient(180deg, transparent 4%, #000 30%, #000 60%, transparent 100%);
+  animation: ambRiver 7s linear infinite; opacity: 0.7;
+}
+@keyframes ambRiver { from { background-position: 0 0; } to { background-position: 240px 0; } }
+
+/* landmark placement (in the skyline band, behind buildings) */
+.amb-landmark-slot { position: absolute; top: 4%; right: 5%; }
+.amb-landmark-slot--bristol { top: 3%; right: auto; left: 10%; }
+.amb-landmark-slot--cambridge, .amb-landmark-slot--oxford { top: 24%; right: auto; left: -10%; width: 120%; }
+.amb-landmark { display: block; filter: drop-shadow(1px 2px 0 rgba(8,10,20,0.4)); }
+
+.amb-ferris-spin { animation: ferrisSpin 24s linear infinite; }
+@keyframes ferrisSpin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+
+.amb-balloon-float { animation: balloonFloat 9s ease-in-out infinite; transform-origin: 20px 50px; }
+@keyframes balloonFloat { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
+
+.amb-flag-wave { transform-box: fill-box; transform-origin: left center; animation: flagWave 1.8s ease-in-out infinite; }
+@keyframes flagWave { 0%, 100% { transform: skewY(0) scaleX(1); } 50% { transform: skewY(-3deg) scaleX(0.96); } }
+
+.amb-punt-drift { animation: puntDrift 22s linear infinite; }
+@keyframes puntDrift { 0% { transform: translateX(-20%); } 100% { transform: translateX(120%); } }
+.amb-punt-wake { animation: puntWake 2.4s ease-in-out infinite; transform-origin: center; }
+@keyframes puntWake { 0%, 100% { opacity: 0.18; } 50% { opacity: 0.32; } }
+
+.amb-birds-drift { animation: birdsDrift 34s linear infinite; }
+@keyframes birdsDrift { 0% { transform: translate(-60px, 6px); } 100% { transform: translate(calc(100vw + 60px), -6px); } }
+.amb-bird-flap { transform-box: fill-box; transform-origin: center; animation: birdFlap 0.5s ease-in-out infinite; }
+.amb-bird-flap--b { animation-delay: -0.25s; }
+@keyframes birdFlap { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(0.6); } }
 
 /* ----------------------------------------------------------------- motion off */
 @media (prefers-reduced-motion: reduce) {
