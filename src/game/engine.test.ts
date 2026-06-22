@@ -3,6 +3,7 @@ import {
   ALL_STAT_KEYS,
   CITIES,
   CITY_SCHOOLS,
+  ENDINGS,
   STAT_META_BY_KEY,
   UNIVERSITY_TYPES,
   advanceWeek,
@@ -136,7 +137,9 @@ describe('full playthroughs', () => {
   });
 
   it('a balanced survivor run can graduate', () => {
-    const rotation = ['attend_lecture', 'cook', 'rest', 'study_library', 'society'];
+    // a balanced student also calls home (video_home) so the family stipend keeps
+    // coming, and studies so they are not dropped.
+    const rotation = ['attend_lecture', 'cook', 'video_home', 'rest', 'study_library', 'society'];
     let n = 0;
     const end = playToEnd(cfg(), (s) => {
       const actions = availableActions(s);
@@ -145,9 +148,63 @@ describe('full playthroughs', () => {
       return i >= 0 ? i : 0;
     });
     expect(end.phase).toBe('ended');
-    expect(['ending_survivor', 'ending_distinction', 'ending_social_star', 'ending_return_home', 'ending_ordinary', 'ending_job_offer', 'ending_phd']).toContain(
-      end.endingId,
-    );
+    // balanced play should graduate (reach a finale ending), not a crisis fail
+    const ending = ENDINGS.find((e) => e.id === end.endingId);
+    expect(ending?.crisis ?? false).toBe(false);
+  });
+});
+
+describe('difficulty', () => {
+  it('a month with no study gets you dropped out (end to end)', () => {
+    // never study: rest every action. Dropout fires at the 4th weekly rollover.
+    const end = playToEnd(cfg(), (s) => {
+      const a = availableActions(s);
+      const i = a.findIndex((x) => x.id === 'rest');
+      return i >= 0 ? i : 0;
+    });
+    expect(end.phase).toBe('ended');
+    expect(end.endingId).toBe('ending_dropout');
+  });
+
+  it('the study-neglect counter trips dropout directly', () => {
+    let s = createGame(cfg());
+    s = { ...s, actionsThisWeek: [], flags: { ...s.flags, weeksSinceStudy: 3, weeksSinceCall: 0 } };
+    s = advanceWeek(s);
+    expect(s.phase).toBe('ended');
+    expect(s.endingId).toBe('ending_dropout');
+  });
+
+  it('studying resets the study-neglect counter', () => {
+    let s = createGame(cfg());
+    s = { ...s, actionsThisWeek: ['study_library'], flags: { ...s.flags, weeksSinceStudy: 3, weeksSinceCall: 0 } };
+    s = advanceWeek(s);
+    expect(s.phase).not.toBe('ended');
+    expect(s.flags.weeksSinceStudy).toBe(0);
+  });
+
+  it('a month with no call home cuts off the stipend, calling home mends it', () => {
+    let s = createGame(cfg());
+    // 4th week with no call: family_cutoff turns on
+    s = { ...s, actionsThisWeek: ['study_library'], flags: { ...s.flags, weeksSinceCall: 3, weeksSinceStudy: 0 } };
+    s = advanceWeek(s);
+    expect(s.flags.family_cutoff).toBe(true);
+    // now call home: cutoff clears
+    s = { ...s, phase: 'playing', actionsThisWeek: ['study_library', 'video_home'] };
+    s = advanceWeek(s);
+    expect(s.flags.family_cutoff).toBe(false);
+  });
+
+  it('stress above the danger line for three straight weeks ends in a breakdown', () => {
+    let s = createGame(cfg());
+    s = {
+      ...s,
+      stats: { ...s.stats, stress: 95 },
+      actionsThisWeek: ['study_library', 'video_home'], // studied + called: not dropout/cutoff
+      flags: { ...s.flags, stressStreak: 2, weeksSinceStudy: 0, weeksSinceCall: 0 },
+    };
+    s = advanceWeek(s);
+    expect(s.phase).toBe('ended');
+    expect(s.endingId).toBe('ending_breakdown');
   });
 });
 

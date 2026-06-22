@@ -1,6 +1,6 @@
 {
   "updatedBy": "register-assets",
-  "count": 246,
+  "count": 250,
   "assets": [
     {
       "id": "bgm-birmingham",
@@ -623,6 +623,14 @@
       "path": "/assets/generated/ending_bankruptcy_male.png"
     },
     {
+      "id": "ending_breakdown_female",
+      "path": "/assets/generated/ending_breakdown_female.png"
+    },
+    {
+      "id": "ending_breakdown_male",
+      "path": "/assets/generated/ending_breakdown_male.png"
+    },
+    {
       "id": "ending_burnout",
       "path": "/assets/generated/ending_burnout.png"
     },
@@ -645,6 +653,14 @@
     {
       "id": "ending_distinction_male",
       "path": "/assets/generated/ending_distinction_male.png"
+    },
+    {
+      "id": "ending_dropout_female",
+      "path": "/assets/generated/ending_dropout_female.png"
+    },
+    {
+      "id": "ending_dropout_male",
+      "path": "/assets/generated/ending_dropout_male.png"
     },
     {
       "id": "ending_grew_but_unsure",

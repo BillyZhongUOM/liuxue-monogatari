@@ -66,6 +66,29 @@ export const ENDINGS: Ending[] = [
     cond: { statGte: { homesick: 85, stress: 55 }, statLte: { social: 18 }, minWeek: 12 },
   },
 
+  // Difficulty fails: triggered DIRECTLY by advanceWeek (neglect counters), not by
+  // the cond DSL, so the cond is a sentinel that never matches checkEndings.
+  {
+    id: 'ending_dropout',
+    title: '连续旷课，被劝退',
+    desc: '一个多月没去上过课，没交过作业，系统里你的出勤记录是一片空白。学院发来最后一封邮件，措辞客气却没有余地：你的注册状态已被取消。你愣愣地看着那行字，才发现留学这件事，原来真的会因为你的视而不见而结束。',
+    quip: '没有人会一直提醒你去上课，这一课，学费很贵。',
+    tone: 'bad',
+    priority: 240,
+    crisis: true,
+    cond: { flagsSet: ['__neglect_only__'] },
+  },
+  {
+    id: 'ending_breakdown',
+    title: '心态崩了',
+    desc: '压力像潮水一样连着几周没退过，你终于在某个再普通不过的早晨爬不起来。盯着天花板，论文、打工、人际、想家，所有事一起压上来，你第一次清楚地感到，自己撑不住了。',
+    quip: '崩溃不是软弱，是你早就该停下来喘口气。下次，请早一点。',
+    tone: 'bad',
+    priority: 235,
+    crisis: true,
+    cond: { flagsSet: ['__neglect_only__'] },
+  },
+
   // ----------------------------------------------------------------- finale (good)
   {
     id: 'ending_distinction',

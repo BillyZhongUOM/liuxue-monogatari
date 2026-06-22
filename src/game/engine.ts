@@ -10,6 +10,7 @@ import {
   BASE_ACTION_POINTS,
   BASE_WEEKLY_COST,
   BUDGETS,
+  CALL_NEGLECT_LIMIT,
   CITIES,
   ENGLISH_LEVELS,
   MAJORS,
@@ -18,6 +19,9 @@ import {
   ROUTES,
   SAVE_VERSION,
   STAT_META_BY_KEY,
+  STRESS_BREAKDOWN_STREAK,
+  STRESS_DANGER,
+  STUDY_NEGLECT_LIMIT,
   TERMS_PER_YEAR,
   UNIVERSITY_TYPES,
   WEEKLY_DRIFT,
@@ -313,11 +317,37 @@ export function advanceWeek(prev: GameState): GameState {
   if (prev.phase !== 'playing') return prev;
   const state = clone(prev);
 
-  // 1. weekly economy
+  // 0. difficulty: neglect counters. Stored as numeric flags (no GameState schema
+  // change => old saves still load; a missing flag reads as 0). Computed from the
+  // week that just ended (prev.actionsThisWeek) before it is reset in step 3.
+  const studiedThisWeek = prev.actionsThisWeek.some((id) =>
+    (ACTION_BY_ID[id]?.tags ?? []).includes('study'),
+  );
+  const calledHomeThisWeek = prev.actionsThisWeek.includes('video_home');
+  const weeksSinceStudy = studiedThisWeek ? 0 : Number(state.flags.weeksSinceStudy ?? 0) + 1;
+  const weeksSinceCall = calledHomeThisWeek ? 0 : Number(state.flags.weeksSinceCall ?? 0) + 1;
+  state.flags.weeksSinceStudy = weeksSinceStudy;
+  state.flags.weeksSinceCall = weeksSinceCall;
+
+  // 断供: a month with no word home and the family stops the stipend; calling home
+  // mends it. One-shot, restorable.
+  if (calledHomeThisWeek && state.flags.family_cutoff) {
+    state.flags.family_cutoff = false;
+    pushLog(state, '你给家里打了通电话报平安，爸妈嘴上念叨，生活费又照常打了过来。', 'milestone');
+  } else if (weeksSinceCall >= CALL_NEGLECT_LIMIT && !state.flags.family_cutoff) {
+    state.flags.family_cutoff = true;
+    pushLog(state, '你已经一个多月没给家里打过电话，这周的生活费没有到账，爸妈在用沉默问你还好不好。', 'milestone');
+  }
+
+  // 1. weekly economy (no stipend while the family has cut you off)
   const cost = weeklyCost(state.config);
-  const stipend = weeklyStipend(state.config);
+  const stipend = state.flags.family_cutoff ? 0 : weeklyStipend(state.config);
   state.stats = applyEffects(state.stats, { money: stipend - cost });
   state.stats = applyEffects(state.stats, WEEKLY_DRIFT);
+
+  // stress streak is read AFTER the weekly drift settles this week's stress
+  const stressStreak = state.stats.stress > STRESS_DANGER ? Number(state.flags.stressStreak ?? 0) + 1 : 0;
+  state.flags.stressStreak = stressStreak;
 
   // 2. advance the calendar
   state.totalWeeks += 1;
@@ -336,6 +366,21 @@ export function advanceWeek(prev: GameState): GameState {
   state.actionsThisWeek = [];
   state.maxActionPoints = weeklyActionPoints(state);
   state.actionPoints = state.maxActionPoints;
+
+  // 3b. difficulty hard-fails (a warning lands the week before each). Triggered
+  // directly so they do not depend on the cond DSL.
+  if (weeksSinceStudy === STUDY_NEGLECT_LIMIT - 1) {
+    pushLog(state, '学院发来一封措辞客气但分量很重的邮件：系统显示你已连续几周没有任何出勤或学习记录，请尽快回到正轨，否则将影响你的注册状态。', 'milestone');
+  }
+  if (weeksSinceStudy >= STUDY_NEGLECT_LIMIT) {
+    return endGame(state, endingById('ending_dropout'));
+  }
+  if (stressStreak === STRESS_BREAKDOWN_STREAK - 1) {
+    pushLog(state, '你已经连着好几周高压运转，睡不好、吃不香、一点小事就想发火，身体在拉警报了。', 'milestone');
+  }
+  if (stressStreak >= STRESS_BREAKDOWN_STREAK) {
+    return endGame(state, endingById('ending_breakdown'));
+  }
 
   // 4. finale?
   if (state.year > MAX_YEARS) {
@@ -407,6 +452,11 @@ function fallbackEnding(): Ending {
       cond: {},
     }
   );
+}
+
+/** Look up an ending by id (for difficulty fails triggered outside the cond DSL). */
+function endingById(id: string): Ending {
+  return ENDINGS.find((e) => e.id === id) ?? fallbackEnding();
 }
 
 function endGame(state: GameState, ending: Ending): GameState {

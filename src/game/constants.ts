@@ -6,7 +6,19 @@ import type { Effects, StatKey, StatMeta, Stats } from './types';
 export const WEEKS_PER_TERM = 12;
 export const TERMS_PER_YEAR = 3;
 export const MAX_YEARS = 1; // one-year UK master's arc (engine supports more)
-export const BASE_ACTION_POINTS = 3;
+export const BASE_ACTION_POINTS = 7;
+
+// =============================================================================
+// Difficulty: neglect fails. Tracked as numeric flags in advanceWeek (no
+// GameState schema change, so old saves keep loading), then triggered directly.
+// =============================================================================
+/** Weeks with no study (study-tagged action) before the school drops you. */
+export const STUDY_NEGLECT_LIMIT = 4; // a month
+/** Weeks with no call home before the family stops the stipend (restorable). */
+export const CALL_NEGLECT_LIMIT = 4; // a month
+/** Stress above this for this many consecutive weeks ends in a breakdown. */
+export const STRESS_DANGER = 60;
+export const STRESS_BREAKDOWN_STREAK = 3;
 
 /** Base weekly cost of living in pounds, before the city multiplier. */
 export const BASE_WEEKLY_COST = 70;

@@ -154,10 +154,12 @@ button { font-family: inherit; }
 .topbar__btn { min-width: 40px; min-height: 40px; padding: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 16px; flex: 0 0 auto; }
 .topbar__time b { color: var(--tx); font-variant-numeric: tabular-nums; }
 .topbar__title { font-size: 13px; font-weight: 700; letter-spacing: 1px; color: var(--amber); }
-.ap { display: flex; align-items: center; gap: 5px; }
+/* AP dots: smaller + wrap-capable so a full 7 to 8 week's points never push the
+   date text off the topbar on a 320px phone. */
+.ap { display: flex; align-items: center; flex-wrap: wrap; justify-content: flex-end; gap: 3px; max-width: 96px; flex: 0 0 auto; }
 .ap__label { font-size: 12px; color: var(--tx-dim); }
 .ap-dot {
-  width: 14px; height: 14px;
+  width: 10px; height: 10px;
   border: 2px solid var(--amber-deep);
   background: transparent;
 }

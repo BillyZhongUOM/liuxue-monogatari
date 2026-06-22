@@ -57,6 +57,8 @@ const ENDINGS = [
   ['ending_homesick_quit', '{S} at an airport holding a return ticket home, bittersweet expression, soft dawn light, gentle mood.'],
   ['ending_resit_exam', '{S} studying alone in summer for a resit exam, a quiet empty campus through the window, determined second-chance mood.'],
   ['ending_midnight_lonely', '{S} on a late-night video call to family from a dim dorm room, tears and a small smile, warm phone glow in the dark.'],
+  ['ending_dropout', '{S} staring at a cancellation email on a laptop, half-packed cardboard boxes around, about to leave an empty campus room, stunned and regretful, muted cold evening light.'],
+  ['ending_breakdown', '{S} sitting on the floor leaning against the bed, unable to get up, scattered papers and an empty mug nearby, overwhelmed but gently lit, non-judgmental soft dim light.'],
 ];
 
 const SUBJECT = {

@@ -30,7 +30,8 @@ import { fileURLToPath } from 'node:url';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT_DIR = join(ROOT, 'public', 'assets', 'generated');
 const BASE = 'https://generativelanguage.googleapis.com/v1beta';
-const MODELS = ['models/gemini-3-pro-image', 'models/gemini-3.1-flash-image', 'models/gemini-2.5-flash-image'];
+// flash-image first: fast and reliable. The pro model can hang, so it is last.
+const MODELS = ['models/gemini-2.5-flash-image', 'models/gemini-3.1-flash-image', 'models/gemini-3-pro-image'];
 const DEFAULT_KEY_FILE = join(ROOT, '..', 'xiaoming-research', 'products', 'ai-research-codex', '.gemini_key');
 
 const STYLE =
@@ -65,6 +66,8 @@ const ENDINGS = [
   ['ending_homesick_quit', 'A Chinese student at an airport holding a return ticket home, bittersweet expression, soft dawn light, gentle mood.'],
   ['ending_resit_exam', 'A Chinese student studying alone in summer for a resit exam, a quiet empty campus through the window, determined second-chance mood.'],
   ['ending_midnight_lonely', 'A Chinese student on a late-night video call to family from a dim dorm room, tears and a small smile, warm phone glow in the dark.'],
+  ['ending_dropout', 'A Chinese student staring at a cancellation email on a laptop, half-packed cardboard boxes around, about to leave an empty campus room, stunned and regretful, muted cold evening light.'],
+  ['ending_breakdown', 'A Chinese student sitting on the floor leaning against the bed, unable to get up, scattered papers nearby, overwhelmed but gently lit, non-judgmental soft dim light.'],
 ];
 
 function resolveKey() {
