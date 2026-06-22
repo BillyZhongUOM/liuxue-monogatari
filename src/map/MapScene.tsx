@@ -5,7 +5,6 @@ import { useGame } from '../store';
 import { isUnlocked, setRain } from '../audio/sound';
 import { assetUrl } from '../ui/theme';
 import { InteriorScene } from './InteriorScene';
-import { MapAmbience } from './MapAmbience';
 import {
   LOCATIONS,
   LOCATION_BY_ID,
@@ -182,8 +181,6 @@ export function MapScene({ state }: { state: GameState }) {
         style={ground ? { backgroundImage: `url(${ground})` } : undefined}
       >
         {skyline ? <img className="map-skyline" src={skyline} alt="" aria-hidden /> : null}
-
-        <MapAmbience city={state.config.city} zone={zone} />
 
         {DECO_SPOTS[zone].map((d, i) => {
           const img = assetUrl(d.a);

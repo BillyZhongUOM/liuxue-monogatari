@@ -45,10 +45,13 @@ const RISK_POOL_BY_TAG: Record<string, string> = {
   health: 'life_incidents',
 };
 function withRisk(a: GameAction): GameAction {
-  if (a.risk) return a;
+  // Every action triggers its secondary event whenever the pool still has an
+  // eligible one (chance 1). Actions that already declare a pool keep it but are
+  // forced to 100% too; the rest get a pool by id, else by tag.
+  if (a.risk) return { ...a, risk: { ...a.risk, chance: 1 } };
   const byTag = (a.tags ?? []).map((t) => RISK_POOL_BY_TAG[t]).find(Boolean);
   const pool = RISK_POOL_BY_ID[a.id] ?? byTag ?? 'life_incidents';
-  return { ...a, risk: { chance: 0.4, eventPool: pool } };
+  return { ...a, risk: { chance: 1, eventPool: pool } };
 }
 
 function merge<T extends { id: string }>(base: T[], extra: T[]): T[] {
@@ -67,11 +70,19 @@ const baseActionsWithLoc: GameAction[] = BASE_ACTIONS.map((a) =>
 );
 
 export const ACTIONS: GameAction[] = merge(baseActionsWithLoc, genActions as unknown as GameAction[]).map(withRisk);
+// Action-incident events live in a named risk pool. They fire when you do the
+// action, so a minWeek time gate just blocks early-game actions from ever
+// triggering one; drop it for pooled events so every action can fire from week 1.
+// (Weekly/story events keep their pacing: pool is '' for those.)
+function ungateIncident(e: GameEvent): GameEvent {
+  if (!e.pool || e.cond?.minWeek === undefined) return e;
+  return { ...e, cond: { ...e.cond, minWeek: undefined } };
+}
 // Story beats join the hand-authored pool (they win over any generated id clash).
 export const EVENTS: GameEvent[] = merge(
   [...STORY_EVENTS, ...STORY_FLAVOR, ...STORY_CITY, ...STORY_MAJOR, ...STORY_MEME, ...STORY_BRANCH, ...STORY_INCIDENTS, ...BASE_EVENTS],
   genEvents as unknown as GameEvent[],
-);
+).map(ungateIncident);
 export const TRAITS: Trait[] = merge(BASE_TRAITS, genTraits as unknown as Trait[]);
 export const ENDINGS: Ending[] = merge(BASE_ENDINGS, genEndings as unknown as Ending[]);
 
