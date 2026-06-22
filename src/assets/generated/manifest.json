@@ -1,6 +1,6 @@
 {
   "updatedBy": "register-assets",
-  "count": 141,
+  "count": 246,
   "assets": [
     {
       "id": "bgm-birmingham",
@@ -47,120 +47,540 @@
       "path": "/assets/generated/building-bank.png"
     },
     {
+      "id": "building-bank-birmingham",
+      "path": "/assets/generated/building-bank-birmingham.png"
+    },
+    {
+      "id": "building-bank-bristol",
+      "path": "/assets/generated/building-bank-bristol.png"
+    },
+    {
+      "id": "building-bank-cambridge",
+      "path": "/assets/generated/building-bank-cambridge.png"
+    },
+    {
+      "id": "building-bank-edinburgh",
+      "path": "/assets/generated/building-bank-edinburgh.png"
+    },
+    {
+      "id": "building-bank-london",
+      "path": "/assets/generated/building-bank-london.png"
+    },
+    {
+      "id": "building-bank-manchester",
+      "path": "/assets/generated/building-bank-manchester.png"
+    },
+    {
       "id": "building-bank-oxford",
       "path": "/assets/generated/building-bank-oxford.png"
+    },
+    {
+      "id": "building-bank-sheffield",
+      "path": "/assets/generated/building-bank-sheffield.png"
     },
     {
       "id": "building-career",
       "path": "/assets/generated/building-career.png"
     },
     {
+      "id": "building-career-birmingham",
+      "path": "/assets/generated/building-career-birmingham.png"
+    },
+    {
+      "id": "building-career-bristol",
+      "path": "/assets/generated/building-career-bristol.png"
+    },
+    {
+      "id": "building-career-cambridge",
+      "path": "/assets/generated/building-career-cambridge.png"
+    },
+    {
+      "id": "building-career-edinburgh",
+      "path": "/assets/generated/building-career-edinburgh.png"
+    },
+    {
+      "id": "building-career-london",
+      "path": "/assets/generated/building-career-london.png"
+    },
+    {
+      "id": "building-career-manchester",
+      "path": "/assets/generated/building-career-manchester.png"
+    },
+    {
       "id": "building-career-oxford",
       "path": "/assets/generated/building-career-oxford.png"
+    },
+    {
+      "id": "building-career-sheffield",
+      "path": "/assets/generated/building-career-sheffield.png"
     },
     {
       "id": "building-clinic",
       "path": "/assets/generated/building-clinic.png"
     },
     {
+      "id": "building-clinic-birmingham",
+      "path": "/assets/generated/building-clinic-birmingham.png"
+    },
+    {
+      "id": "building-clinic-bristol",
+      "path": "/assets/generated/building-clinic-bristol.png"
+    },
+    {
+      "id": "building-clinic-cambridge",
+      "path": "/assets/generated/building-clinic-cambridge.png"
+    },
+    {
+      "id": "building-clinic-edinburgh",
+      "path": "/assets/generated/building-clinic-edinburgh.png"
+    },
+    {
+      "id": "building-clinic-london",
+      "path": "/assets/generated/building-clinic-london.png"
+    },
+    {
+      "id": "building-clinic-manchester",
+      "path": "/assets/generated/building-clinic-manchester.png"
+    },
+    {
       "id": "building-clinic-oxford",
       "path": "/assets/generated/building-clinic-oxford.png"
+    },
+    {
+      "id": "building-clinic-sheffield",
+      "path": "/assets/generated/building-clinic-sheffield.png"
     },
     {
       "id": "building-dorm",
       "path": "/assets/generated/building-dorm.png"
     },
     {
+      "id": "building-dorm-birmingham",
+      "path": "/assets/generated/building-dorm-birmingham.png"
+    },
+    {
+      "id": "building-dorm-bristol",
+      "path": "/assets/generated/building-dorm-bristol.png"
+    },
+    {
+      "id": "building-dorm-cambridge",
+      "path": "/assets/generated/building-dorm-cambridge.png"
+    },
+    {
+      "id": "building-dorm-edinburgh",
+      "path": "/assets/generated/building-dorm-edinburgh.png"
+    },
+    {
+      "id": "building-dorm-london",
+      "path": "/assets/generated/building-dorm-london.png"
+    },
+    {
+      "id": "building-dorm-manchester",
+      "path": "/assets/generated/building-dorm-manchester.png"
+    },
+    {
       "id": "building-dorm-oxford",
       "path": "/assets/generated/building-dorm-oxford.png"
+    },
+    {
+      "id": "building-dorm-sheffield",
+      "path": "/assets/generated/building-dorm-sheffield.png"
     },
     {
       "id": "building-gym",
       "path": "/assets/generated/building-gym.png"
     },
     {
+      "id": "building-gym-birmingham",
+      "path": "/assets/generated/building-gym-birmingham.png"
+    },
+    {
+      "id": "building-gym-bristol",
+      "path": "/assets/generated/building-gym-bristol.png"
+    },
+    {
+      "id": "building-gym-cambridge",
+      "path": "/assets/generated/building-gym-cambridge.png"
+    },
+    {
+      "id": "building-gym-edinburgh",
+      "path": "/assets/generated/building-gym-edinburgh.png"
+    },
+    {
+      "id": "building-gym-london",
+      "path": "/assets/generated/building-gym-london.png"
+    },
+    {
+      "id": "building-gym-manchester",
+      "path": "/assets/generated/building-gym-manchester.png"
+    },
+    {
       "id": "building-gym-oxford",
       "path": "/assets/generated/building-gym-oxford.png"
+    },
+    {
+      "id": "building-gym-sheffield",
+      "path": "/assets/generated/building-gym-sheffield.png"
     },
     {
       "id": "building-lecture",
       "path": "/assets/generated/building-lecture.png"
     },
     {
+      "id": "building-lecture-birmingham",
+      "path": "/assets/generated/building-lecture-birmingham.png"
+    },
+    {
+      "id": "building-lecture-bristol",
+      "path": "/assets/generated/building-lecture-bristol.png"
+    },
+    {
+      "id": "building-lecture-cambridge",
+      "path": "/assets/generated/building-lecture-cambridge.png"
+    },
+    {
+      "id": "building-lecture-edinburgh",
+      "path": "/assets/generated/building-lecture-edinburgh.png"
+    },
+    {
+      "id": "building-lecture-london",
+      "path": "/assets/generated/building-lecture-london.png"
+    },
+    {
+      "id": "building-lecture-manchester",
+      "path": "/assets/generated/building-lecture-manchester.png"
+    },
+    {
       "id": "building-lecture-oxford",
       "path": "/assets/generated/building-lecture-oxford.png"
+    },
+    {
+      "id": "building-lecture-sheffield",
+      "path": "/assets/generated/building-lecture-sheffield.png"
     },
     {
       "id": "building-library",
       "path": "/assets/generated/building-library.png"
     },
     {
+      "id": "building-library-birmingham",
+      "path": "/assets/generated/building-library-birmingham.png"
+    },
+    {
+      "id": "building-library-bristol",
+      "path": "/assets/generated/building-library-bristol.png"
+    },
+    {
+      "id": "building-library-cambridge",
+      "path": "/assets/generated/building-library-cambridge.png"
+    },
+    {
+      "id": "building-library-edinburgh",
+      "path": "/assets/generated/building-library-edinburgh.png"
+    },
+    {
+      "id": "building-library-london",
+      "path": "/assets/generated/building-library-london.png"
+    },
+    {
+      "id": "building-library-manchester",
+      "path": "/assets/generated/building-library-manchester.png"
+    },
+    {
       "id": "building-library-oxford",
       "path": "/assets/generated/building-library-oxford.png"
+    },
+    {
+      "id": "building-library-sheffield",
+      "path": "/assets/generated/building-library-sheffield.png"
     },
     {
       "id": "building-mall",
       "path": "/assets/generated/building-mall.png"
     },
     {
+      "id": "building-mall-birmingham",
+      "path": "/assets/generated/building-mall-birmingham.png"
+    },
+    {
+      "id": "building-mall-bristol",
+      "path": "/assets/generated/building-mall-bristol.png"
+    },
+    {
+      "id": "building-mall-cambridge",
+      "path": "/assets/generated/building-mall-cambridge.png"
+    },
+    {
+      "id": "building-mall-edinburgh",
+      "path": "/assets/generated/building-mall-edinburgh.png"
+    },
+    {
+      "id": "building-mall-london",
+      "path": "/assets/generated/building-mall-london.png"
+    },
+    {
+      "id": "building-mall-manchester",
+      "path": "/assets/generated/building-mall-manchester.png"
+    },
+    {
       "id": "building-mall-oxford",
       "path": "/assets/generated/building-mall-oxford.png"
+    },
+    {
+      "id": "building-mall-sheffield",
+      "path": "/assets/generated/building-mall-sheffield.png"
     },
     {
       "id": "building-market",
       "path": "/assets/generated/building-market.png"
     },
     {
+      "id": "building-market-birmingham",
+      "path": "/assets/generated/building-market-birmingham.png"
+    },
+    {
+      "id": "building-market-bristol",
+      "path": "/assets/generated/building-market-bristol.png"
+    },
+    {
+      "id": "building-market-cambridge",
+      "path": "/assets/generated/building-market-cambridge.png"
+    },
+    {
+      "id": "building-market-edinburgh",
+      "path": "/assets/generated/building-market-edinburgh.png"
+    },
+    {
+      "id": "building-market-london",
+      "path": "/assets/generated/building-market-london.png"
+    },
+    {
+      "id": "building-market-manchester",
+      "path": "/assets/generated/building-market-manchester.png"
+    },
+    {
       "id": "building-market-oxford",
       "path": "/assets/generated/building-market-oxford.png"
+    },
+    {
+      "id": "building-market-sheffield",
+      "path": "/assets/generated/building-market-sheffield.png"
     },
     {
       "id": "building-nightlife",
       "path": "/assets/generated/building-nightlife.png"
     },
     {
+      "id": "building-nightlife-birmingham",
+      "path": "/assets/generated/building-nightlife-birmingham.png"
+    },
+    {
+      "id": "building-nightlife-bristol",
+      "path": "/assets/generated/building-nightlife-bristol.png"
+    },
+    {
+      "id": "building-nightlife-cambridge",
+      "path": "/assets/generated/building-nightlife-cambridge.png"
+    },
+    {
+      "id": "building-nightlife-edinburgh",
+      "path": "/assets/generated/building-nightlife-edinburgh.png"
+    },
+    {
+      "id": "building-nightlife-london",
+      "path": "/assets/generated/building-nightlife-london.png"
+    },
+    {
+      "id": "building-nightlife-manchester",
+      "path": "/assets/generated/building-nightlife-manchester.png"
+    },
+    {
       "id": "building-nightlife-oxford",
       "path": "/assets/generated/building-nightlife-oxford.png"
+    },
+    {
+      "id": "building-nightlife-sheffield",
+      "path": "/assets/generated/building-nightlife-sheffield.png"
     },
     {
       "id": "building-park",
       "path": "/assets/generated/building-park.png"
     },
     {
+      "id": "building-park-birmingham",
+      "path": "/assets/generated/building-park-birmingham.png"
+    },
+    {
+      "id": "building-park-bristol",
+      "path": "/assets/generated/building-park-bristol.png"
+    },
+    {
+      "id": "building-park-cambridge",
+      "path": "/assets/generated/building-park-cambridge.png"
+    },
+    {
+      "id": "building-park-edinburgh",
+      "path": "/assets/generated/building-park-edinburgh.png"
+    },
+    {
+      "id": "building-park-london",
+      "path": "/assets/generated/building-park-london.png"
+    },
+    {
+      "id": "building-park-manchester",
+      "path": "/assets/generated/building-park-manchester.png"
+    },
+    {
       "id": "building-park-oxford",
       "path": "/assets/generated/building-park-oxford.png"
+    },
+    {
+      "id": "building-park-sheffield",
+      "path": "/assets/generated/building-park-sheffield.png"
     },
     {
       "id": "building-society",
       "path": "/assets/generated/building-society.png"
     },
     {
+      "id": "building-society-birmingham",
+      "path": "/assets/generated/building-society-birmingham.png"
+    },
+    {
+      "id": "building-society-bristol",
+      "path": "/assets/generated/building-society-bristol.png"
+    },
+    {
+      "id": "building-society-cambridge",
+      "path": "/assets/generated/building-society-cambridge.png"
+    },
+    {
+      "id": "building-society-edinburgh",
+      "path": "/assets/generated/building-society-edinburgh.png"
+    },
+    {
+      "id": "building-society-london",
+      "path": "/assets/generated/building-society-london.png"
+    },
+    {
+      "id": "building-society-manchester",
+      "path": "/assets/generated/building-society-manchester.png"
+    },
+    {
       "id": "building-society-oxford",
       "path": "/assets/generated/building-society-oxford.png"
+    },
+    {
+      "id": "building-society-sheffield",
+      "path": "/assets/generated/building-society-sheffield.png"
     },
     {
       "id": "building-station",
       "path": "/assets/generated/building-station.png"
     },
     {
+      "id": "building-station-birmingham",
+      "path": "/assets/generated/building-station-birmingham.png"
+    },
+    {
+      "id": "building-station-bristol",
+      "path": "/assets/generated/building-station-bristol.png"
+    },
+    {
+      "id": "building-station-cambridge",
+      "path": "/assets/generated/building-station-cambridge.png"
+    },
+    {
+      "id": "building-station-edinburgh",
+      "path": "/assets/generated/building-station-edinburgh.png"
+    },
+    {
+      "id": "building-station-london",
+      "path": "/assets/generated/building-station-london.png"
+    },
+    {
+      "id": "building-station-manchester",
+      "path": "/assets/generated/building-station-manchester.png"
+    },
+    {
       "id": "building-station-oxford",
       "path": "/assets/generated/building-station-oxford.png"
+    },
+    {
+      "id": "building-station-sheffield",
+      "path": "/assets/generated/building-station-sheffield.png"
     },
     {
       "id": "building-town",
       "path": "/assets/generated/building-town.png"
     },
     {
+      "id": "building-town-birmingham",
+      "path": "/assets/generated/building-town-birmingham.png"
+    },
+    {
+      "id": "building-town-bristol",
+      "path": "/assets/generated/building-town-bristol.png"
+    },
+    {
+      "id": "building-town-cambridge",
+      "path": "/assets/generated/building-town-cambridge.png"
+    },
+    {
+      "id": "building-town-edinburgh",
+      "path": "/assets/generated/building-town-edinburgh.png"
+    },
+    {
+      "id": "building-town-london",
+      "path": "/assets/generated/building-town-london.png"
+    },
+    {
+      "id": "building-town-manchester",
+      "path": "/assets/generated/building-town-manchester.png"
+    },
+    {
       "id": "building-town-oxford",
       "path": "/assets/generated/building-town-oxford.png"
+    },
+    {
+      "id": "building-town-sheffield",
+      "path": "/assets/generated/building-town-sheffield.png"
     },
     {
       "id": "building-work",
       "path": "/assets/generated/building-work.png"
     },
     {
+      "id": "building-work-birmingham",
+      "path": "/assets/generated/building-work-birmingham.png"
+    },
+    {
+      "id": "building-work-bristol",
+      "path": "/assets/generated/building-work-bristol.png"
+    },
+    {
+      "id": "building-work-cambridge",
+      "path": "/assets/generated/building-work-cambridge.png"
+    },
+    {
+      "id": "building-work-edinburgh",
+      "path": "/assets/generated/building-work-edinburgh.png"
+    },
+    {
+      "id": "building-work-london",
+      "path": "/assets/generated/building-work-london.png"
+    },
+    {
+      "id": "building-work-manchester",
+      "path": "/assets/generated/building-work-manchester.png"
+    },
+    {
       "id": "building-work-oxford",
       "path": "/assets/generated/building-work-oxford.png"
+    },
+    {
+      "id": "building-work-sheffield",
+      "path": "/assets/generated/building-work-sheffield.png"
     },
     {
       "id": "char-student",
